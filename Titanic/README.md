@@ -2,17 +2,8 @@
 
 # h<sub>&theta;</sub>(x) = &theta;<sub>o</sub> x + &theta;<sub>1</sub>x
 
-My approach
-<img src="https://latex.codecogs.com/svg.latex?\epsilon_t&space;=&space;\frac{\text{misclassifications}_t}{\text{observations}_t}" title="\epsilon_t = \frac{\text{misclassifications}_t}{\text{observations}_t}" />
-
-2nd approach
-
-<img src="https://latex.codecogs.com/svg.latex?\Large&space;x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" title="\Large x=a" />
-
-3rd approach
-![\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}](https://latex.codecogs.com/svg.latex?x%3D%5Cfrac%7B-b%5Cpm%5Csqrt%7Bb%5E2-4ac%7D%7D%7B2a%7D)
-
-
+my approach
+<img src="http://www.sciweavers.org/tex2img.php?eq=%5Cepsilon_t%20%3D%20%5Cfrac%7B%5Ctext%7Bmisclassifications%7D_t%7D%7B%5Ctext%7Bobservations%7D_t%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0" align="center" border="0" alt="\epsilon_t = \frac{\text{misclassifications}_t}{\text{observations}_t}" width="194" height="46" />
 
 <img src="http://data.freehdw.com/ships-titanic-vehicles-best.jpg"  Width="800">
 
@@ -944,7 +935,7 @@ fig.show()
 ```
 
 
-![png](kernel_files/kernel_44_0.png)
+![png](kernel_files/kernel_41_0.png)
 
 
 Here, in both training set and test set, the average fare closest to $80 are in the <b>C</b> Embarked values where pclass is 1. So, let's fill in the missing values as "C" 
@@ -1293,7 +1284,7 @@ plt.xlabel("Sex",fontsize = 15);
 ```
 
 
-![png](kernel_files/kernel_71_0.png)
+![png](kernel_files/kernel_68_0.png)
 
 
 This bar plot above shows the distribution of female and male survived. The ***x_label*** represents **Sex** feature while the ***y_label*** represents the % of **passenger survived**. This bar plot shows that ~74% female passenger survived while only ~19% male passenger survived.
@@ -1329,7 +1320,7 @@ plt.show()
 ```
 
 
-![png](kernel_files/kernel_73_0.png)
+![png](kernel_files/kernel_70_0.png)
 
 
 This count plot shows the actual distribution of male and female passengers that survived and did not survive. It shows that among all the females ~ 230 survived and ~ 70 did not survive. While among male passengers ~110 survived and ~480 did not survive. 
@@ -1374,7 +1365,7 @@ plt.show()
 ```
 
 
-![png](kernel_files/kernel_76_0.png)
+![png](kernel_files/kernel_73_0.png)
 
 
 
@@ -1400,7 +1391,7 @@ plt.xticks(val, names);
 ```
 
 
-![png](kernel_files/kernel_77_0.png)
+![png](kernel_files/kernel_74_0.png)
 
 
 - It looks like ...
@@ -1433,7 +1424,7 @@ plt.xticks(sorted(train.Pclass.unique()), labels);
 ```
 
 
-![png](kernel_files/kernel_79_0.png)
+![png](kernel_files/kernel_76_0.png)
 
 
 This KDE plot is pretty self-explanatory with all the labels and colors. Something I have noticed that some readers might find questionable is that the lower class passengers have survived more than second-class passengers. It is true since there were a lot more third-class passengers than first and second. 
@@ -1460,7 +1451,7 @@ plt.xlabel("Fare", fontsize = 15, labelpad = 20);
 ```
 
 
-![png](kernel_files/kernel_82_0.png)
+![png](kernel_files/kernel_79_0.png)
 
 
 This plot shows something impressive..
@@ -1577,7 +1568,7 @@ plt.ylabel('Frequency', fontsize = 15, labelpad= 20);
 ```
 
 
-![png](kernel_files/kernel_87_0.png)
+![png](kernel_files/kernel_84_0.png)
 
 
 There is nothing out of the ordinary about this plot, except the very left part of the distribution. This may hint on the posibility that children and infants were the priority. 
@@ -1599,7 +1590,7 @@ plt.subplots_adjust(top=0.90)
 ```
 
 
-![png](kernel_files/kernel_90_0.png)
+![png](kernel_files/kernel_87_0.png)
 
 
 Facetgrid is a great way to visualize multiple variables and their relationships at once. From the chart in section 3a we have a intuation that female passengers had better prority than males during the tragedy. However, from this facet grid, we can also understand which age range groups survived more than others or were not so lucky
@@ -1615,7 +1606,7 @@ plt.subplots_adjust(top=0.90)
 ```
 
 
-![png](kernel_files/kernel_92_0.png)
+![png](kernel_files/kernel_89_0.png)
 
 
 This is another compelling facet grid illustrating four features relationship at once. They are **Embarked, Age, Survived & Sex**. 
@@ -1640,7 +1631,7 @@ plt.subplots_adjust(top=0.85)
 ```
 
 
-![png](kernel_files/kernel_94_0.png)
+![png](kernel_files/kernel_91_0.png)
 
 
 This facet grid unveils a couple of interesting insights. Let's find out.
@@ -1658,7 +1649,7 @@ plt.subplots_adjust(top=0.85)
 ```
 
 
-![png](kernel_files/kernel_96_0.png)
+![png](kernel_files/kernel_93_0.png)
 
 
 **Passenger who traveled in big groups with parents/children had less survival rate than other passengers.**
@@ -1671,7 +1662,7 @@ plt.subplots_adjust(top=0.85)
 ```
 
 
-![png](kernel_files/kernel_98_0.png)
+![png](kernel_files/kernel_95_0.png)
 
 
 **While, passenger who traveled in small groups with sibilings/spouses had better changes of survivint than other passengers.**
@@ -2230,7 +2221,7 @@ plt.title("Correlations Among Features", y = 1.03,fontsize = 20, pad = 40);
 ```
 
 
-![png](kernel_files/kernel_115_0.png)
+![png](kernel_files/kernel_112_0.png)
 
 
 #### Positive Correlation Features:
@@ -2911,7 +2902,7 @@ sns.distplot(train.Age, bins = 100, kde = True, rug = False, norm_hist=False);
 ```
 
 
-![png](kernel_files/kernel_163_0.png)
+![png](kernel_files/kernel_160_0.png)
 
 
 ## age_group
@@ -3875,11 +3866,11 @@ plt.show()
 
 
 
-![png](kernel_files/kernel_194_1.png)
+![png](kernel_files/kernel_191_1.png)
 
 
 
-![png](kernel_files/kernel_194_2.png)
+![png](kernel_files/kernel_191_2.png)
 
 
 <h1>AUC & ROC Curve</h1>
@@ -3909,7 +3900,7 @@ plt.show()
 
 
 
-![png](kernel_files/kernel_196_1.png)
+![png](kernel_files/kernel_193_1.png)
 
 
 
@@ -3931,7 +3922,7 @@ plt.show()
 ```
 
 
-![png](kernel_files/kernel_197_0.png)
+![png](kernel_files/kernel_194_0.png)
 
 
 ## Using Cross-validation:
@@ -4146,7 +4137,7 @@ plt.plot(k_range, k_scores)
 
 
 
-![png](kernel_files/kernel_211_1.png)
+![png](kernel_files/kernel_208_1.png)
 
 
 ### Grid search on KNN classifier
