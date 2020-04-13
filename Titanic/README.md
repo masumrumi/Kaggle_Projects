@@ -5236,9 +5236,8 @@ If you like to discuss any other projects or have a chat about data science topi
 **LinkedIn:** https://www.linkedin.com/in/masumrumi/ 
 
 **My Website:** http://masumrumi.com/ 
+<div class="alert alert-info">This kernel is a work in progress. I will always incorporate new concepts of data science as I master them. This journey of learning is worth sharing as well as collaborating. Therefore any comments about further improvements would be genuinely appreciated.</strong>
 
-*** This kernel is a work in progress. I will always incorporate new concepts of data science as I master them. This journey of learning is worth sharing as well as collaborating. Therefore any comments about further improvements would be genuinely appreciated.***
-***
 ## If you have come this far, Congratulations!!
 
 ## If this notebook helped you in any way, please upvote!!
