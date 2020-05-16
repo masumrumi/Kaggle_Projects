@@ -1,21 +1,23 @@
 ![image](https://www.livetradingnews.com/wp-content/uploads/2017/01/home-sales-701x526.jpg)
-<div style="text-align: center" > A Statistical Analysis & Machine Learning Workflow of House-Pricing </div>
+<br>
+<div style="text-align: left">This kernel is going to solve <font color="red"><b>House Pricing with Advanced Regression Analysis</b></font>, a popular machine learning dataset for <b>beginners</b>. I am going to share how I work with a dataset step by step  <b>from data preparation and data analysis to statistical tests and implementing machine learning models.</b> I will also describe the model results along with many other tips. This kernel is the "regression siblings" of my other <a href="https://www.kaggle.com/masumrumi/a-statistical-analysis-ml-workflow-of-titanic">Classification kernel</a>. As the name suggests, this kernel goes on a detailed analysis journey of most of the regression algorithms.  In addition to that, this kernel uses many charts and images to make things easier for readers to understand.</div>
 
-<div style="text-align: center">This kernel is going to solve <font color="red"><b>House Pricing with Advanced Regression Analysis</b></font>, a popular machine learning dataset for <b>beginners</b>. I am going to share how I work with a dataset step by step  <b>from data preparation and data analysis to statistical tests and implementing machine learning models.</b> I will also describe the model results along with many other tips. Let's get started.</div>
 
-<div style="text-align:center"> If there are any recommendations/changes you would like to see in this notebook, please <b>leave a comment</b> at the end of this kernel. Any feedback/constructive criticism would be genuinely appreciated. If you like this notebook or find this notebook helpful, Please feel free to <font color="red"><b>UPVOTE</b></font> and/or leave a comment.
+<div style="text-align:left"> If there are any recommendations/changes you would like to see in this notebook, please <b>leave a comment</b> at the end. Any feedback/constructive criticism would be genuinely appreciated. If you like this notebook or find this notebook helpful, Please feel free to <font color="Green"><b>UPVOTE</b></font> and/or leave a comment.
  
 <div> <b>This notebook is always a work in progress. So, please stay tuned for more to come.</b></div>
 
-# Goals
+<div class="alert alert-info">
+<h1>Goals</h1>
 This kernel hopes to accomplish many goals, to name a few...
-* Learn/review/explain complex data science topics through write-ups. 
-* Do a comprehensive data analysis along with visualizations. 
-* Create models that are well equipped to predict better sale price of the houses. 
+    <ul>
+        <li>Learn/review/explain complex data science topics through write-ups.</li>
+        <li>Do a comprehensive data analysis along with visualizations.</li>
+        <li>Create models that are well equipped to predict housing prices.</li>  
+    </ul>
+</div>
 
-# Introduction
-This kernel is the "regression siblings" of my other [ Classification kernel](https://www.kaggle.com/masumrumi/a-statistical-analysis-ml-workflow-of-titanic). As the name suggests, this kernel goes on a detailed analysis journey of most of the regression algorithms.  In addition to that, this kernel uses many charts and images to make things easier for readers to understand.
-# 1: Importing Necessary Libraries and datasets
+<h1>Importing Necessary Libraries and datasets</h1>
 
 
 ```python
@@ -25,11 +27,14 @@ This kernel is the "regression siblings" of my other [ Classification kernel](ht
 
 import numpy as np # linear algebra
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
-
+from datetime import datetime
+import matplotlib.pyplot as plt
+import matplotlib.gridspec as gridspec
+import matplotlib.style as style
 # Input data files are available in the "../input/" directory.
 # For example, running this (by clicking run or pressing Shift+Enter) will list the files in the input directory
-import matplotlib.gridspec as gridspec
-from datetime import datetime
+
+
 from scipy.stats import skew  # for some statistics
 from scipy.special import boxcox1p
 from scipy.stats import boxcox_normmax
@@ -43,10 +48,10 @@ from sklearn.metrics import mean_squared_error
 from mlxtend.regressor import StackingCVRegressor
 from xgboost import XGBRegressor
 from lightgbm import LGBMRegressor
-import matplotlib.pyplot as plt
+
 import scipy.stats as stats
 import sklearn.linear_model as linear_model
-import matplotlib.style as style
+
 import seaborn as sns
 from sklearn.manifold import TSNE
 from sklearn.cluster import KMeans
@@ -63,17 +68,17 @@ warnings.filterwarnings('ignore')
 # Any results you write to the current directory are saved as output.
 ```
 
-    ['house-prices-advanced-regression-techniques']
+    ['top-house-price-kernel-predictions', 'house-prices-advanced-regression-techniques']
 
 
-# A Glimpse of the datasets.
-> **Sample Train Dataset**
+<h1>A Glimpse of the datasets.</h1>
+<h2>Sample Train Dataset</h2>
 
 
 ```python
 ## Import Trainning data. 
 train = pd.read_csv("../input/house-prices-advanced-regression-techniques/train.csv")
-train.head()
+train.head(5)
 ```
 
 
@@ -248,13 +253,13 @@ train.head()
 
 
 
-> **Sample Test Dataset**
+<h2>Sample Test Dataset</h2>
 
 
 ```python
 ## Import test data.
 test = pd.read_csv("../input/house-prices-advanced-regression-techniques/test.csv")
-test.head()
+test.sample(5)
 ```
 
 
@@ -303,39 +308,63 @@ test.head()
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
-      <td>1461</td>
-      <td>20</td>
-      <td>RH</td>
-      <td>80.0</td>
-      <td>11622</td>
+      <th>153</th>
+      <td>1614</td>
+      <td>120</td>
+      <td>RM</td>
+      <td>31.0</td>
+      <td>2394</td>
+      <td>Pave</td>
+      <td>NaN</td>
+      <td>Reg</td>
+      <td>Low</td>
+      <td>AllPub</td>
+      <td>...</td>
+      <td>108</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>5</td>
+      <td>2010</td>
+      <td>WD</td>
+      <td>Normal</td>
+    </tr>
+    <tr>
+      <th>502</th>
+      <td>1963</td>
+      <td>160</td>
+      <td>RM</td>
+      <td>21.0</td>
+      <td>1890</td>
       <td>Pave</td>
       <td>NaN</td>
       <td>Reg</td>
       <td>Lvl</td>
       <td>AllPub</td>
       <td>...</td>
-      <td>120</td>
+      <td>0</td>
       <td>0</td>
       <td>NaN</td>
-      <td>MnPrv</td>
+      <td>NaN</td>
       <td>NaN</td>
       <td>0</td>
-      <td>6</td>
-      <td>2010</td>
+      <td>4</td>
+      <td>2008</td>
       <td>WD</td>
       <td>Normal</td>
     </tr>
     <tr>
-      <th>1</th>
-      <td>1462</td>
-      <td>20</td>
+      <th>609</th>
+      <td>2070</td>
+      <td>50</td>
       <td>RL</td>
-      <td>81.0</td>
-      <td>14267</td>
+      <td>45.0</td>
+      <td>7506</td>
       <td>Pave</td>
       <td>NaN</td>
-      <td>IR1</td>
+      <td>Reg</td>
       <td>Lvl</td>
       <td>AllPub</td>
       <td>...</td>
@@ -343,82 +372,58 @@ test.head()
       <td>0</td>
       <td>NaN</td>
       <td>NaN</td>
-      <td>Gar2</td>
-      <td>12500</td>
-      <td>6</td>
-      <td>2010</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>5</td>
+      <td>2008</td>
       <td>WD</td>
       <td>Normal</td>
     </tr>
     <tr>
-      <th>2</th>
-      <td>1463</td>
-      <td>60</td>
-      <td>RL</td>
-      <td>74.0</td>
-      <td>13830</td>
+      <th>999</th>
+      <td>2460</td>
+      <td>50</td>
+      <td>RM</td>
+      <td>NaN</td>
+      <td>6240</td>
       <td>Pave</td>
       <td>NaN</td>
-      <td>IR1</td>
+      <td>Reg</td>
       <td>Lvl</td>
       <td>AllPub</td>
       <td>...</td>
       <td>0</td>
       <td>0</td>
       <td>NaN</td>
-      <td>MnPrv</td>
+      <td>NaN</td>
       <td>NaN</td>
       <td>0</td>
       <td>3</td>
-      <td>2010</td>
+      <td>2007</td>
       <td>WD</td>
       <td>Normal</td>
     </tr>
     <tr>
-      <th>3</th>
-      <td>1464</td>
-      <td>60</td>
+      <th>331</th>
+      <td>1792</td>
+      <td>20</td>
       <td>RL</td>
-      <td>78.0</td>
-      <td>9978</td>
+      <td>83.0</td>
+      <td>10143</td>
       <td>Pave</td>
       <td>NaN</td>
-      <td>IR1</td>
+      <td>Reg</td>
       <td>Lvl</td>
       <td>AllPub</td>
       <td>...</td>
-      <td>0</td>
+      <td>216</td>
       <td>0</td>
       <td>NaN</td>
-      <td>NaN</td>
+      <td>GdWo</td>
       <td>NaN</td>
       <td>0</td>
       <td>6</td>
-      <td>2010</td>
-      <td>WD</td>
-      <td>Normal</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1465</td>
-      <td>120</td>
-      <td>RL</td>
-      <td>43.0</td>
-      <td>5005</td>
-      <td>Pave</td>
-      <td>NaN</td>
-      <td>IR1</td>
-      <td>HLS</td>
-      <td>AllPub</td>
-      <td>...</td>
-      <td>144</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0</td>
-      <td>1</td>
-      <td>2010</td>
+      <td>2009</td>
       <td>WD</td>
       <td>Normal</td>
     </tr>
@@ -429,7 +434,7 @@ test.head()
 
 
 
-# Describe the Datasets
+<h1>Exponential Data Analysis(EDA)</h1>
 
 
 ```python
@@ -1007,17 +1012,17 @@ train.info()
 # train.get_dtype_counts()
 ```
 
-## Checking for Missing Values
-
-### Missing Train values
+<h2>Missing Values</h2>
+<h3>Train</h3>
 
 
 ```python
+## the white part in the graph are the missing values. 
 msno.matrix(train);
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_15_0.png)
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_14_0.png)
 
 
 
@@ -1027,7 +1032,7 @@ def missing_percentage(df):
     ## the two following line may seem complicated but its actually very simple. 
     total = df.isnull().sum().sort_values(ascending = False)[df.isnull().sum().sort_values(ascending = False) != 0]
     percent = round(df.isnull().sum().sort_values(ascending = False)/len(df)*100,2)[round(df.isnull().sum().sort_values(ascending = False)/len(df)*100,2) != 0]
-    return pd.concat([total, percent], axis=1, keys=['Total','Percent'])
+    return pd.concat([total, percent], axis=1, keys=['Total_missing','Percent_wise'])
 
 missing_percentage(train)
 ```
@@ -1053,8 +1058,8 @@ missing_percentage(train)
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Total</th>
-      <th>Percent</th>
+      <th>Total_missing</th>
+      <th>Percent_wise</th>
     </tr>
   </thead>
   <tbody>
@@ -1159,7 +1164,7 @@ missing_percentage(train)
 
 
 
-### Missing Train values
+<h3>Test</h3>
 
 
 ```python
@@ -1167,7 +1172,7 @@ msno.matrix(test);
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_18_0.png)
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_17_0.png)
 
 
 
@@ -1196,8 +1201,8 @@ missing_percentage(test)
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Total</th>
-      <th>Percent</th>
+      <th>Total_missing</th>
+      <th>Percent_wise</th>
     </tr>
   </thead>
   <tbody>
@@ -1372,12 +1377,881 @@ missing_percentage(test)
 
 
 
-# Observation
-* There are multiple types of features. 
-* Some features have missing values. 
-* Most of the features are object( includes string values in the variable).
+<h4>Relationship between missing values and Sale Price:</h4>
 
-I want to focus on the target variable which is **SalePrice.** Let's create a histogram to see if the target variable is Normally distributed. If we want to create any linear model, it is essential that the features are normally distributed. This is one of the assumptions of multiple linear regression. I will explain more on this later.
+
+```python
+## Making a list of features that contains missing value. 
+features_with_na = missing_percentage(train).index
+
+def analyze_na_value(df, var, target):
+    """
+    This function takes in a dataFrame(df),a variable(var), and a dependent variable(target_feature); 
+    assigns 1 if the observaion is missing or 0 otherwise and 
+    Returns a bar plot of median values of the target_features.
+    e.x.
+    features_with_na is a list of values with nan values. 
+    "for var in features_with_na:
+     analyze_na_value(train, var, 'SalePrice')"
+    
+    """
+    df = df.copy()
+
+    # let's make a variable that indicates 1 if the observation was missing or zero otherwise
+    df[var] = np.where(df[var].isnull(), 1, 0)
+    
+
+    # let's compare the median SalePrice in the observations where data is missing
+    # vs the observations where a value is available
+
+    df.groupby(var)[target].median().plot.bar()
+
+    plt.title(var)
+    plt.show()
+
+
+# let's run the function on each variable with missing data
+for var in features_with_na:
+    analyze_na_value(train, var, 'SalePrice')
+```
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_20_0.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_20_1.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_20_2.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_20_3.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_20_4.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_20_5.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_20_6.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_20_7.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_20_8.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_20_9.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_20_10.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_20_11.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_20_12.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_20_13.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_20_14.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_20_15.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_20_16.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_20_17.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_20_18.png)
+
+
+These plots compare the median SalePrice in the observations where data is missing vs the observations where a value is available. As you can see there is a significant difference in median sale price between where missing value exists and where missing value doesn't exist. <b>We are using median here because mean would not direct us towards a better assumption as there are some outliers present. 
+
+<h2>Numerical variables</h2>
+
+Let's find the numerical variables from the dataset.
+
+
+
+```python
+# make list of numerical variables
+n_vars = [var for var in train.columns if train[var].dtypes != 'O']
+
+print('Number of numerical variables: ', len(n_vars))
+
+# visualise the numerical variables
+train[n_vars].head()
+```
+
+    Number of numerical variables:  38
+
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Id</th>
+      <th>MSSubClass</th>
+      <th>LotFrontage</th>
+      <th>LotArea</th>
+      <th>OverallQual</th>
+      <th>OverallCond</th>
+      <th>YearBuilt</th>
+      <th>YearRemodAdd</th>
+      <th>MasVnrArea</th>
+      <th>BsmtFinSF1</th>
+      <th>...</th>
+      <th>WoodDeckSF</th>
+      <th>OpenPorchSF</th>
+      <th>EnclosedPorch</th>
+      <th>3SsnPorch</th>
+      <th>ScreenPorch</th>
+      <th>PoolArea</th>
+      <th>MiscVal</th>
+      <th>MoSold</th>
+      <th>YrSold</th>
+      <th>SalePrice</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>60</td>
+      <td>65.0</td>
+      <td>8450</td>
+      <td>7</td>
+      <td>5</td>
+      <td>2003</td>
+      <td>2003</td>
+      <td>196.0</td>
+      <td>706</td>
+      <td>...</td>
+      <td>0</td>
+      <td>61</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>2008</td>
+      <td>208500</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>20</td>
+      <td>80.0</td>
+      <td>9600</td>
+      <td>6</td>
+      <td>8</td>
+      <td>1976</td>
+      <td>1976</td>
+      <td>0.0</td>
+      <td>978</td>
+      <td>...</td>
+      <td>298</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>5</td>
+      <td>2007</td>
+      <td>181500</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>60</td>
+      <td>68.0</td>
+      <td>11250</td>
+      <td>7</td>
+      <td>5</td>
+      <td>2001</td>
+      <td>2002</td>
+      <td>162.0</td>
+      <td>486</td>
+      <td>...</td>
+      <td>0</td>
+      <td>42</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>9</td>
+      <td>2008</td>
+      <td>223500</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>70</td>
+      <td>60.0</td>
+      <td>9550</td>
+      <td>7</td>
+      <td>5</td>
+      <td>1915</td>
+      <td>1970</td>
+      <td>0.0</td>
+      <td>216</td>
+      <td>...</td>
+      <td>0</td>
+      <td>35</td>
+      <td>272</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>2006</td>
+      <td>140000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>60</td>
+      <td>84.0</td>
+      <td>14260</td>
+      <td>8</td>
+      <td>5</td>
+      <td>2000</td>
+      <td>2000</td>
+      <td>350.0</td>
+      <td>655</td>
+      <td>...</td>
+      <td>192</td>
+      <td>84</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>12</td>
+      <td>2008</td>
+      <td>250000</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 38 columns</p>
+</div>
+
+
+
+Many of these variables will not be useful for the final model, i.e.,.id column, this column the unique identifier for each house. We will take care of that in the feature engineering selection. 
+
+<h3>Temporal Variable</h3>
+
+There are 4 year variables in the dataset. Let's find them
+
+
+```python
+year_features = [var for var in train.columns if 'Yr' in var or 'Year' in var]
+year_features
+```
+
+
+
+
+    ['YearBuilt', 'YearRemodAdd', 'GarageYrBlt', 'YrSold']
+
+
+
+
+```python
+# let's explore the values of these temporal variables
+
+for feat in year_features:
+    print(feat, train[feat].unique())
+    print()
+```
+
+    YearBuilt [2003 1976 2001 1915 2000 1993 2004 1973 1931 1939 1965 2005 1962 2006
+     1960 1929 1970 1967 1958 1930 2002 1968 2007 1951 1957 1927 1920 1966
+     1959 1994 1954 1953 1955 1983 1975 1997 1934 1963 1981 1964 1999 1972
+     1921 1945 1982 1998 1956 1948 1910 1995 1991 2009 1950 1961 1977 1985
+     1979 1885 1919 1990 1969 1935 1988 1971 1952 1936 1923 1924 1984 1926
+     1940 1941 1987 1986 2008 1908 1892 1916 1932 1918 1912 1947 1925 1900
+     1980 1989 1992 1949 1880 1928 1978 1922 1996 2010 1946 1913 1937 1942
+     1938 1974 1893 1914 1906 1890 1898 1904 1882 1875 1911 1917 1872 1905]
+    
+    YearRemodAdd [2003 1976 2002 1970 2000 1995 2005 1973 1950 1965 2006 1962 2007 1960
+     2001 1967 2004 2008 1997 1959 1990 1955 1983 1980 1966 1963 1987 1964
+     1972 1996 1998 1989 1953 1956 1968 1981 1992 2009 1982 1961 1993 1999
+     1985 1979 1977 1969 1958 1991 1971 1952 1975 2010 1984 1986 1994 1988
+     1954 1957 1951 1978 1974]
+    
+    GarageYrBlt [2003. 1976. 2001. 1998. 2000. 1993. 2004. 1973. 1931. 1939. 1965. 2005.
+     1962. 2006. 1960. 1991. 1970. 1967. 1958. 1930. 2002. 1968. 2007. 2008.
+     1957. 1920. 1966. 1959. 1995. 1954. 1953.   nan 1983. 1977. 1997. 1985.
+     1963. 1981. 1964. 1999. 1935. 1990. 1945. 1987. 1989. 1915. 1956. 1948.
+     1974. 2009. 1950. 1961. 1921. 1900. 1979. 1951. 1969. 1936. 1975. 1971.
+     1923. 1984. 1926. 1955. 1986. 1988. 1916. 1932. 1972. 1918. 1980. 1924.
+     1996. 1940. 1949. 1994. 1910. 1978. 1982. 1992. 1925. 1941. 2010. 1927.
+     1947. 1937. 1942. 1938. 1952. 1928. 1922. 1934. 1906. 1914. 1946. 1908.
+     1929. 1933.]
+    
+    YrSold [2008 2007 2006 2009 2010]
+    
+
+
+You can see these values are represented in years as we hoped. However, we generally don't use data for example year in their raw format, instead we try to get information from them. Let's look at the "YrSold" plot 
+
+
+```python
+train.groupby('YrSold')['SalePrice'].median().plot()
+plt.ylabel('Median House Price')
+plt.title('Change in House price with the years')
+```
+
+
+
+
+    Text(0.5, 1.0, 'Change in House price with the years')
+
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_29_1.png)
+
+
+This plot should raise an eyebrows. As the year increases the price of the houses seems to be decreasing, which in real time is quite unusual. Let's see if there is a relationship between year features and SalePrice
+
+
+```python
+# let's explore the relationship between the year variables
+# and the house price in a bit of more detail:
+
+def analyse_year_features(df, feature):
+    df = df.copy()
+    
+    # capture difference between year variable and year
+    # in which the house was sold
+    df[feature] = df['YrSold'] - df[feature]
+    plt.scatter(df[feature], df['SalePrice'], )
+    plt.ylabel('SalePrice')
+    plt.xlabel(feature)
+    plt.show()
+    
+    
+for feature in year_features:
+    if feature !='YrSold':
+        analyse_year_features(train, feature)
+    
+```
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_31_0.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_31_1.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_31_2.png)
+
+
+These charts seems more like a real life situation case. The longer the time between the house was built/remodeled and sold, the lower the sale price. This is likely, because the houses will have an older look and might need repairing. 
+
+<h3>Discrete Variables</h3>
+
+Let's find the descrete variables, i.e.,show a finite number of values
+
+
+```python
+#  let's make a list of discrete variables
+discrete_vars = [var for var in n_vars if len(
+    train[var].unique()) < 20 and var not in year_features+['Id']]
+
+
+print('Number of discrete variables: ', len(discrete_vars))
+```
+
+    Number of discrete variables:  14
+
+
+Let's analyze the discrete variables and see how they are related with the target variable SalePrice. 
+
+
+```python
+def analyze_discrete(df, var, target):
+    """
+    This function takes in a dataFrame(df),a variable(var), 
+    and a dependent variable(target_feature)
+    and returns a plot of median target variable in the y axis and var in the x axis
+    """
+    df = df.copy()
+    df.groupby(var)[target].median().plot.bar()
+    plt.title(var)
+    plt.ylabel('Median '+ str(target))
+    plt.show()
+    
+for var in discrete_vars:
+    analyze_discrete(train, var, 'SalePrice')
+```
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_36_0.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_36_1.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_36_2.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_36_3.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_36_4.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_36_5.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_36_6.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_36_7.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_36_8.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_36_9.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_36_10.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_36_11.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_36_12.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_36_13.png)
+
+
+There tend to be some relationships between the variables and the SalePrice, for example some are monotonic like OverallQual, some almost monotonic except for a unique values like OverallCond. We need to be particulary careful for these variables to extract maximum values for a linear model. 
+
+
+```python
+temp = train[discrete_vars].corr()
+## Plot fig sizing. 
+style.use('ggplot')
+sns.set_style('whitegrid')
+plt.subplots(figsize = (15,12))
+## Plotting heatmap. 
+
+# Generate a mask for the upper triangle (taken from seaborn example gallery)
+mask = np.zeros_like(temp, dtype=np.bool)
+mask[np.triu_indices_from(mask)] = True
+
+
+sns.heatmap(temp, 
+            cmap=sns.diverging_palette(20, 220, n=200), 
+#             cbar=False,
+            mask = mask, 
+            annot=True,
+            annot_kws={},
+            linecolor='white',
+            linewidths=.50,
+            center = 0, 
+           );
+## Give title. 
+plt.title("Heatmap of the Discrete Features", fontsize = 30);
+```
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_38_0.png)
+
+
+<h3>Continous Variables</h3>
+
+Let's find out the continous variables. 
+
+
+```python
+# make list of continuous variables
+continous_vars = [var for var in n_vars if var not in discrete_vars+year_features+['Id']]
+
+print('Number of continuous variables: ', len(continous_vars))
+```
+
+    Number of continuous variables:  19
+
+
+
+```python
+train[continous_vars].head()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>LotFrontage</th>
+      <th>LotArea</th>
+      <th>MasVnrArea</th>
+      <th>BsmtFinSF1</th>
+      <th>BsmtFinSF2</th>
+      <th>BsmtUnfSF</th>
+      <th>TotalBsmtSF</th>
+      <th>1stFlrSF</th>
+      <th>2ndFlrSF</th>
+      <th>LowQualFinSF</th>
+      <th>GrLivArea</th>
+      <th>GarageArea</th>
+      <th>WoodDeckSF</th>
+      <th>OpenPorchSF</th>
+      <th>EnclosedPorch</th>
+      <th>3SsnPorch</th>
+      <th>ScreenPorch</th>
+      <th>MiscVal</th>
+      <th>SalePrice</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>65.0</td>
+      <td>8450</td>
+      <td>196.0</td>
+      <td>706</td>
+      <td>0</td>
+      <td>150</td>
+      <td>856</td>
+      <td>856</td>
+      <td>854</td>
+      <td>0</td>
+      <td>1710</td>
+      <td>548</td>
+      <td>0</td>
+      <td>61</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>208500</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>80.0</td>
+      <td>9600</td>
+      <td>0.0</td>
+      <td>978</td>
+      <td>0</td>
+      <td>284</td>
+      <td>1262</td>
+      <td>1262</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1262</td>
+      <td>460</td>
+      <td>298</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>181500</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>68.0</td>
+      <td>11250</td>
+      <td>162.0</td>
+      <td>486</td>
+      <td>0</td>
+      <td>434</td>
+      <td>920</td>
+      <td>920</td>
+      <td>866</td>
+      <td>0</td>
+      <td>1786</td>
+      <td>608</td>
+      <td>0</td>
+      <td>42</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>223500</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>60.0</td>
+      <td>9550</td>
+      <td>0.0</td>
+      <td>216</td>
+      <td>0</td>
+      <td>540</td>
+      <td>756</td>
+      <td>961</td>
+      <td>756</td>
+      <td>0</td>
+      <td>1717</td>
+      <td>642</td>
+      <td>0</td>
+      <td>35</td>
+      <td>272</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>140000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>84.0</td>
+      <td>14260</td>
+      <td>350.0</td>
+      <td>655</td>
+      <td>0</td>
+      <td>490</td>
+      <td>1145</td>
+      <td>1145</td>
+      <td>1053</td>
+      <td>0</td>
+      <td>2198</td>
+      <td>836</td>
+      <td>192</td>
+      <td>84</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>250000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+# Let's go ahead and analyse the distributions of these variables
+
+
+def analyze_continuous(df, var):
+    df = df.copy()
+    df[var].hist(bins=30)
+    plt.ylabel('# of houses')
+    plt.xlabel(var)
+    plt.title(var)
+    plt.show()
+
+
+for var in continous_vars:
+    analyze_continuous(train, var)
+```
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_42_0.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_42_1.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_42_2.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_42_3.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_42_4.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_42_5.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_42_6.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_42_7.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_42_8.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_42_9.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_42_10.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_42_11.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_42_12.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_42_13.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_42_14.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_42_15.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_42_16.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_42_17.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_42_18.png)
+
+
+As you can see these variables are not normally distributed including our target variable "SalePrice". In order to maximise performance of linear models, we can use log transformation. We will describe more on this in following parts. We will do the transformation in the feature engineering section. Let's now see how the distribution might look once we do the transformation. 
+
+
+```python
+# Let's go ahead and analyse the distributions of these variables
+# after applying a logarithmic transformation
+
+
+def analyze_transformed_continuous(df, var):
+    df = df.copy()
+
+    # log does not take 0 or negative values, so let's be
+    # careful and skip those variables
+    if any(df[var] <= 0):
+        pass
+    else:
+        # log transform the variable
+        df[var] = np.log(df[var])
+        df[var].hist(bins=30)
+        plt.ylabel('# of houses')
+        plt.xlabel(var)
+        plt.title(var)
+        plt.show()
+
+
+for var in continous_vars:
+    analyze_transformed_continuous(train, var)
+```
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_44_0.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_44_1.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_44_2.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_44_3.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_44_4.png)
+
+
+As you can see, we get a better spread of data once we use log transformation.
+
+I want to focus our attention on the target variable which is **SalePrice.** We already know that our target variable is not normally distributed. However, lets go into more details. If we want to create any linear model, it is essential that the features are normally distributed. This is one of the assumptions of multiple linear regression. In previous codes we have seen that log transformation can help us to make features more like normally distribute. I will explain more on this later.
 
 
 ```python
@@ -1421,7 +2295,7 @@ plotting_3_chart(train, 'SalePrice')
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_21_0.png)
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_46_0.png)
 
 
 These **three** charts above can tell us a lot about our target variable.
@@ -1533,7 +2407,7 @@ We can fix this by using different types of transformation(more on this later). 
 
 These are the predictor variables sorted in a descending order starting with the most correlated one **OverallQual**. Let's put this one in a scatter plot and see how it looks.
 
-### SalePrice vs OverallQual
+<h4>SalePrice vs OverallQual</h4>
 
 
 ```python
@@ -1551,12 +2425,12 @@ customized_scatterplot(train.SalePrice, train.OverallQual)
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_29_0.png)
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_54_0.png)
 
 
 **OverallQual** is a categorical variable, and a scatter plot is not the best way to visualize categorical variables. However, there is an apparent relationship between the two features. The price of the houses increases with the overall quality. Let's check out some more features to determine the outliers. Let's focus on the numerical variables this time.
 
-### SalePrice vs GrLivArea
+<h4>SalePrice vs GrLivArea</h4>
 
 
 ```python
@@ -1564,12 +2438,12 @@ customized_scatterplot(train.SalePrice, train.GrLivArea)
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_32_0.png)
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_57_0.png)
 
 
 As you can see, there are two outliers in the plot above. We will get rid off them later. Let's look at another scatter plot with a different feature.
 
-### SalePrice vs GarageArea
+<h4>SalePrice vs GarageArea</h4>
 
 
 ```python
@@ -1577,11 +2451,11 @@ customized_scatterplot(train.SalePrice, train.GarageArea);
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_34_0.png)
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_59_0.png)
 
 
 And the next one..?
-### SalePrice vs TotalBsmtSF
+<h4>SalePrice vs TotalBsmtSF</h4>
 
 
 ```python
@@ -1589,11 +2463,11 @@ customized_scatterplot(train.SalePrice, train.TotalBsmtSF)
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_36_0.png)
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_61_0.png)
 
 
 and the next ?
-### SalePrice vs 1stFlrSF
+<h4>SalePrice vs 1stFlrSF</h4>
 
 
 ```python
@@ -1601,10 +2475,12 @@ customized_scatterplot(train.SalePrice, train['1stFlrSF']);
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_38_0.png)
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_63_0.png)
 
 
 How about one more...
+
+<h4>SalePrice vs MasVnrArea</h4>
 
 
 ```python
@@ -1612,38 +2488,38 @@ customized_scatterplot(train.SalePrice, train.MasVnrArea);
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_40_0.png)
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_65_0.png)
 
 
 Okay, I think we have seen enough. Let's discuss what we have found so far. 
 
-# Observations
+<h4>Observations</h4>
+
 * Our target variable shows an unequal level of variance across most predictor(independent) variables. This is called **Heteroscedasticity(more explanation below)** and is a red flag for the multiple linear regression model.
 * There are many outliers in the scatter plots above that took my attention. 
 
 * The two on the top-right edge of **SalePrice vs. GrLivArea** seem to follow a trend, which can be explained by saying that "As the prices increased, so did the area. 
-* However, The two on the bottom right of the same chart do not follow any trends. We will get rid of these two below.
+* However, The two on the bottom right of the same chart do not follow any trends. We will get rid of these two in the feature engineering section.
 
 
 ```python
-
-## Deleting those two values with outliers. 
-train = train[train.GrLivArea < 4500]
-train.reset_index(drop = True, inplace = True)
-
 ## save a copy of this dataset so that any changes later on can be compared side by side.
 previous_train = train.copy()
 ```
 
 As we look through these scatter plots, I realized that it is time to explain the assumptions of Multiple Linear Regression. Before building a multiple linear regression model, we need to check that these assumptions below are valid.
-## Assumptions of Regression
 
-* **Linearity ( Correct functional form )** 
-* **Homoscedasticity ( Constant Error Variance )( vs Heteroscedasticity ). **
-* **Independence of Errors ( vs Autocorrelation ) **
-* **Multivariate Normality ( Normality of Errors ) **
-* **No or little Multicollinearity. ** 
-
+<div class="alert alert-info">
+    <h4>Assumptions of Regression</h4>
+        <ul>
+            <li>Linearity ( Correct functional form )</li>
+            <li>Homoscedasticity ( Constant Error Variance )( vs Heteroscedasticity ).</li>
+            <li>Independence of Errors ( vs Autocorrelation )</li>
+            <li>Multivariate Normality ( Normality of Errors )</li>
+            <li>No or little Multicollinearity.</li>
+        </ul>
+</div>
+   
 Since we fit a linear model, we assume that the relationship is **linear**, and the errors, or residuals, are pure random fluctuations around the true line. We expect that the variability in the response(dependent) variable doesn't increase as the value of the predictor(independent) increases, which is the assumptions of equal variance, also known as **Homoscedasticity**. We also assume that the observations are independent of one another(**No Multicollinearity**), and a correlation between sequential observations or auto-correlation is not there.
 
 Now, these assumptions are prone to happen altogether. In other words, if we see one of these assumptions in the dataset, it's more likely that we may come across with others mentioned above. Therefore, we can find and fix various assumptions with a few unique techniques.
@@ -1669,7 +2545,7 @@ sns.regplot(x=train.MasVnrArea, y=train.SalePrice, ax=ax2);
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_44_0.png)
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_69_0.png)
 
 
 Here we are plotting our target variable with two independent variables **GrLivArea** and **MasVnrArea**. It's pretty apparent from the chart that there is a better linear relationship between **SalePrice** and **GrLivArea** than **SalePrice** and **MasVnrArea**. One thing to take note here, there are some outliers in the dataset. It is imperative to check for outliers since linear regression is sensitive to outlier effects. Sometimes we may be trying to fit a linear regression model when the data might not be so linear, or the function may need another degree of freedom to fit the data. In that case, we may need to change our function depending on the data to get the best possible fit. In addition to that, we can also check the residual plot, which tells us how is the error variance across the true line. Let's look at the residual plot for independent variable **GrLivArea** and our target variable **SalePrice **. 
@@ -1681,7 +2557,7 @@ sns.residplot(train.GrLivArea, train.SalePrice);
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_46_0.png)
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_71_0.png)
 
 
 Ideally, if the assumptions are met, the residuals will be randomly scattered around the centerline of zero with no apparent pattern. The residual will look like an unstructured cloud of points centered around zero. However, our residual plot is anything but an unstructured cloud of points. Even though it seems like there is a linear relationship between the response variable and predictor variable, the residual plot looks more like a funnel. The error plot shows that as **GrLivArea** value increases, the variance also increases, which is the characteristics known as **Heteroscedasticity**. Let's break this down. 
@@ -1702,25 +2578,25 @@ plotting_3_chart(train, 'SalePrice')
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_48_0.png)
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_73_0.png)
 
 
 Now, let's make sure that the target variable follows a normal distribution. If you want to learn more about the probability plot(Q-Q plot), try [this](https://www.youtube.com/watch?v=smJBsZ4YQZw) video. You can also check out [this](https://www.youtube.com/watch?v=9IcaQwQkE9I) one if you have some extra time.
 
 
 ```python
-## trainsforming target variable using numpy.log1p, 
-train["SalePrice"] = np.log1p(train["SalePrice"])
+## trainsforming target variable using numpy.log1p
+train["transformed_SalePrice"] = np.log1p(train["SalePrice"])
 
 ## Plotting the newly transformed response variable
-plotting_3_chart(train, 'SalePrice')
+plotting_3_chart(train, 'transformed_SalePrice')
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_50_0.png)
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_75_0.png)
 
 
-As you can see, the log transformation removes the normality of errors, which solves most of the other errors we talked about above. Let's make a comparison of the pre-transformed and post-transformed state of residual plots. 
+<div class="alert alert-success"><strong>Success!!</strong> As you can see, the log transformation removes the normality of errors, which solves most of the other errors we talked about above. Let's make a comparison of the pre-transformed and post-transformed state of residual plots.</div> 
 
 
 ```python
@@ -1733,11 +2609,11 @@ fig, (ax1, ax2) = plt.subplots(figsize = (15,6),
 ## doing the first scatter plot. 
 sns.residplot(x = previous_train.GrLivArea, y = previous_train.SalePrice, ax = ax1)
 ## doing the scatter plot for GrLivArea and SalePrice. 
-sns.residplot(x = train.GrLivArea, y = train.SalePrice, ax = ax2);
+sns.residplot(x = train.GrLivArea, y = train.transformed_SalePrice, ax = ax2);
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_52_0.png)
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_77_0.png)
 
 
 Here, we see that the pre-transformed chart on the left has heteroscedasticity, and the post-transformed chart on the right has Homoscedasticity(almost an equal amount of variance across the zero lines). It looks like a blob of data points and doesn't seem to give away any relationships. That's the sort of relationship we would like to see to avoid some of these assumptions. 
@@ -1753,32 +2629,40 @@ Heatmap is an excellent way to identify whether there is multicollinearity or no
 
 
 ```python
+## We will delete the transformed_salePrice for now. 
+del train['transformed_SalePrice']
+```
+
+
+```python
+temp = train[continous_vars].corr()
 ## Plot fig sizing. 
 style.use('ggplot')
 sns.set_style('whitegrid')
-plt.subplots(figsize = (30,20))
+plt.subplots(figsize = (15,12))
 ## Plotting heatmap. 
 
 # Generate a mask for the upper triangle (taken from seaborn example gallery)
-mask = np.zeros_like(train.corr(), dtype=np.bool)
+mask = np.zeros_like(temp, dtype=np.bool)
 mask[np.triu_indices_from(mask)] = True
 
 
-sns.heatmap(train.corr(), 
+sns.heatmap(temp, 
             cmap=sns.diverging_palette(20, 220, n=200), 
             mask = mask, 
             annot=True, 
             center = 0, 
            );
 ## Give title. 
-plt.title("Heatmap of all the Features", fontsize = 30);
+plt.title("Heatmap of the Continous Features", fontsize = 30);
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_54_0.png)
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_80_0.png)
 
 
-## Observation. 
+<h4>Observation.</h4>
+
 As we can see, the multicollinearity still exists in various features. However, we will keep them for now for the sake of learning and let the models(e.x. Regularization models such as Lasso, Ridge) do the clean up later on. Let's go through some of the correlations that still exists. 
 
 * There is 0.83 or 83% correlation between **GarageYrBlt** and **YearBuilt**. 
@@ -1788,76 +2672,69 @@ As we can see, the multicollinearity still exists in various features. However, 
 
 If I were using only multiple linear regression, I would be deleting these features from the dataset to fit better multiple linear regression algorithms. However, we will be using many algorithms as scikit learn modules makes it easy to implement them and get the best possible outcome. Therefore, we will keep all the features for now. 
 
-<h3>Resources:</h3>
+<h4>Resources:</h4>
 <ul>
     <li><a href="https://www.statisticssolutions.com/assumptions-of-linear-regression/">Assumptions of Linear Regression</a></li>
     <li><a href="https://www.statisticssolutions.com/assumptions-of-multiple-linear-regression/">Assumptions of Multiple Linear Regression</a></li>
     <li><a href="https://www.youtube.com/watch?v=0MFpOQRY0rw/"> Youtube: All regression assumptions explained!<a/></li>
 </ul>
 
-# Feature engineering
+<h4>Outliers</h4>
+
+Extreme values affects the performance of a linear model. Let's find out if we have any in our variables. 
 
 
 ```python
-## Dropping the "Id" from train and test set. 
-# train.drop(columns=['Id'],axis=1, inplace=True)
-
-train.drop(columns=['Id'],axis=1, inplace=True)
-test.drop(columns=['Id'],axis=1, inplace=True)
-
-## Saving the target values in "y_train". 
-y = train['SalePrice'].reset_index(drop=True)
+# let's make boxplots to visualise outliers in the continuous variables
 
 
+def find_outliers(df, var):
+    df = df.copy()
 
-# getting a copy of train
-previous_train = train.copy()
+    # log does not take negative values, so let's be
+    # careful and skip those variables
+    if any(df[var] <= 0):
+        pass
+    else:
+        df[var] = np.log(df[var])
+        df.boxplot(column=var)
+        plt.title(var)
+        plt.ylabel(var)
+        plt.show()
+
+
+for var in continous_vars:
+    find_outliers(train, var)
 ```
 
 
-```python
-# quantitative = [f for f in train.columns if train.dtypes[f] != 'object']
-# qualitative = [f for f in train.columns if train.dtypes[f] == 'object']
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_83_0.png)
 
-# def encode(df, feature, target_feature):
-#     """
-#     This function takes a dataframe, a feature(a categorical feature) and a target_feature(the feature that should be used for encoding)
-#     and returns a new feature with the original feature name + postfix(_E). 
-#     This new feature consists of encoded value of unique original value but the values are weighted(incremented) based on the 
-#     mean of target_feature and grouped by the feature itself.
-#     """
-#     ordering = pd.DataFrame()
-#     ordering['val'] = df[feature].unique()
-#     ordering.index = ordering.val
-#     ordering['spmean'] = df[[feature, target_feature]].groupby(feature).mean()[target_feature]
-#     ordering = ordering.sort_values('spmean')
-#     ordering['ordering'] = range(1, ordering.shape[0]+1)
-#     ordering = ordering['ordering'].to_dict()
-    
-#     for cat, o in ordering.items():
-#         df.loc[df[feature] == cat, feature+'_E'] = o
-    
-# qual_encoded = []
-# for q in qualitative:  
-#     encode(train, q, 'SalePrice')
-#     qual_encoded.append(q+'_E')
-# print(qual_encoded)
-```
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_83_1.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_83_2.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_83_3.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_83_4.png)
+
+
+As you can see most of the continous variables seem to contaion outliers. We will get rid of some of these outliers in the feature engineering section. 
+
+<h3>Categorical Variables</h3>
 
 
 ```python
-## Combining train and test datasets together so that we can do all the work at once. 
-all_data = pd.concat((train, test)).reset_index(drop = True)
-## Dropping the target variable. 
-all_data.drop(['SalePrice'], axis = 1, inplace = True)
-```
-
-## Dealing with Missing Values
-> **Missing data in train and test data(all_data)**
-
-
-```python
-missing_percentage(all_data)
+categorical_vars = [var for var in train.columns if train[var].dtypes == 'O']
+train[categorical_vars].head()
 ```
 
 
@@ -1881,180 +2758,801 @@ missing_percentage(all_data)
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Total</th>
-      <th>Percent</th>
+      <th>MSZoning</th>
+      <th>Street</th>
+      <th>Alley</th>
+      <th>LotShape</th>
+      <th>LandContour</th>
+      <th>Utilities</th>
+      <th>LotConfig</th>
+      <th>LandSlope</th>
+      <th>Neighborhood</th>
+      <th>Condition1</th>
+      <th>...</th>
+      <th>GarageType</th>
+      <th>GarageFinish</th>
+      <th>GarageQual</th>
+      <th>GarageCond</th>
+      <th>PavedDrive</th>
+      <th>PoolQC</th>
+      <th>Fence</th>
+      <th>MiscFeature</th>
+      <th>SaleType</th>
+      <th>SaleCondition</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>PoolQC</th>
-      <td>2908</td>
-      <td>99.69</td>
+      <th>0</th>
+      <td>RL</td>
+      <td>Pave</td>
+      <td>NaN</td>
+      <td>Reg</td>
+      <td>Lvl</td>
+      <td>AllPub</td>
+      <td>Inside</td>
+      <td>Gtl</td>
+      <td>CollgCr</td>
+      <td>Norm</td>
+      <td>...</td>
+      <td>Attchd</td>
+      <td>RFn</td>
+      <td>TA</td>
+      <td>TA</td>
+      <td>Y</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>WD</td>
+      <td>Normal</td>
     </tr>
     <tr>
-      <th>MiscFeature</th>
-      <td>2812</td>
-      <td>96.40</td>
+      <th>1</th>
+      <td>RL</td>
+      <td>Pave</td>
+      <td>NaN</td>
+      <td>Reg</td>
+      <td>Lvl</td>
+      <td>AllPub</td>
+      <td>FR2</td>
+      <td>Gtl</td>
+      <td>Veenker</td>
+      <td>Feedr</td>
+      <td>...</td>
+      <td>Attchd</td>
+      <td>RFn</td>
+      <td>TA</td>
+      <td>TA</td>
+      <td>Y</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>WD</td>
+      <td>Normal</td>
     </tr>
     <tr>
-      <th>Alley</th>
-      <td>2719</td>
-      <td>93.21</td>
+      <th>2</th>
+      <td>RL</td>
+      <td>Pave</td>
+      <td>NaN</td>
+      <td>IR1</td>
+      <td>Lvl</td>
+      <td>AllPub</td>
+      <td>Inside</td>
+      <td>Gtl</td>
+      <td>CollgCr</td>
+      <td>Norm</td>
+      <td>...</td>
+      <td>Attchd</td>
+      <td>RFn</td>
+      <td>TA</td>
+      <td>TA</td>
+      <td>Y</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>WD</td>
+      <td>Normal</td>
     </tr>
     <tr>
-      <th>Fence</th>
-      <td>2346</td>
-      <td>80.43</td>
+      <th>3</th>
+      <td>RL</td>
+      <td>Pave</td>
+      <td>NaN</td>
+      <td>IR1</td>
+      <td>Lvl</td>
+      <td>AllPub</td>
+      <td>Corner</td>
+      <td>Gtl</td>
+      <td>Crawfor</td>
+      <td>Norm</td>
+      <td>...</td>
+      <td>Detchd</td>
+      <td>Unf</td>
+      <td>TA</td>
+      <td>TA</td>
+      <td>Y</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>WD</td>
+      <td>Abnorml</td>
     </tr>
     <tr>
-      <th>FireplaceQu</th>
-      <td>1420</td>
-      <td>48.68</td>
+      <th>4</th>
+      <td>RL</td>
+      <td>Pave</td>
+      <td>NaN</td>
+      <td>IR1</td>
+      <td>Lvl</td>
+      <td>AllPub</td>
+      <td>FR2</td>
+      <td>Gtl</td>
+      <td>NoRidge</td>
+      <td>Norm</td>
+      <td>...</td>
+      <td>Attchd</td>
+      <td>RFn</td>
+      <td>TA</td>
+      <td>TA</td>
+      <td>Y</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>WD</td>
+      <td>Normal</td>
     </tr>
-    <tr>
-      <th>LotFrontage</th>
-      <td>486</td>
-      <td>16.66</td>
+  </tbody>
+</table>
+<p>5 rows × 43 columns</p>
+</div>
+
+
+
+
+```python
+print(f"So, There are a total of {len(categorical_vars)} categorical values. Let's see the cardinality of each features.")
+```
+
+    So, There are a total of 43 categorical values. Let's see the cardinality of each features.
+
+
+
+```python
+train[categorical_vars].nunique()
+```
+
+
+
+
+    MSZoning          5
+    Street            2
+    Alley             2
+    LotShape          4
+    LandContour       4
+    Utilities         2
+    LotConfig         5
+    LandSlope         3
+    Neighborhood     25
+    Condition1        9
+    Condition2        8
+    BldgType          5
+    HouseStyle        8
+    RoofStyle         6
+    RoofMatl          8
+    Exterior1st      15
+    Exterior2nd      16
+    MasVnrType        4
+    ExterQual         4
+    ExterCond         5
+    Foundation        6
+    BsmtQual          4
+    BsmtCond          4
+    BsmtExposure      4
+    BsmtFinType1      6
+    BsmtFinType2      6
+    Heating           6
+    HeatingQC         5
+    CentralAir        2
+    Electrical        5
+    KitchenQual       4
+    Functional        7
+    FireplaceQu       5
+    GarageType        6
+    GarageFinish      3
+    GarageQual        5
+    GarageCond        5
+    PavedDrive        3
+    PoolQC            3
+    Fence             4
+    MiscFeature       4
+    SaleType          9
+    SaleCondition     6
+    dtype: int64
+
+
+
+There is less cardinality in these features. In other words the amount of unique value for each feature is not so much that we need to tackle them. 
+
+<h4>Rare Values</h4>
+The presence of rare values can skew the model result. The problem with rare values is that, sometimes they are present in the train but not in test, sometimes in test but not in train. In these cases models doesn't know what to do with the values. Let's investigate if there are any labels that are present only in a small number of houses. 
+
+
+```python
+def analyse_rare_labels(df, var, rare_perc):
+    df = df.copy()
+
+    # determine the % of observations per category
+    tmp = df.groupby(var)['SalePrice'].count() / len(df)
+
+    # return categories that are rare
+    return tmp[tmp < rare_perc]
+
+# print categories that are present in less than
+# 1 % of the observations
+
+
+for var in categorical_vars:
+    print(analyse_rare_labels(train, var, 0.01))
+    print()
+```
+
+    MSZoning
+    C (all)    0.006849
+    Name: SalePrice, dtype: float64
+    
+    Street
+    Grvl    0.00411
+    Name: SalePrice, dtype: float64
+    
+    Series([], Name: SalePrice, dtype: float64)
+    
+    LotShape
+    IR3    0.006849
+    Name: SalePrice, dtype: float64
+    
+    Series([], Name: SalePrice, dtype: float64)
+    
+    Utilities
+    NoSeWa    0.000685
+    Name: SalePrice, dtype: float64
+    
+    LotConfig
+    FR3    0.00274
+    Name: SalePrice, dtype: float64
+    
+    LandSlope
+    Sev    0.008904
+    Name: SalePrice, dtype: float64
+    
+    Neighborhood
+    Blueste    0.001370
+    NPkVill    0.006164
+    Veenker    0.007534
+    Name: SalePrice, dtype: float64
+    
+    Condition1
+    PosA    0.005479
+    RRAe    0.007534
+    RRNe    0.001370
+    RRNn    0.003425
+    Name: SalePrice, dtype: float64
+    
+    Condition2
+    Artery    0.001370
+    Feedr     0.004110
+    PosA      0.000685
+    PosN      0.001370
+    RRAe      0.000685
+    RRAn      0.000685
+    RRNn      0.001370
+    Name: SalePrice, dtype: float64
+    
+    Series([], Name: SalePrice, dtype: float64)
+    
+    HouseStyle
+    1.5Unf    0.009589
+    2.5Fin    0.005479
+    2.5Unf    0.007534
+    Name: SalePrice, dtype: float64
+    
+    RoofStyle
+    Flat       0.008904
+    Gambrel    0.007534
+    Mansard    0.004795
+    Shed       0.001370
+    Name: SalePrice, dtype: float64
+    
+    RoofMatl
+    ClyTile    0.000685
+    Membran    0.000685
+    Metal      0.000685
+    Roll       0.000685
+    Tar&Grv    0.007534
+    WdShake    0.003425
+    WdShngl    0.004110
+    Name: SalePrice, dtype: float64
+    
+    Exterior1st
+    AsphShn    0.000685
+    BrkComm    0.001370
+    CBlock     0.000685
+    ImStucc    0.000685
+    Stone      0.001370
+    Name: SalePrice, dtype: float64
+    
+    Exterior2nd
+    AsphShn    0.002055
+    Brk Cmn    0.004795
+    CBlock     0.000685
+    ImStucc    0.006849
+    Other      0.000685
+    Stone      0.003425
+    Name: SalePrice, dtype: float64
+    
+    Series([], Name: SalePrice, dtype: float64)
+    
+    ExterQual
+    Fa    0.009589
+    Name: SalePrice, dtype: float64
+    
+    ExterCond
+    Ex    0.002055
+    Po    0.000685
+    Name: SalePrice, dtype: float64
+    
+    Foundation
+    Stone    0.004110
+    Wood     0.002055
+    Name: SalePrice, dtype: float64
+    
+    Series([], Name: SalePrice, dtype: float64)
+    
+    BsmtCond
+    Po    0.00137
+    Name: SalePrice, dtype: float64
+    
+    Series([], Name: SalePrice, dtype: float64)
+    
+    Series([], Name: SalePrice, dtype: float64)
+    
+    BsmtFinType2
+    GLQ    0.009589
+    Name: SalePrice, dtype: float64
+    
+    Heating
+    Floor    0.000685
+    Grav     0.004795
+    OthW     0.001370
+    Wall     0.002740
+    Name: SalePrice, dtype: float64
+    
+    HeatingQC
+    Po    0.000685
+    Name: SalePrice, dtype: float64
+    
+    Series([], Name: SalePrice, dtype: float64)
+    
+    Electrical
+    FuseP    0.002055
+    Mix      0.000685
+    Name: SalePrice, dtype: float64
+    
+    Series([], Name: SalePrice, dtype: float64)
+    
+    Functional
+    Maj1    0.009589
+    Maj2    0.003425
+    Sev     0.000685
+    Name: SalePrice, dtype: float64
+    
+    Series([], Name: SalePrice, dtype: float64)
+    
+    GarageType
+    2Types     0.004110
+    CarPort    0.006164
+    Name: SalePrice, dtype: float64
+    
+    Series([], Name: SalePrice, dtype: float64)
+    
+    GarageQual
+    Ex    0.002055
+    Gd    0.009589
+    Po    0.002055
+    Name: SalePrice, dtype: float64
+    
+    GarageCond
+    Ex    0.001370
+    Gd    0.006164
+    Po    0.004795
+    Name: SalePrice, dtype: float64
+    
+    Series([], Name: SalePrice, dtype: float64)
+    
+    PoolQC
+    Ex    0.001370
+    Fa    0.001370
+    Gd    0.002055
+    Name: SalePrice, dtype: float64
+    
+    Fence
+    MnWw    0.007534
+    Name: SalePrice, dtype: float64
+    
+    MiscFeature
+    Gar2    0.001370
+    Othr    0.001370
+    TenC    0.000685
+    Name: SalePrice, dtype: float64
+    
+    SaleType
+    CWD      0.002740
+    Con      0.001370
+    ConLD    0.006164
+    ConLI    0.003425
+    ConLw    0.003425
+    Oth      0.002055
+    Name: SalePrice, dtype: float64
+    
+    SaleCondition
+    AdjLand    0.002740
+    Alloca     0.008219
+    Name: SalePrice, dtype: float64
+    
+
+
+Some of these categorical variable consists of values that are present in a very small amount. These values can overfit the models significantly. We need to remove them in the Feature engineering section. 
+
+
+```python
+for var in categorical_vars:
+    # we can re-use the function to determine median
+    # sale price, that we created for discrete variables
+
+    analyze_discrete(train, var, 'SalePrice')
+```
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_0.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_1.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_2.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_3.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_4.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_5.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_6.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_7.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_8.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_9.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_10.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_11.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_12.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_13.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_14.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_15.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_16.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_17.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_18.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_19.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_20.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_21.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_22.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_23.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_24.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_25.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_26.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_27.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_28.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_29.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_30.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_31.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_32.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_33.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_34.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_35.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_36.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_37.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_38.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_39.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_40.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_41.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_42.png)
+
+
+Clearly these categorical variables shows promising information. We will transform these variable in the feature engineering section to extract necessary information. 
+
+<h1>Feature Engineering</h1>
+
+Here is a list of things we will go over in this section based on this dataset. 
+<ul>
+    <li>Missing Values</li>
+    <li>Temporal variables(year variables)</li>
+    <li>Non-Gaussian distributed variables(variables that do not follow a normal distribution.</li>
+    <li>Categorical variables: remove rare labels</li>
+    <li>Categorical variables: convert strings to numbers</li>
+    <li>Standarise the values of the variables to the same range</li>
+</ul>
+
+Before we began to engineer the features it is important to separate the data into train and test set. As we engineer existing features or new features, we might use some techniques to learn parameters from the data. In that case we don't want to learn from part of the data that will be used to evaluate the model. This is to avoid over-fitting. 
+
+
+```python
+# Let's separate into train and test set
+# Remember to set the seed (random_state for this sklearn function)
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(train,
+                                                    train['SalePrice'],
+                                                    test_size=0.1,
+                                                    # we are setting the seed here:
+                                                    random_state=0,
+#                                                     stratify = train['SalePrice']
+                                                   )  
+
+X_train.shape, X_test.shape, y_train.shape,y_test.shape
+```
+
+
+
+
+    ((1314, 81), (146, 81), (1314,), (146,))
+
+
+
+<h2>Missing Values</h2>
+
+
+```python
+## Some missing values are intentionally left blank, for example: In the Alley feature 
+## there are blank values meaning that there are no alley's in that specific house. 
+missing_val_col = ["Alley", 
+                   "PoolQC", 
+                   "MiscFeature",
+                   "Fence",
+                   "FireplaceQu",
+                   "GarageType",
+                   "GarageFinish",
+                   "GarageQual",
+                   "GarageCond",
+                   'BsmtQual',
+                   'BsmtCond',
+                   'BsmtExposure',
+                   'BsmtFinType1',
+                   'BsmtFinType2',
+                   'MasVnrType']
+for i in missing_val_col:
+    X_train[i] = X_train[i].fillna('None')
+    X_test[i] = X_test[i].fillna('None')
+```
+
+
+```python
+## In the following features the null values are there for a purpose, so we replace them with "0"
+missing_val_col2 = ['BsmtFinSF1',
+                    'BsmtFinSF2',
+                    'BsmtUnfSF',
+                    'TotalBsmtSF',
+                    'BsmtFullBath', 
+                    'BsmtHalfBath', 
+                    'GarageCars']
+for i in missing_val_col2:
+    X_train[i] = X_train[i].fillna(0)
+    X_test[i] = X_test[i].fillna(0)
+```
+
+
+```python
+# make a list with the numerical variables that contain missing values
+num_vars_with_na = [
+    var for var in train.columns
+    if X_train[var].isnull().sum() > 0 and X_train[var].dtypes != 'O'
+]
+
+# print percentage of missing values per variable
+X_train[num_vars_with_na].isnull().mean()
+```
+
+
+
+
+    LotFrontage    0.177321
+    MasVnrArea     0.004566
+    GarageYrBlt    0.056317
+    dtype: float64
+
+
+
+
+```python
+# replace engineer missing values as we described above
+
+for var in num_vars_with_na:
+
+    # calculate the mode using the train set
+    mode_val = X_train[var].mode()[0]
+
+    # add binary missing indicator (in train and test)
+    X_train[var+'_na'] = np.where(X_train[var].isnull(), 1, 0)
+    X_test[var+'_na'] = np.where(X_test[var].isnull(), 1, 0)
+
+    # replace missing values by the mode
+    # (in train and test)
+    X_train[var] = X_train[var].fillna(mode_val)
+    X_test[var] = X_test[var].fillna(mode_val)
+
+# check that we have no more missing values in the engineered variables
+X_train[num_vars_with_na].isnull().sum()
+```
+
+
+
+
+    LotFrontage    0
+    MasVnrArea     0
+    GarageYrBlt    0
+    dtype: int64
+
+
+
+
+```python
+missing_percentage(X_train)
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Total_missing</th>
+      <th>Percent_wise</th>
     </tr>
-    <tr>
-      <th>GarageCond</th>
-      <td>159</td>
-      <td>5.45</td>
-    </tr>
-    <tr>
-      <th>GarageQual</th>
-      <td>159</td>
-      <td>5.45</td>
-    </tr>
-    <tr>
-      <th>GarageYrBlt</th>
-      <td>159</td>
-      <td>5.45</td>
-    </tr>
-    <tr>
-      <th>GarageFinish</th>
-      <td>159</td>
-      <td>5.45</td>
-    </tr>
-    <tr>
-      <th>GarageType</th>
-      <td>157</td>
-      <td>5.38</td>
-    </tr>
-    <tr>
-      <th>BsmtCond</th>
-      <td>82</td>
-      <td>2.81</td>
-    </tr>
-    <tr>
-      <th>BsmtExposure</th>
-      <td>82</td>
-      <td>2.81</td>
-    </tr>
-    <tr>
-      <th>BsmtQual</th>
-      <td>81</td>
-      <td>2.78</td>
-    </tr>
-    <tr>
-      <th>BsmtFinType2</th>
-      <td>80</td>
-      <td>2.74</td>
-    </tr>
-    <tr>
-      <th>BsmtFinType1</th>
-      <td>79</td>
-      <td>2.71</td>
-    </tr>
-    <tr>
-      <th>MasVnrType</th>
-      <td>24</td>
-      <td>0.82</td>
-    </tr>
-    <tr>
-      <th>MasVnrArea</th>
-      <td>23</td>
-      <td>0.79</td>
-    </tr>
-    <tr>
-      <th>MSZoning</th>
-      <td>4</td>
-      <td>0.14</td>
-    </tr>
-    <tr>
-      <th>BsmtHalfBath</th>
-      <td>2</td>
-      <td>0.07</td>
-    </tr>
-    <tr>
-      <th>Utilities</th>
-      <td>2</td>
-      <td>0.07</td>
-    </tr>
-    <tr>
-      <th>Functional</th>
-      <td>2</td>
-      <td>0.07</td>
-    </tr>
-    <tr>
-      <th>BsmtFullBath</th>
-      <td>2</td>
-      <td>0.07</td>
-    </tr>
-    <tr>
-      <th>BsmtFinSF2</th>
-      <td>1</td>
-      <td>0.03</td>
-    </tr>
-    <tr>
-      <th>BsmtFinSF1</th>
-      <td>1</td>
-      <td>0.03</td>
-    </tr>
-    <tr>
-      <th>Exterior2nd</th>
-      <td>1</td>
-      <td>0.03</td>
-    </tr>
-    <tr>
-      <th>BsmtUnfSF</th>
-      <td>1</td>
-      <td>0.03</td>
-    </tr>
-    <tr>
-      <th>TotalBsmtSF</th>
-      <td>1</td>
-      <td>0.03</td>
-    </tr>
-    <tr>
-      <th>Exterior1st</th>
-      <td>1</td>
-      <td>0.03</td>
-    </tr>
-    <tr>
-      <th>SaleType</th>
-      <td>1</td>
-      <td>0.03</td>
-    </tr>
+  </thead>
+  <tbody>
     <tr>
       <th>Electrical</th>
       <td>1</td>
-      <td>0.03</td>
-    </tr>
-    <tr>
-      <th>KitchenQual</th>
-      <td>1</td>
-      <td>0.03</td>
-    </tr>
-    <tr>
-      <th>GarageArea</th>
-      <td>1</td>
-      <td>0.03</td>
-    </tr>
-    <tr>
-      <th>GarageCars</th>
-      <td>1</td>
-      <td>0.03</td>
+      <td>0.08</td>
     </tr>
   </tbody>
 </table>
@@ -2062,7 +3560,751 @@ missing_percentage(all_data)
 
 
 
-> **Imputing Missing Values**
+
+```python
+missing_percentage(X_test)
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Total_missing</th>
+      <th>Percent_wise</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+</div>
+
+
+
+<div class="alert alert-success"><strong>Success!!</strong> It looks like there is no more missing variables.</div>
+
+<h2>Year Variables</h2>
+
+We learned from the EDA section that getting the elapsed years of yearBuilt, YearRemodAdd and GarageYrBlt actually shows a better relation with median sale prices. So, let's do that. 
+
+
+```python
+def elapsed_years(df, var):
+    # capture difference between the year variable
+    # and the year in which the house was sold
+    df[var] = df['YrSold'] - df[var]
+    return df
+```
+
+
+```python
+for var in ['YearBuilt', 'YearRemodAdd', 'GarageYrBlt']:
+    X_train = elapsed_years(X_train, var)
+    X_test = elapsed_years(X_test, var)
+```
+
+
+```python
+## Checking if the years variable have any missing values in X_test 
+[v for var in ['YearBuilt', 'YearRemodAdd', 'GarageYrBlt'] if X_test[var].isnull().sum()>0]
+```
+
+
+
+
+    []
+
+
+
+<h2>Numeric Variable Transformation</h2>
+
+We are transforming the continous variables. We will use log transformation to do the transformation. One important thing to remember that log doesn't take 0 or negative values, therefore we will have to skip variable including values of 0 or lower. Let's do that. 
+
+
+```python
+log_transformable_vars = [var for var in continous_vars if train[var].dtype != 'O' and all(train[var])>0]
+
+```
+
+
+```python
+for var in log_transformable_vars:
+    X_train[var] = np.log(X_train[var])
+    X_test[var] = np.log(X_test[var])
+```
+
+
+```python
+for var in log_transformable_vars:
+    X_train[var].hist(bins=30)
+plt.ylabel("Number of houses(log scale)");
+```
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_113_0.png)
+
+
+
+```python
+for var in log_transformable_vars:
+    X_test[var].hist(bins=30)
+plt.ylabel("Number of houses(log scale)");
+```
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_114_0.png)
+
+
+<div class="alert alert-success"><strong>Success!!</strong> It looks like the transformation was successful. We can see variables are normally distributed(Gaussian distribution).</div>
+
+<h2>Categorical Variables: Dealing with rare Labels/anticipated rare labels</h2>
+
+This is an important step and can save a lot of headache down the road. Here we are not only renaming the rare labels; but also writing codes that deal with labels that may not be in the dataset now but show up in the future. 
+
+
+```python
+def find_frequent_labels(df, var, rare_perc):
+    
+    # function finds the labels that are shared by more than
+    # a certain % of the houses in the dataset
+
+    df = df.copy()
+
+    tmp = df.groupby(var)['SalePrice'].count() / len(df)
+
+    return tmp[tmp > rare_perc].index
+```
+
+
+```python
+for var in categorical_vars:
+    
+    # find the frequent categories
+    frequent_ls = find_frequent_labels(X_train, var, 0.01)
+    
+    # replace rare categories by the string "Rare"
+    X_train[var] = np.where(X_train[var].isin(frequent_ls), X_train[var], 'Rare')
+    
+    X_test[var] = np.where(X_test[var].isin(frequent_ls), X_test[var], 'Rare')
+```
+
+<h2>Categorical Variables: Converting to String Variables</h2>
+
+
+```python
+# this function will assign discrete values to the strings of the variables,
+# so that the smaller value corresponds to the category that shows the smaller
+# mean house sale price
+
+
+def replace_categories(train, test, var, target):
+    """
+    This function takes in train, test, a feature, target
+    and assign discrete values to the strings of the variables,
+    so that the smaller value corresponds to the category that 
+    shows the smaller mean of the target variable.
+    """
+
+    # order the categories in a variable from that with the lowest
+    # house sale price, to that with the highest
+    ordered_labels = train.groupby([var])[target].mean().sort_values(ascending=True).index
+
+    # create a dictionary of ordered categories to integer values
+    ordinal_label = {k: i for i, k in enumerate(ordered_labels, 0)}
+
+    # use the dictionary to replace the categorical strings by integers
+    train[var] = train[var].map(ordinal_label)
+    test[var] = test[var].map(ordinal_label)
+```
+
+
+```python
+for var in categorical_vars:
+    replace_categories(X_train, X_test, var, 'SalePrice')
+```
+
+
+```python
+for var in categorical_vars[:5]:
+    analyze_discrete(X_train, var, 'SalePrice')
+```
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_122_0.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_122_1.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_122_2.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_122_3.png)
+
+
+
+![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_122_4.png)
+
+
+<div class="alert alert-success"><strong>Success!!</strong> It looks like we have successfully converted all the categorical variables and the monotonic relationship is pretty apperant.</div>
+
+<h2>Feature Scaling</h2>
+
+
+```python
+X_train.head()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Id</th>
+      <th>MSSubClass</th>
+      <th>MSZoning</th>
+      <th>LotFrontage</th>
+      <th>LotArea</th>
+      <th>Street</th>
+      <th>Alley</th>
+      <th>LotShape</th>
+      <th>LandContour</th>
+      <th>Utilities</th>
+      <th>...</th>
+      <th>MiscFeature</th>
+      <th>MiscVal</th>
+      <th>MoSold</th>
+      <th>YrSold</th>
+      <th>SaleType</th>
+      <th>SaleCondition</th>
+      <th>SalePrice</th>
+      <th>LotFrontage_na</th>
+      <th>MasVnrArea_na</th>
+      <th>GarageYrBlt_na</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>930</th>
+      <td>931</td>
+      <td>20</td>
+      <td>3</td>
+      <td>4.290459</td>
+      <td>9.096612</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>3</td>
+      <td>1</td>
+      <td>...</td>
+      <td>2</td>
+      <td>0</td>
+      <td>7</td>
+      <td>2009</td>
+      <td>2</td>
+      <td>3</td>
+      <td>12.211060</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>656</th>
+      <td>657</td>
+      <td>20</td>
+      <td>3</td>
+      <td>4.276666</td>
+      <td>9.211040</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>...</td>
+      <td>2</td>
+      <td>0</td>
+      <td>8</td>
+      <td>2008</td>
+      <td>2</td>
+      <td>3</td>
+      <td>11.887931</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>46</td>
+      <td>120</td>
+      <td>3</td>
+      <td>4.110874</td>
+      <td>8.943506</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>...</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>2010</td>
+      <td>2</td>
+      <td>3</td>
+      <td>12.675764</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1348</th>
+      <td>1349</td>
+      <td>20</td>
+      <td>3</td>
+      <td>4.094345</td>
+      <td>9.692520</td>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>1</td>
+      <td>...</td>
+      <td>2</td>
+      <td>0</td>
+      <td>8</td>
+      <td>2007</td>
+      <td>2</td>
+      <td>3</td>
+      <td>12.278393</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>55</th>
+      <td>56</td>
+      <td>20</td>
+      <td>3</td>
+      <td>4.605170</td>
+      <td>9.227689</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>...</td>
+      <td>2</td>
+      <td>0</td>
+      <td>7</td>
+      <td>2008</td>
+      <td>2</td>
+      <td>3</td>
+      <td>12.103486</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 84 columns</p>
+</div>
+
+
+
+
+```python
+# capture all variables in a list
+# except the target and the ID
+
+train_vars = [var for var in X_train.columns if var not in ['Id', 'SalePrice']]
+
+# count number of variables
+len(train_vars)
+```
+
+
+
+
+    82
+
+
+
+
+```python
+from sklearn.preprocessing import MinMaxScaler
+```
+
+
+```python
+# create scaler
+scaler = MinMaxScaler()
+
+#  fit  the scaler to the train set
+scaler.fit(X_train[train_vars]) 
+
+# transform the train and test set
+X_train[train_vars] = scaler.transform(X_train[train_vars])
+
+X_test[train_vars] = scaler.transform(X_test[train_vars])
+```
+
+<h1>Feature Selection</h1>
+
+
+```python
+train.head()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Id</th>
+      <th>MSSubClass</th>
+      <th>MSZoning</th>
+      <th>LotFrontage</th>
+      <th>LotArea</th>
+      <th>Street</th>
+      <th>Alley</th>
+      <th>LotShape</th>
+      <th>LandContour</th>
+      <th>Utilities</th>
+      <th>...</th>
+      <th>PoolArea</th>
+      <th>PoolQC</th>
+      <th>Fence</th>
+      <th>MiscFeature</th>
+      <th>MiscVal</th>
+      <th>MoSold</th>
+      <th>YrSold</th>
+      <th>SaleType</th>
+      <th>SaleCondition</th>
+      <th>SalePrice</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>60</td>
+      <td>RL</td>
+      <td>65.0</td>
+      <td>8450</td>
+      <td>Pave</td>
+      <td>NaN</td>
+      <td>Reg</td>
+      <td>Lvl</td>
+      <td>AllPub</td>
+      <td>...</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>2</td>
+      <td>2008</td>
+      <td>WD</td>
+      <td>Normal</td>
+      <td>208500</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>20</td>
+      <td>RL</td>
+      <td>80.0</td>
+      <td>9600</td>
+      <td>Pave</td>
+      <td>NaN</td>
+      <td>Reg</td>
+      <td>Lvl</td>
+      <td>AllPub</td>
+      <td>...</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>5</td>
+      <td>2007</td>
+      <td>WD</td>
+      <td>Normal</td>
+      <td>181500</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>60</td>
+      <td>RL</td>
+      <td>68.0</td>
+      <td>11250</td>
+      <td>Pave</td>
+      <td>NaN</td>
+      <td>IR1</td>
+      <td>Lvl</td>
+      <td>AllPub</td>
+      <td>...</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>9</td>
+      <td>2008</td>
+      <td>WD</td>
+      <td>Normal</td>
+      <td>223500</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>70</td>
+      <td>RL</td>
+      <td>60.0</td>
+      <td>9550</td>
+      <td>Pave</td>
+      <td>NaN</td>
+      <td>IR1</td>
+      <td>Lvl</td>
+      <td>AllPub</td>
+      <td>...</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>2</td>
+      <td>2006</td>
+      <td>WD</td>
+      <td>Abnorml</td>
+      <td>140000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>60</td>
+      <td>RL</td>
+      <td>84.0</td>
+      <td>14260</td>
+      <td>Pave</td>
+      <td>NaN</td>
+      <td>IR1</td>
+      <td>Lvl</td>
+      <td>AllPub</td>
+      <td>...</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>12</td>
+      <td>2008</td>
+      <td>WD</td>
+      <td>Normal</td>
+      <td>250000</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 81 columns</p>
+</div>
+
+
+
+
+```python
+
+```
+
+
+```python
+
+```
+
+
+```python
+
+```
+
+
+```python
+
+```
+
+
+```python
+
+```
+
+
+```python
+
+```
+
+
+```python
+
+```
+
+
+```python
+## Dropping the "Id" from train and test set. 
+train.drop(columns=['Id'],axis=1, inplace=True)
+test.drop(columns=['Id'],axis=1, inplace=True)
+
+## Saving the target values in "y_train". 
+y = train['SalePrice'].reset_index(drop=True)
+
+# getting a copy of train
+previous_train = train.copy()
+```
+
+
+```python
+
+```
+
+
+```python
+## Combining train and test datasets together so that we can do all the work at once. 
+all_data = pd.concat((train, test)).reset_index(drop = True)
+## Dropping the target variable. 
+all_data.drop(['SalePrice'], axis = 1, inplace = True)
+```
+
+<h2>Dealing with Missing Values</h2>
+
+* Missing data in train and test data(all_data)
+
+
+```python
+del all_data['transformed_SalePrice']
+```
+
+
+    ---------------------------------------------------------------------------
+
+    KeyError                                  Traceback (most recent call last)
+
+    ~/anaconda3/lib/python3.7/site-packages/pandas/core/indexes/base.py in get_loc(self, key, method, tolerance)
+       2645             try:
+    -> 2646                 return self._engine.get_loc(key)
+       2647             except KeyError:
+
+
+    pandas/_libs/index.pyx in pandas._libs.index.IndexEngine.get_loc()
+
+
+    pandas/_libs/index.pyx in pandas._libs.index.IndexEngine.get_loc()
+
+
+    pandas/_libs/hashtable_class_helper.pxi in pandas._libs.hashtable.PyObjectHashTable.get_item()
+
+
+    pandas/_libs/hashtable_class_helper.pxi in pandas._libs.hashtable.PyObjectHashTable.get_item()
+
+
+    KeyError: 'transformed_SalePrice'
+
+    
+    During handling of the above exception, another exception occurred:
+
+
+    KeyError                                  Traceback (most recent call last)
+
+    <ipython-input-75-194de315918e> in <module>
+    ----> 1 del all_data['transformed_SalePrice']
+    
+
+    ~/anaconda3/lib/python3.7/site-packages/pandas/core/generic.py in __delitem__(self, key)
+       3757             # there was no match, this call should raise the appropriate
+       3758             # exception:
+    -> 3759             self._data.delete(key)
+       3760 
+       3761         # delete from the caches
+
+
+    ~/anaconda3/lib/python3.7/site-packages/pandas/core/internals/managers.py in delete(self, item)
+       1000         Delete selected item (items if non-unique) in-place.
+       1001         """
+    -> 1002         indexer = self.items.get_loc(item)
+       1003 
+       1004         is_deleted = np.zeros(self.shape[0], dtype=np.bool_)
+
+
+    ~/anaconda3/lib/python3.7/site-packages/pandas/core/indexes/base.py in get_loc(self, key, method, tolerance)
+       2646                 return self._engine.get_loc(key)
+       2647             except KeyError:
+    -> 2648                 return self._engine.get_loc(self._maybe_cast_indexer(key))
+       2649         indexer = self.get_indexer([key], method=method, tolerance=tolerance)
+       2650         if indexer.ndim > 1 or indexer.size > 1:
+
+
+    pandas/_libs/index.pyx in pandas._libs.index.IndexEngine.get_loc()
+
+
+    pandas/_libs/index.pyx in pandas._libs.index.IndexEngine.get_loc()
+
+
+    pandas/_libs/hashtable_class_helper.pxi in pandas._libs.hashtable.PyObjectHashTable.get_item()
+
+
+    pandas/_libs/hashtable_class_helper.pxi in pandas._libs.hashtable.PyObjectHashTable.get_item()
+
+
+    KeyError: 'transformed_SalePrice'
+
 
 
 ```python
@@ -2111,6 +4353,26 @@ all_data['LotFrontage'] = all_data.groupby('Neighborhood')['LotFrontage'].transf
 
 
 ```python
+all_data['MSSubClass'] = all_data['MSSubClass'].astype(str)
+```
+
+
+```python
+all_data.groupby('MSSubClass')['MSZoning']
+```
+
+
+```python
+
+```
+
+
+```python
+all_data['MSZoning'].value_counts(dropna = False)
+```
+
+
+```python
 ## the "OverallCond" and "OverallQual" of the house. 
 # all_data['OverallCond'] = all_data['OverallCond'].astype(str) 
 # all_data['OverallQual'] = all_data['OverallQual'].astype(str)
@@ -2144,38 +4406,6 @@ all_data['Electrical'] = all_data['Electrical'].fillna("SBrkr")
 missing_percentage(all_data)
 ```
 
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Total</th>
-      <th>Percent</th>
-    </tr>
-  </thead>
-  <tbody>
-  </tbody>
-</table>
-</div>
-
-
-
 So, there are no missing value left. 
 
 ## Fixing Skewness
@@ -2188,55 +4418,6 @@ skewed_feats = all_data[numeric_feats].apply(lambda x: skew(x)).sort_values(asce
 
 skewed_feats
 ```
-
-
-
-
-    MiscVal          21.939672
-    PoolArea         17.688664
-    LotArea          13.109495
-    LowQualFinSF     12.084539
-    3SsnPorch        11.372080
-    KitchenAbvGr      4.300550
-    BsmtFinSF2        4.144503
-    EnclosedPorch     4.002344
-    ScreenPorch       3.945101
-    BsmtHalfBath      3.929996
-    MasVnrArea        2.621719
-    OpenPorchSF       2.529358
-    WoodDeckSF        1.844792
-    1stFlrSF          1.257286
-    GrLivArea         1.068750
-    LotFrontage       1.058803
-    BsmtFinSF1        0.980645
-    BsmtUnfSF         0.919688
-    2ndFlrSF          0.861556
-    TotRmsAbvGrd      0.749232
-    Fireplaces        0.725278
-    HalfBath          0.696666
-    TotalBsmtSF       0.671751
-    BsmtFullBath      0.622415
-    OverallCond       0.569314
-    BedroomAbvGr      0.326568
-    GarageArea        0.216857
-    OverallQual       0.189591
-    FullBath          0.165514
-    GarageCars       -0.219297
-    YearRemodAdd     -0.450134
-    YearBuilt        -0.599194
-    GarageYrBlt      -3.904632
-    dtype: float64
-
-
-
-
-```python
-sns.distplot(all_data['1stFlrSF']);
-```
-
-
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_70_0.png)
-
 
 
 ```python
@@ -2252,7 +4433,7 @@ def fixing_skewness(df):
     from scipy.special import boxcox1p
     from scipy.stats import boxcox_normmax
     
-    ## Getting all the data that are not of "object" type. 
+    ## Getting all the numerical features. 
     numeric_feats = df.dtypes[df.dtypes != "object"].index
 
     # Check the skew of all numerical features
@@ -2270,10 +4451,6 @@ fixing_skewness(all_data)
 ```python
 sns.distplot(all_data['1stFlrSF']);
 ```
-
-
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_72_0.png)
-
 
 ## Creating New Features
 
@@ -2325,13 +4502,6 @@ all_data['hasfireplace'] = all_data['Fireplaces'].apply(lambda x: 1 if x > 0 els
 all_data.shape
 ```
 
-
-
-
-    (2917, 89)
-
-
-
 ## Deleting features
 
 
@@ -2350,13 +4520,6 @@ final_features.shape
 ```
 
 
-
-
-    (2917, 333)
-
-
-
-
 ```python
 X = final_features.iloc[:len(y), :]
 
@@ -2369,1370 +4532,6 @@ outliers = [30, 88, 462, 631, 1322]
 X = X.drop(X.index[outliers])
 y = y.drop(y.index[outliers])
 ```
-
-
-```python
-counts = X.BsmtUnfSF.value_counts()
-```
-
-
-```python
-counts.iloc[0]
-```
-
-
-
-
-    117
-
-
-
-
-```python
-for i in X.columns:
-    counts = X[i].value_counts()
-    print (counts)
-```
-
-    17.840337    142
-    19.692955     70
-    21.443061     69
-    15.860626     56
-    20.579604     52
-                ... 
-    30.245223      1
-    26.381204      1
-    30.655039      1
-    30.518824      1
-    28.852705      1
-    Name: LotFrontage, Length: 132, dtype: int64
-    13.480169    25
-    14.117918    24
-    13.084300    17
-    13.973432    14
-    14.383736    14
-                 ..
-    14.297174     1
-    14.170671     1
-    12.981584     1
-    13.493508     1
-    14.802122     1
-    Name: LotArea, Length: 1068, dtype: int64
-    5     396
-    6     374
-    7     318
-    8     167
-    4     115
-    9      43
-    3      19
-    10     16
-    2       3
-    1       2
-    Name: OverallQual, dtype: int64
-    3.991517    816
-    4.679501    252
-    5.348041    205
-    6.000033     72
-    3.280100     56
-    2.539440     25
-    6.637670     22
-    1.760360      4
-    0.926401      1
-    Name: OverallCond, dtype: int64
-    2.803702e+51    66
-    2.781514e+51    64
-    2.759490e+51    54
-    2.826056e+51    48
-    2.737630e+51    45
-                    ..
-    1.315931e+51     1
-    1.230930e+51     1
-    9.558503e+50     1
-    1.241267e+51     1
-    1.160804e+51     1
-    Name: YearBuilt, Length: 112, dtype: int64
-    1950    177
-    2006     97
-    2007     75
-    2005     73
-    2004     62
-           ... 
-    1982      6
-    1983      5
-    1952      5
-    1986      5
-    1951      4
-    Name: YearRemodAdd, Length: 61, dtype: int64
-    0.000000     866
-    18.672689      8
-    12.010890      8
-    14.642917      8
-    5.433718       7
-                ... 
-    23.416413      1
-    42.724168      1
-    22.239998      1
-    26.248403      1
-    4.372150       1
-    Name: MasVnrArea, Length: 323, dtype: int64
-    0.000000      464
-    12.329405      12
-    9.052858        9
-    137.662974      5
-    130.778407      5
-                 ... 
-    100.018543      1
-    237.061765      1
-    176.804868      1
-    51.345625       1
-    217.555782      1
-    Name: BsmtFinSF1, Length: 635, dtype: int64
-    0.000000     1287
-    8.279525        5
-    10.125437       3
-    11.951035       2
-    9.492405        2
-                 ... 
-    11.574678       1
-    7.441943        1
-    4.749196        1
-    8.185842        1
-    7.160610        1
-    Name: BsmtFinSF2, Length: 143, dtype: int64
-    0.000000      117
-    77.387613       9
-    52.884732       8
-    67.066133       7
-    45.613017       7
-                 ... 
-    60.118950       1
-    120.909168      1
-    133.570538      1
-    107.671755      1
-    93.323274       1
-    Name: BsmtUnfSF, Length: 776, dtype: int64
-    0.000000      37
-    425.950955    34
-    341.648447    17
-    446.644084    15
-    501.188603    14
-                  ..
-    530.241399     1
-    476.156877     1
-    764.446500     1
-    771.213184     1
-    394.640480     1
-    Name: TotalBsmtSF, Length: 718, dtype: int64
-    5.946177    24
-    6.088025    16
-    5.987645    14
-    5.931821    12
-    5.972366    12
-                ..
-    6.319806     1
-    5.597880     1
-    6.750047     1
-    6.250418     1
-    5.560106     1
-    Name: 1stFlrSF, Length: 748, dtype: int64
-    0.000000       825
-    869.944539      10
-    595.353605       9
-    801.007115       8
-    646.587765       8
-                  ... 
-    1551.995403      1
-    1416.676846      1
-    515.120311       1
-    1157.214536      1
-    972.425816       1
-    Name: 2ndFlrSF, Length: 415, dtype: int64
-    0.000000    1428
-    3.731031       3
-    4.739339       2
-    4.962539       1
-    4.918806       1
-    4.790020       1
-    4.801244       1
-    4.461413       1
-    4.910965       1
-    4.374295       1
-    4.963741       1
-    3.436951       1
-    4.013260       1
-    4.191825       1
-    4.137690       1
-    4.758431       1
-    4.780227       1
-    4.836677       1
-    4.455786       1
-    5.028404       1
-    4.979144       1
-    4.793249       1
-    4.921396       1
-    Name: LowQualFinSF, dtype: int64
-    7.507207    21
-    7.735276    14
-    7.549095    11
-    7.484287    10
-    8.152571    10
-                ..
-    8.393937     1
-    8.647890     1
-    7.813492     1
-    8.564072     1
-    8.583852     1
-    Name: GrLivArea, Length: 857, dtype: int64
-    0.000000    851
-    0.993440    587
-    1.978051     14
-    2.956972      1
-    Name: BsmtFullBath, dtype: int64
-    0.000000    1371
-    0.710895      80
-    1.143642       2
-    Name: BsmtHalfBath, dtype: int64
-    2    765
-    1    647
-    3     32
-    0      9
-    Name: FullBath, dtype: int64
-    0.000000    908
-    1.068837    533
-    2.237197     12
-    Name: HalfBath, dtype: int64
-    3    799
-    2    356
-    4    213
-    1     50
-    5     21
-    6      7
-    0      6
-    8      1
-    Name: BedroomAbvGr, dtype: int64
-    0.750957    1385
-    1.248543      65
-    1.630565       2
-    0.000000       1
-    Name: KitchenAbvGr, dtype: int64
-    1.996577    399
-    2.137369    328
-    1.834659    274
-    2.261968    187
-    1.643995     97
-    2.373753     75
-    2.475142     47
-    2.567925     17
-    1.411883     17
-    2.653465     10
-    2.806843      1
-    1.114642      1
-    Name: TotRmsAbvGrd, dtype: int64
-    0.000000    688
-    0.903334    646
-    1.688254    115
-    2.404976      4
-    Name: Fireplaces, dtype: int64
-    0.000000e+00    80
-    8.470611e+56    65
-    8.545305e+56    59
-    8.396532e+56    53
-    8.323065e+56    50
-                    ..
-    4.449082e+56     1
-    3.473051e+56     1
-    3.537778e+56     1
-    3.285507e+56     1
-    4.212100e+56     1
-    Name: GarageYrBlt, Length: 98, dtype: int64
-    2.0    822
-    1.0    367
-    3.0    179
-    0.0     80
-    4.0      5
-    Name: GarageCars, dtype: int64
-    0.0      80
-    440.0    49
-    576.0    47
-    240.0    38
-    484.0    34
-             ..
-    616.0     1
-    445.0     1
-    872.0     1
-    696.0     1
-    789.0     1
-    Name: GarageArea, Length: 440, dtype: int64
-    0.000000     757
-    42.245702     37
-    27.547833     36
-    35.011824     33
-    31.064436     31
-                ... 
-    41.958652      1
-    52.076157      1
-    51.821307      1
-    36.428669      1
-    78.415692      1
-    Name: WoodDeckSF, Length: 274, dtype: int64
-    0.000000     653
-    9.105438      29
-    10.637927     22
-    6.548761      21
-    10.276091     19
-                ... 
-    24.241322      1
-    23.384421      1
-    16.079297      1
-    13.643401      1
-    25.490355      1
-    Name: OpenPorchSF, Length: 200, dtype: int64
-    0.000000     1248
-    11.252030      15
-    10.557010       6
-    14.644807       5
-    11.574808       5
-                 ... 
-    10.131463       1
-    8.890646        1
-    16.334336       1
-    14.591443       1
-    15.929118       1
-    Name: EnclosedPorch, Length: 119, dtype: int64
-    0.000000    1429
-    6.174266       3
-    5.955943       2
-    6.272811       2
-    6.535696       2
-    7.038144       1
-    6.968074       1
-    6.122528       1
-    5.812499       1
-    5.916321       1
-    5.393928       1
-    6.719441       1
-    6.395151       1
-    6.677010       1
-    7.817018       1
-    7.114652       1
-    6.288641       1
-    7.477204       1
-    3.560137       1
-    6.041500       1
-    Name: 3SsnPorch, dtype: int64
-    0.000000     1337
-    24.456268       6
-    19.077822       5
-    26.506769       5
-    23.642560       4
-                 ... 
-    35.575499       1
-    29.374551       1
-    31.988628       1
-    34.548018       1
-    23.984879       1
-    Name: ScreenPorch, Length: 76, dtype: int64
-    0.000000    1447
-    5.606854       1
-    5.703226       1
-    5.519096       1
-    5.441078       1
-    5.491330       1
-    5.430885       1
-    Name: PoolArea, dtype: int64
-    0.000000     1401
-    6.315042       11
-    6.562433        8
-    6.937474        5
-    8.122680        4
-    6.445490        4
-    6.765357        4
-    7.543164        2
-    6.517095        2
-    8.763610        1
-    7.495121        1
-    6.801927        1
-    8.377489        1
-    6.688485        1
-    7.086969        1
-    4.149193        1
-    7.717485        1
-    7.633620        1
-    6.167518        1
-    9.764988        1
-    10.498741       1
-    Name: MiscVal, dtype: int64
-    431.897132     21
-    424.953764     10
-    444.872713     10
-    411.017210      9
-    452.631730      7
-                   ..
-    2308.290185     1
-    471.090201      1
-    744.115628      1
-    919.389872      1
-    759.641390      1
-    Name: TotalSF, Length: 1247, dtype: int64
-    2.803702e+51    66
-    2.781514e+51    64
-    2.759490e+51    54
-    2.826056e+51    48
-    2.737630e+51    45
-                    ..
-    1.315931e+51     1
-    1.230930e+51     1
-    9.558503e+50     1
-    1.241267e+51     1
-    1.160804e+51     1
-    Name: YrBltAndRemod, Length: 112, dtype: int64
-    6.088025       6
-    875.758796     5
-    143.594795     4
-    198.003940     3
-    5.962001       3
-                  ..
-    180.904395     1
-    94.002828      1
-    1232.877672    1
-    6.408129       1
-    1695.160972    1
-    Name: Total_sqr_footage, Length: 1403, dtype: int64
-    2.000000    232
-    1.000000    224
-    1.993440    208
-    2.534418    200
-    2.993440    163
-    3.527858    126
-    1.534418     99
-    2.527858     68
-    1.355448     28
-    2.355448     21
-    3.534418     11
-    1.889866     11
-    3.000000      8
-    2.889866      7
-    3.993440      6
-    3.348887      5
-    3.978051      5
-    4.527858      4
-    3.118598      3
-    2.512469      2
-    2.474046      2
-    3.512469      2
-    3.889866      2
-    3.096649      2
-    2.348887      2
-    3.112038      1
-    2.118598      1
-    1.348887      1
-    0.993440      1
-    2.571821      1
-    1.978051      1
-    1.690420      1
-    4.467486      1
-    1.527858      1
-    2.978051      1
-    5.956972      1
-    5.096649      1
-    Name: Total_Bathrooms, dtype: int64
-    0.000000     254
-    31.064436     12
-    9.643047      12
-    9.105438      12
-    38.723951      9
-                ... 
-    19.169684      1
-    53.035518      1
-    18.042164      1
-    22.440714      1
-    86.531959      1
-    Name: Total_porch_sf, Length: 916, dtype: int64
-    0    1447
-    1       6
-    Name: haspool, dtype: int64
-    0    825
-    1    628
-    Name: has2ndfloor, dtype: int64
-    1    1373
-    0      80
-    Name: hasgarage, dtype: int64
-    1    1416
-    0      37
-    Name: hasbsmt, dtype: int64
-    1    765
-    0    688
-    Name: hasfireplace, dtype: int64
-    0    1366
-    1      87
-    Name: MSSubClass_120, dtype: int64
-    0    1453
-    Name: MSSubClass_150, dtype: int64
-    0    1390
-    1      63
-    Name: MSSubClass_160, dtype: int64
-    0    1443
-    1      10
-    Name: MSSubClass_180, dtype: int64
-    0    1423
-    1      30
-    Name: MSSubClass_190, dtype: int64
-    0    920
-    1    533
-    Name: MSSubClass_20, dtype: int64
-    0    1384
-    1      69
-    Name: MSSubClass_30, dtype: int64
-    0    1449
-    1       4
-    Name: MSSubClass_40, dtype: int64
-    0    1441
-    1      12
-    Name: MSSubClass_45, dtype: int64
-    0    1310
-    1     143
-    Name: MSSubClass_50, dtype: int64
-    0    1156
-    1     297
-    Name: MSSubClass_60, dtype: int64
-    0    1394
-    1      59
-    Name: MSSubClass_70, dtype: int64
-    0    1437
-    1      16
-    Name: MSSubClass_75, dtype: int64
-    0    1395
-    1      58
-    Name: MSSubClass_80, dtype: int64
-    0    1433
-    1      20
-    Name: MSSubClass_85, dtype: int64
-    0    1401
-    1      52
-    Name: MSSubClass_90, dtype: int64
-    0    1445
-    1       8
-    Name: MSZoning_C (all), dtype: int64
-    0    1388
-    1      65
-    Name: MSZoning_FV, dtype: int64
-    0    1437
-    1      16
-    Name: MSZoning_RH, dtype: int64
-    1    1146
-    0     307
-    Name: MSZoning_RL, dtype: int64
-    0    1235
-    1     218
-    Name: MSZoning_RM, dtype: int64
-    0    1403
-    1      50
-    Name: Alley_Grvl, dtype: int64
-    1    1363
-    0      90
-    Name: Alley_None, dtype: int64
-    0    1413
-    1      40
-    Name: Alley_Pave, dtype: int64
-    0    972
-    1    481
-    Name: LotShape_IR1, dtype: int64
-    0    1412
-    1      41
-    Name: LotShape_IR2, dtype: int64
-    0    1444
-    1       9
-    Name: LotShape_IR3, dtype: int64
-    1    922
-    0    531
-    Name: LotShape_Reg, dtype: int64
-    0    1392
-    1      61
-    Name: LandContour_Bnk, dtype: int64
-    0    1403
-    1      50
-    Name: LandContour_HLS, dtype: int64
-    0    1417
-    1      36
-    Name: LandContour_Low, dtype: int64
-    1    1306
-    0     147
-    Name: LandContour_Lvl, dtype: int64
-    0    1192
-    1     261
-    Name: LotConfig_Corner, dtype: int64
-    0    1359
-    1      94
-    Name: LotConfig_CulDSac, dtype: int64
-    0    1406
-    1      47
-    Name: LotConfig_FR2, dtype: int64
-    0    1449
-    1       4
-    Name: LotConfig_FR3, dtype: int64
-    1    1047
-    0     406
-    Name: LotConfig_Inside, dtype: int64
-    1    1375
-    0      78
-    Name: LandSlope_Gtl, dtype: int64
-    0    1388
-    1      65
-    Name: LandSlope_Mod, dtype: int64
-    0    1440
-    1      13
-    Name: LandSlope_Sev, dtype: int64
-    0    1436
-    1      17
-    Name: Neighborhood_Blmngtn, dtype: int64
-    0    1451
-    1       2
-    Name: Neighborhood_Blueste, dtype: int64
-    0    1437
-    1      16
-    Name: Neighborhood_BrDale, dtype: int64
-    0    1395
-    1      58
-    Name: Neighborhood_BrkSide, dtype: int64
-    0    1425
-    1      28
-    Name: Neighborhood_ClearCr, dtype: int64
-    0    1303
-    1     150
-    Name: Neighborhood_CollgCr, dtype: int64
-    0    1402
-    1      51
-    Name: Neighborhood_Crawfor, dtype: int64
-    0    1355
-    1      98
-    Name: Neighborhood_Edwards, dtype: int64
-    0    1374
-    1      79
-    Name: Neighborhood_Gilbert, dtype: int64
-    0    1418
-    1      35
-    Name: Neighborhood_IDOTRR, dtype: int64
-    0    1436
-    1      17
-    Name: Neighborhood_MeadowV, dtype: int64
-    0    1404
-    1      49
-    Name: Neighborhood_Mitchel, dtype: int64
-    0    1228
-    1     225
-    Name: Neighborhood_NAmes, dtype: int64
-    0    1444
-    1       9
-    Name: Neighborhood_NPkVill, dtype: int64
-    0    1381
-    1      72
-    Name: Neighborhood_NWAmes, dtype: int64
-    0    1412
-    1      41
-    Name: Neighborhood_NoRidge, dtype: int64
-    0    1376
-    1      77
-    Name: Neighborhood_NridgHt, dtype: int64
-    0    1340
-    1     113
-    Name: Neighborhood_OldTown, dtype: int64
-    0    1428
-    1      25
-    Name: Neighborhood_SWISU, dtype: int64
-    0    1380
-    1      73
-    Name: Neighborhood_Sawyer, dtype: int64
-    0    1394
-    1      59
-    Name: Neighborhood_SawyerW, dtype: int64
-    0    1368
-    1      85
-    Name: Neighborhood_Somerst, dtype: int64
-    0    1428
-    1      25
-    Name: Neighborhood_StoneBr, dtype: int64
-    0    1415
-    1      38
-    Name: Neighborhood_Timber, dtype: int64
-    0    1442
-    1      11
-    Name: Neighborhood_Veenker, dtype: int64
-    0    1405
-    1      48
-    Name: Condition1_Artery, dtype: int64
-    0    1375
-    1      78
-    Name: Condition1_Feedr, dtype: int64
-    1    1257
-    0     196
-    Name: Condition1_Norm, dtype: int64
-    0    1445
-    1       8
-    Name: Condition1_PosA, dtype: int64
-    0    1435
-    1      18
-    Name: Condition1_PosN, dtype: int64
-    0    1442
-    1      11
-    Name: Condition1_RRAe, dtype: int64
-    0    1427
-    1      26
-    Name: Condition1_RRAn, dtype: int64
-    0    1451
-    1       2
-    Name: Condition1_RRNe, dtype: int64
-    0    1448
-    1       5
-    Name: Condition1_RRNn, dtype: int64
-    0    1451
-    1       2
-    Name: Condition2_Artery, dtype: int64
-    0    1448
-    1       5
-    Name: Condition2_Feedr, dtype: int64
-    1    1440
-    0      13
-    Name: Condition2_Norm, dtype: int64
-    0    1452
-    1       1
-    Name: Condition2_PosA, dtype: int64
-    0    1452
-    1       1
-    Name: Condition2_PosN, dtype: int64
-    0    1452
-    1       1
-    Name: Condition2_RRAe, dtype: int64
-    0    1452
-    1       1
-    Name: Condition2_RRAn, dtype: int64
-    0    1451
-    1       2
-    Name: Condition2_RRNn, dtype: int64
-    1    1213
-    0     240
-    Name: BldgType_1Fam, dtype: int64
-    0    1422
-    1      31
-    Name: BldgType_2fmCon, dtype: int64
-    0    1401
-    1      52
-    Name: BldgType_Duplex, dtype: int64
-    0    1410
-    1      43
-    Name: BldgType_Twnhs, dtype: int64
-    0    1339
-    1     114
-    Name: BldgType_TwnhsE, dtype: int64
-    0    1300
-    1     153
-    Name: HouseStyle_1.5Fin, dtype: int64
-    0    1439
-    1      14
-    Name: HouseStyle_1.5Unf, dtype: int64
-    0    730
-    1    723
-    Name: HouseStyle_1Story, dtype: int64
-    0    1445
-    1       8
-    Name: HouseStyle_2.5Fin, dtype: int64
-    0    1442
-    1      11
-    Name: HouseStyle_2.5Unf, dtype: int64
-    0    1011
-    1     442
-    Name: HouseStyle_2Story, dtype: int64
-    0    1416
-    1      37
-    Name: HouseStyle_SFoyer, dtype: int64
-    0    1388
-    1      65
-    Name: HouseStyle_SLvl, dtype: int64
-    0    1440
-    1      13
-    Name: RoofStyle_Flat, dtype: int64
-    1    1139
-    0     314
-    Name: RoofStyle_Gable, dtype: int64
-    0    1443
-    1      10
-    Name: RoofStyle_Gambrel, dtype: int64
-    0    1171
-    1     282
-    Name: RoofStyle_Hip, dtype: int64
-    0    1446
-    1       7
-    Name: RoofStyle_Mansard, dtype: int64
-    0    1451
-    1       2
-    Name: RoofStyle_Shed, dtype: int64
-    1    1428
-    0      25
-    Name: RoofMatl_CompShg, dtype: int64
-    0    1452
-    1       1
-    Name: RoofMatl_Membran, dtype: int64
-    0    1452
-    1       1
-    Name: RoofMatl_Metal, dtype: int64
-    0    1452
-    1       1
-    Name: RoofMatl_Roll, dtype: int64
-    0    1442
-    1      11
-    Name: RoofMatl_Tar&Grv, dtype: int64
-    0    1448
-    1       5
-    Name: RoofMatl_WdShake, dtype: int64
-    0    1447
-    1       6
-    Name: RoofMatl_WdShngl, dtype: int64
-    0    1433
-    1      20
-    Name: Exterior1st_AsbShng, dtype: int64
-    0    1452
-    1       1
-    Name: Exterior1st_AsphShn, dtype: int64
-    0    1451
-    1       2
-    Name: Exterior1st_BrkComm, dtype: int64
-    0    1404
-    1      49
-    Name: Exterior1st_BrkFace, dtype: int64
-    0    1452
-    1       1
-    Name: Exterior1st_CBlock, dtype: int64
-    0    1393
-    1      60
-    Name: Exterior1st_CemntBd, dtype: int64
-    0    1231
-    1     222
-    Name: Exterior1st_HdBoard, dtype: int64
-    0    1452
-    1       1
-    Name: Exterior1st_ImStucc, dtype: int64
-    0    1234
-    1     219
-    Name: Exterior1st_MetalSd, dtype: int64
-    0    1347
-    1     106
-    Name: Exterior1st_Plywood, dtype: int64
-    0    1451
-    1       2
-    Name: Exterior1st_Stone, dtype: int64
-    0    1429
-    1      24
-    Name: Exterior1st_Stucco, dtype: int64
-    0    939
-    1    514
-    Name: Exterior1st_VinylSd, dtype: int64
-    0    1247
-    1     206
-    Name: Exterior1st_Wd Sdng, dtype: int64
-    0    1427
-    1      26
-    Name: Exterior1st_WdShing, dtype: int64
-    0    1433
-    1      20
-    Name: Exterior2nd_AsbShng, dtype: int64
-    0    1450
-    1       3
-    Name: Exterior2nd_AsphShn, dtype: int64
-    0    1446
-    1       7
-    Name: Exterior2nd_Brk Cmn, dtype: int64
-    0    1429
-    1      24
-    Name: Exterior2nd_BrkFace, dtype: int64
-    0    1452
-    1       1
-    Name: Exterior2nd_CBlock, dtype: int64
-    0    1394
-    1      59
-    Name: Exterior2nd_CmentBd, dtype: int64
-    0    1246
-    1     207
-    Name: Exterior2nd_HdBoard, dtype: int64
-    0    1443
-    1      10
-    Name: Exterior2nd_ImStucc, dtype: int64
-    0    1240
-    1     213
-    Name: Exterior2nd_MetalSd, dtype: int64
-    0    1452
-    1       1
-    Name: Exterior2nd_Other, dtype: int64
-    0    1313
-    1     140
-    Name: Exterior2nd_Plywood, dtype: int64
-    0    1448
-    1       5
-    Name: Exterior2nd_Stone, dtype: int64
-    0    1428
-    1      25
-    Name: Exterior2nd_Stucco, dtype: int64
-    0    950
-    1    503
-    Name: Exterior2nd_VinylSd, dtype: int64
-    0    1256
-    1     197
-    Name: Exterior2nd_Wd Sdng, dtype: int64
-    0    1415
-    1      38
-    Name: Exterior2nd_Wd Shng, dtype: int64
-    0    1438
-    1      15
-    Name: MasVnrType_BrkCmn, dtype: int64
-    0    1010
-    1     443
-    Name: MasVnrType_BrkFace, dtype: int64
-    1    869
-    0    584
-    Name: MasVnrType_None, dtype: int64
-    0    1327
-    1     126
-    Name: MasVnrType_Stone, dtype: int64
-    0    1403
-    1      50
-    Name: ExterQual_Ex, dtype: int64
-    0    1440
-    1      13
-    Name: ExterQual_Fa, dtype: int64
-    0    966
-    1    487
-    Name: ExterQual_Gd, dtype: int64
-    1    903
-    0    550
-    Name: ExterQual_TA, dtype: int64
-    0    1450
-    1       3
-    Name: ExterCond_Ex, dtype: int64
-    0    1427
-    1      26
-    Name: ExterCond_Fa, dtype: int64
-    0    1308
-    1     145
-    Name: ExterCond_Gd, dtype: int64
-    0    1452
-    1       1
-    Name: ExterCond_Po, dtype: int64
-    1    1278
-    0     175
-    Name: ExterCond_TA, dtype: int64
-    0    1308
-    1     145
-    Name: Foundation_BrkTil, dtype: int64
-    0    822
-    1    631
-    Name: Foundation_CBlock, dtype: int64
-    0    809
-    1    644
-    Name: Foundation_PConc, dtype: int64
-    0    1429
-    1      24
-    Name: Foundation_Slab, dtype: int64
-    0    1447
-    1       6
-    Name: Foundation_Stone, dtype: int64
-    0    1450
-    1       3
-    Name: Foundation_Wood, dtype: int64
-    0    1335
-    1     118
-    Name: BsmtQual_Ex, dtype: int64
-    0    1418
-    1      35
-    Name: BsmtQual_Fa, dtype: int64
-    0    835
-    1    618
-    Name: BsmtQual_Gd, dtype: int64
-    0    1416
-    1      37
-    Name: BsmtQual_None, dtype: int64
-    0    808
-    1    645
-    Name: BsmtQual_TA, dtype: int64
-    0    1409
-    1      44
-    Name: BsmtCond_Fa, dtype: int64
-    0    1388
-    1      65
-    Name: BsmtCond_Gd, dtype: int64
-    0    1416
-    1      37
-    Name: BsmtCond_None, dtype: int64
-    0    1451
-    1       2
-    Name: BsmtCond_Po, dtype: int64
-    1    1305
-    0     148
-    Name: BsmtCond_TA, dtype: int64
-    0    1233
-    1     220
-    Name: BsmtExposure_Av, dtype: int64
-    0    1321
-    1     132
-    Name: BsmtExposure_Gd, dtype: int64
-    0    1339
-    1     114
-    Name: BsmtExposure_Mn, dtype: int64
-    1    949
-    0    504
-    Name: BsmtExposure_No, dtype: int64
-    0    1415
-    1      38
-    Name: BsmtExposure_None, dtype: int64
-    0    1234
-    1     219
-    Name: BsmtFinType1_ALQ, dtype: int64
-    0    1305
-    1     148
-    Name: BsmtFinType1_BLQ, dtype: int64
-    0    1037
-    1     416
-    Name: BsmtFinType1_GLQ, dtype: int64
-    0    1379
-    1      74
-    Name: BsmtFinType1_LwQ, dtype: int64
-    0    1416
-    1      37
-    Name: BsmtFinType1_None, dtype: int64
-    0    1321
-    1     132
-    Name: BsmtFinType1_Rec, dtype: int64
-    0    1026
-    1     427
-    Name: BsmtFinType1_Unf, dtype: int64
-    0    1434
-    1      19
-    Name: BsmtFinType2_ALQ, dtype: int64
-    0    1421
-    1      32
-    Name: BsmtFinType2_BLQ, dtype: int64
-    0    1439
-    1      14
-    Name: BsmtFinType2_GLQ, dtype: int64
-    0    1407
-    1      46
-    Name: BsmtFinType2_LwQ, dtype: int64
-    0    1415
-    1      38
-    Name: BsmtFinType2_None, dtype: int64
-    0    1399
-    1      54
-    Name: BsmtFinType2_Rec, dtype: int64
-    1    1250
-    0     203
-    Name: BsmtFinType2_Unf, dtype: int64
-    0    1452
-    1       1
-    Name: Heating_Floor, dtype: int64
-    1    1421
-    0      32
-    Name: Heating_GasA, dtype: int64
-    0    1435
-    1      18
-    Name: Heating_GasW, dtype: int64
-    0    1446
-    1       7
-    Name: Heating_Grav, dtype: int64
-    0    1451
-    1       2
-    Name: Heating_OthW, dtype: int64
-    0    1449
-    1       4
-    Name: Heating_Wall, dtype: int64
-    1    738
-    0    715
-    Name: HeatingQC_Ex, dtype: int64
-    0    1404
-    1      49
-    Name: HeatingQC_Fa, dtype: int64
-    0    1213
-    1     240
-    Name: HeatingQC_Gd, dtype: int64
-    0    1452
-    1       1
-    Name: HeatingQC_Po, dtype: int64
-    0    1028
-    1     425
-    Name: HeatingQC_TA, dtype: int64
-    0    1360
-    1      93
-    Name: CentralAir_N, dtype: int64
-    1    1360
-    0      93
-    Name: CentralAir_Y, dtype: int64
-    0    1359
-    1      94
-    Name: Electrical_FuseA, dtype: int64
-    0    1426
-    1      27
-    Name: Electrical_FuseF, dtype: int64
-    0    1450
-    1       3
-    Name: Electrical_FuseP, dtype: int64
-    0    1452
-    1       1
-    Name: Electrical_Mix, dtype: int64
-    1    1328
-    0     125
-    Name: Electrical_SBrkr, dtype: int64
-    0    1355
-    1      98
-    Name: KitchenQual_Ex, dtype: int64
-    0    1415
-    1      38
-    Name: KitchenQual_Fa, dtype: int64
-    0    868
-    1    585
-    Name: KitchenQual_Gd, dtype: int64
-    1    732
-    0    721
-    Name: KitchenQual_TA, dtype: int64
-    0    1439
-    1      14
-    Name: Functional_Maj1, dtype: int64
-    0    1448
-    1       5
-    Name: Functional_Maj2, dtype: int64
-    0    1422
-    1      31
-    Name: Functional_Min1, dtype: int64
-    0    1419
-    1      34
-    Name: Functional_Min2, dtype: int64
-    0    1438
-    1      15
-    Name: Functional_Mod, dtype: int64
-    0    1452
-    1       1
-    Name: Functional_Sev, dtype: int64
-    1    1353
-    0     100
-    Name: Functional_Typ, dtype: int64
-    0    1429
-    1      24
-    Name: FireplaceQu_Ex, dtype: int64
-    0    1420
-    1      33
-    Name: FireplaceQu_Fa, dtype: int64
-    0    1076
-    1     377
-    Name: FireplaceQu_Gd, dtype: int64
-    0    765
-    1    688
-    Name: FireplaceQu_None, dtype: int64
-    0    1434
-    1      19
-    Name: FireplaceQu_Po, dtype: int64
-    0    1141
-    1     312
-    Name: FireplaceQu_TA, dtype: int64
-    0    1447
-    1       6
-    Name: GarageType_2Types, dtype: int64
-    1    867
-    0    586
-    Name: GarageType_Attchd, dtype: int64
-    0    1434
-    1      19
-    Name: GarageType_Basment, dtype: int64
-    0    1366
-    1      87
-    Name: GarageType_BuiltIn, dtype: int64
-    0    1444
-    1       9
-    Name: GarageType_CarPort, dtype: int64
-    0    1068
-    1     385
-    Name: GarageType_Detchd, dtype: int64
-    0    1373
-    1      80
-    Name: GarageType_None, dtype: int64
-    0    1104
-    1     349
-    Name: GarageFinish_Fin, dtype: int64
-    0    1373
-    1      80
-    Name: GarageFinish_None, dtype: int64
-    0    1032
-    1     421
-    Name: GarageFinish_RFn, dtype: int64
-    0    850
-    1    603
-    Name: GarageFinish_Unf, dtype: int64
-    0    1450
-    1       3
-    Name: GarageQual_Ex, dtype: int64
-    0    1405
-    1      48
-    Name: GarageQual_Fa, dtype: int64
-    0    1439
-    1      14
-    Name: GarageQual_Gd, dtype: int64
-    0    1373
-    1      80
-    Name: GarageQual_None, dtype: int64
-    0    1450
-    1       3
-    Name: GarageQual_Po, dtype: int64
-    1    1305
-    0     148
-    Name: GarageQual_TA, dtype: int64
-    0    1451
-    1       2
-    Name: GarageCond_Ex, dtype: int64
-    0    1419
-    1      34
-    Name: GarageCond_Fa, dtype: int64
-    0    1444
-    1       9
-    Name: GarageCond_Gd, dtype: int64
-    0    1373
-    1      80
-    Name: GarageCond_None, dtype: int64
-    0    1446
-    1       7
-    Name: GarageCond_Po, dtype: int64
-    1    1321
-    0     132
-    Name: GarageCond_TA, dtype: int64
-    0    1365
-    1      88
-    Name: PavedDrive_N, dtype: int64
-    0    1423
-    1      30
-    Name: PavedDrive_P, dtype: int64
-    1    1335
-    0     118
-    Name: PavedDrive_Y, dtype: int64
-    0    1394
-    1      59
-    Name: Fence_GdPrv, dtype: int64
-    0    1400
-    1      53
-    Name: Fence_GdWo, dtype: int64
-    0    1298
-    1     155
-    Name: Fence_MnPrv, dtype: int64
-    0    1442
-    1      11
-    Name: Fence_MnWw, dtype: int64
-    1    1175
-    0     278
-    Name: Fence_None, dtype: int64
-    0    1451
-    1       2
-    Name: MiscFeature_Gar2, dtype: int64
-    1    1399
-    0      54
-    Name: MiscFeature_None, dtype: int64
-    0    1451
-    1       2
-    Name: MiscFeature_Othr, dtype: int64
-    0    1404
-    1      49
-    Name: MiscFeature_Shed, dtype: int64
-    0    1452
-    1       1
-    Name: MiscFeature_TenC, dtype: int64
-    0    1396
-    1      57
-    Name: MoSold_1, dtype: int64
-    0    1366
-    1      87
-    Name: MoSold_10, dtype: int64
-    0    1374
-    1      79
-    Name: MoSold_11, dtype: int64
-    0    1395
-    1      58
-    Name: MoSold_12, dtype: int64
-    0    1402
-    1      51
-    Name: MoSold_2, dtype: int64
-    0    1347
-    1     106
-    Name: MoSold_3, dtype: int64
-    0    1313
-    1     140
-    Name: MoSold_4, dtype: int64
-    0    1249
-    1     204
-    Name: MoSold_5, dtype: int64
-    0    1200
-    1     253
-    Name: MoSold_6, dtype: int64
-    0    1220
-    1     233
-    Name: MoSold_7, dtype: int64
-    0    1331
-    1     122
-    Name: MoSold_8, dtype: int64
-    0    1390
-    1      63
-    Name: MoSold_9, dtype: int64
-    0    1139
-    1     314
-    Name: YrSold_2006, dtype: int64
-    0    1126
-    1     327
-    Name: YrSold_2007, dtype: int64
-    0    1151
-    1     302
-    Name: YrSold_2008, dtype: int64
-    0    1118
-    1     335
-    Name: YrSold_2009, dtype: int64
-    0    1278
-    1     175
-    Name: YrSold_2010, dtype: int64
-    0    1410
-    1      43
-    Name: SaleType_COD, dtype: int64
-    0    1449
-    1       4
-    Name: SaleType_CWD, dtype: int64
-    0    1451
-    1       2
-    Name: SaleType_Con, dtype: int64
-    0    1445
-    1       8
-    Name: SaleType_ConLD, dtype: int64
-    0    1448
-    1       5
-    Name: SaleType_ConLI, dtype: int64
-    0    1448
-    1       5
-    Name: SaleType_ConLw, dtype: int64
-    0    1334
-    1     119
-    Name: SaleType_New, dtype: int64
-    0    1450
-    1       3
-    Name: SaleType_Oth, dtype: int64
-    1    1264
-    0     189
-    Name: SaleType_WD, dtype: int64
-    0    1353
-    1     100
-    Name: SaleCondition_Abnorml, dtype: int64
-    0    1449
-    1       4
-    Name: SaleCondition_AdjLand, dtype: int64
-    0    1441
-    1      12
-    Name: SaleCondition_Alloca, dtype: int64
-    0    1434
-    1      19
-    Name: SaleCondition_Family, dtype: int64
-    1    1196
-    0     257
-    Name: SaleCondition_Normal, dtype: int64
-    0    1331
-    1     122
-    Name: SaleCondition_Partial, dtype: int64
-
 
 
 ```python
@@ -3761,13 +4560,6 @@ X_sub = X_sub.drop(overfitted_features, axis=1)
 X.shape,y.shape, X_sub.shape
 ```
 
-
-
-
-    ((1453, 332), (1453,), (1459, 332))
-
-
-
 # Fitting model(simple approach)
 
 ## Train_test split
@@ -3792,13 +4584,6 @@ X_train, X_test, y_train, y_test = train_test_split(X, y,test_size = .33, random
 X_train.shape, y_train.shape, X_test.shape, y_test.shape
 ```
 
-
-
-
-    ((973, 332), (973,), (480, 332), (480,))
-
-
-
 # Modeling the Data
  
 Before modeling each algorithm, I would like to discuss them for a better understanding. This way I would review what I know and at the same time help out the community. If you already know enough about Linear Regression, you may skip this part and go straight to the part where I fit the model. However, if you take your time to read this and other model description sections and let me know how I am doing, I would genuinely appreciate it. Let's get started. 
@@ -3819,10 +4604,6 @@ plt.title("Chart with Data Points");
 #ax.plot((sample_train.GrLivArea.values.min(),sample_train.GrLivArea.values.max()), (sample_train.SalePrice.values.mean(),sample_train.SalePrice.values.mean()), color = 'r');
 ```
 
-
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_92_0.png)
-
-
 As we discussed before, there is a linear relationship between SalePrice and GrLivArea. We want to know/estimate/predict the sale price of a house based on the given area, How do we do that? One naive way is to find the average of all the house prices. Let's find a line with the average of all houses and place it in the scatter plot. Simple enough.
 
 
@@ -3835,10 +4616,6 @@ ax.plot((sample_train.GrLivArea.values.min(),sample_train.GrLivArea.values.max()
 plt.title("Chart with Average Line");
 ```
 
-
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_94_0.png)
-
-
 You can tell this is not the most efficient way to estimate the price of houses. The average line clearly does not represent all the datapoint and fails to grasp the linear relationship between <b>GrLivArea & SalePrice. </b> Let use one of the evaluation regression metrics and find out the Mean Squared Error(more on this later) of this line.
 
 
@@ -3850,9 +4627,6 @@ sample_train.mse.mean()
 ## getting mse
 print("Mean Squared Error(MSE) for average line is : {}".format(sample_train.mse.mean()))
 ```
-
-    Mean Squared Error(MSE) for average line is : 0.1673537968365356
-
 
 > If you are reading this in my github page, you may find it difficult to follow through as the following section includes mathematical equation. Please checkout [this](https://www.kaggle.com/masumrumi/a-stats-analysis-and-ml-workflow-of-house-pricing) kernel at Kaggle. 
 
@@ -3878,18 +4652,18 @@ If you would like to know more about this equation, Please check out this [video
 
 This slope equation gives us an exact linear relationship between X and y. This relationship is "exact" because we are given X and y beforehand and based on the value of X and y, we come up with the slope and y-intercept, which in turns determine the relationship between X and y. However, in real life, data is not that simple. Often the relationship is unknown to us, and even if we know the relationship, it may not always be exact. To fit an exact slope equation in an inexact relationship of data we introduce the term error. Let's see how mathematicians express this error with the slope equation. 
 
-## $$ y = \beta_0 + \beta_1 x + \epsilon \\ $$
+## $$ y = \beta_0 + \beta_1 x_1 + \epsilon \\ $$
 
 And, this is the equation for a simple linear regression.
 Here,
 * y = Dependent variable. This is what we are trying to estimate/solve/understand. 
 * $\beta_0$ = the y-intercept, it is a constant and it represents the value of y when x is 0. 
-* $\beta_1$ = Slope, Weight, Coefficient of x. This metrics is the relationship between y and x. In simple terms, it shows 1 unit increase in y changes when 1 unit increases in x. 
+* $\beta_1$ = Slope, Weight, Coefficient of x. This metrics is the relationship between y and x. In simple terms, it shows 1 unit of increase in y changes when 1 unit increases in x. 
 * $x_1$ = Independent variable ( simple linear regression ) /variables.
 * $ \epsilon$ = error or residual. 
 
 ### $$ \text{residual}_i = y_i - \hat{y}_i$$
-This error is the only part that's different/addition from the slope equation. This error exists because in real life we will never have a dataset where the regression line crosses exactly every single data point. There will be at least a good amount of points where the regression line will not be able to go through for the sake of model specifications and ** bias-variance tradeoff **(more on this later). This error term accounts for the difference of those points. So, simply speaking, an error is the difference between an original value( $y_i$ ) and a predicted value( $\hat{y}_i$ ). 
+This error is the only part that's different/addition from the slope equation. This error exists because in real life we will never have a dataset where the regression line crosses exactly every single data point. There will be at least a good amount of points where the regression line will not be able to go through for the sake of model specifications(linear/non-linear) and <b>bias-variance tradeoff</b>(more on this later). This error term accounts for the difference of those points. So, simply speaking, an error is the difference between an original value( $y_i$ ) and a predicted value( $\hat{y}_i$ ). 
 
 We use this function to predict the values of one dependent(target) variable based on one independent(predictor) variable. Therefore this regression is called **Simple linear regression(SLR).** If we were to write the equation regarding the sample example above it would simply look like the following equation, 
 ## $$ Sale Price= \beta_0 + \beta_1 (Area) + \epsilon \\ $$
@@ -3967,10 +4741,6 @@ ax.scatter(sample_train.GrLivArea, sample_train.SalePrice, c='b')
 ax.plot(sample_train['GrLivArea'], sample_train['Linear_Yhat'], color='r');
 ```
 
-
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_102_0.png)
-
-
 Phew!! This looks like something we can work with!! Let's find out the MSE for the regression line as well.
 
 
@@ -3979,21 +4749,11 @@ Phew!! This looks like something we can work with!! Let's find out the MSE for t
 print("Mean Squared Error(MSE) for regression line is : {}".format(np.square(sample_train['SalePrice'] - sample_train['Linear_Yhat']).mean()))
 ```
 
-    Mean Squared Error(MSE) for regression line is : 0.07957199589283931
-
-
 
 ```python
 from sklearn.metrics import mean_squared_error
 mean_squared_error(sample_train['SalePrice'], sample_train.Linear_Yhat)
 ```
-
-
-
-
-    0.07957199589283928
-
-
 
 A much-anticipated decrease in mean squared error(mse), therefore better-predicted model. The way we compare between the two predicted lines is by considering their errors. Let's put both of the model's side by side and compare the errors.
 
@@ -4027,10 +4787,6 @@ ax2.plot(sample_train['GrLivArea'], sample_train['Linear_Yhat'], color='k');
 for _, row in sample_train.iterrows():
     plt.plot((row['GrLivArea'], row['GrLivArea']), (row['SalePrice'], row['Linear_Yhat']), 'r-')
 ```
-
-
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_107_0.png)
-
 
 On the two charts above, the left one is the average line, and the right one is the regression line. <font color="blue"><b>Blue</b></font> dots are observed data points and <font color="red"><b>red</b></font> lines are error distance from each observed data points to model-predicted line. As you can see, the regression line reduces much of the errors; therefore, performs much better than average line. 
 
@@ -4182,9 +4938,6 @@ y_pred = lin_reg.predict(X_test)
 print ('%.2f'%mean_squared_error(y_test, y_pred))
 ```
 
-    3444690724184620032.00
-
-
 ## Using cross validation.
 
 
@@ -4200,9 +4953,6 @@ scores = cross_val_score(lin_reg, X,y,cv = cv, scoring = 'neg_mean_absolute_erro
 ```python
 print ('%.8f'%scores.mean())
 ```
-
-    -0.23923767
-
 
  This way of model fitting above is probably the simplest way to construct a machine learning model. However, Let's dive deep into some more complex regression. 
 
@@ -4282,57 +5032,11 @@ for key, value in sorted(temp_mse.items(), key=lambda item: item[1]):
     print("%s: %s" % (key, value))
 ```
 
-    0.01: 0.012058094351210535
-    0.001: 0.012361806588246711
-    0.5: 0.012398339932154152
-    0.0001: 0.01245484127382067
-    1e-05: 0.012608710723829023
-    1e-15: 0.012689040089985792
-    1e-08: 0.012689390221530126
-    1e-10: 0.012689501040831894
-    1: 0.013828461512484526
-    1.5: 0.015292912740672846
-    2: 0.01675982655543862
-    3: 0.019679216442474945
-    4: 0.02256515565515432
-    5: 0.025406035155256846
-    10: 0.03869750083870753
-    20: 0.06016951670298049
-    30: 0.0759721333920899
-    40: 0.08783870527373712
-    -1: 22.584227365355215
-    -3: 37.778420933109615
-    -2: 1127.9922287334566
-
-
 
 ```python
 for key, value in sorted(temp_rss.items(), key=lambda item: item[1]):
     print("%s: %s" % (key, value))
 ```
-
-    0.01: 5.787885288581059
-    0.001: 5.93366716235842
-    0.5: 5.951203167433997
-    0.0001: 5.978323811433925
-    1e-05: 6.0521811474379295
-    1e-15: 6.09073924319318
-    1e-08: 6.09090730633446
-    1e-10: 6.090960499599308
-    1: 6.637661525992575
-    1.5: 7.340598115522962
-    2: 8.04471674661054
-    3: 9.446023892387972
-    4: 10.831274714474079
-    5: 12.194896874523279
-    10: 18.574800402579594
-    20: 28.881368017430614
-    30: 36.466624028203164
-    40: 42.16257853139385
-    -1: 10840.429135370508
-    -3: 18133.642047892616
-    -2: 541436.2697920599
-
 
 ### Lasso:
 Lasso adds penalty equivalent to the absolute value of the sum of coefficients. This penalty is added to the least square loss function and replaces the squared sum of coefficients from Ridge. 
@@ -4368,57 +5072,11 @@ for key, value in sorted(temp_mse.items(), key=lambda item: item[1]):
     print("%s: %s" % (key, value))
 ```
 
-    0.0001: 0.010061310720512168
-    1e-05: 0.011553827897129448
-    1e-08: 0.012457467856017411
-    1e-10: 0.012462691942706754
-    1e-15: 0.012462746144280465
-    0.001: 0.01834414161633641
-    0.01: 0.15998234085337285
-    0.5: 0.16529633945001213
-    1: 0.16529633945001213
-    1.5: 0.16529633945001213
-    2: 0.16529633945001213
-    3: 0.16529633945001213
-    4: 0.16529633945001213
-    5: 0.16529633945001213
-    10: 0.16529633945001213
-    20: 0.16529633945001213
-    30: 0.16529633945001213
-    40: 0.16529633945001213
-    -1: 13593671877.122139
-    -2: 54374687289.91916
-    -3: 122343046237.35477
-
-
 
 ```python
 for key, value in sorted(temp_rss.items(), key=lambda item: item[1]):
     print("%s: %s" % (key, value))
 ```
-
-    0.0001: 4.829429145845844
-    1e-05: 5.545837390622136
-    1e-08: 5.979584570888356
-    1e-10: 5.982092132499242
-    1e-15: 5.982118149254621
-    0.001: 8.80518797584147
-    0.01: 76.79152360961896
-    0.5: 79.34224293600582
-    1: 79.34224293600582
-    1.5: 79.34224293600582
-    2: 79.34224293600582
-    3: 79.34224293600582
-    4: 79.34224293600582
-    5: 79.34224293600582
-    10: 79.34224293600582
-    20: 79.34224293600582
-    30: 79.34224293600582
-    40: 79.34224293600582
-    -1: 6524962501018.624
-    -2: 26099849899161.2
-    -3: 58724662193930.24
-
 
 ### Elastic Net: 
 Elastic Net is the combination of both Ridge and Lasso. It adds both the sum of squared coefficients and the absolute sum of the coefficients with the ordinary least square function. Let's look at the function. 
@@ -4452,57 +5110,11 @@ for key, value in sorted(temp_mse.items(), key=lambda item: item[1]):
     print("%s: %s" % (key, value))
 ```
 
-    0.0001: 0.010410659759083177
-    1e-05: 0.011786338809652118
-    1e-08: 0.012459291804442076
-    1e-10: 0.012462710322589892
-    1e-15: 0.012462746144464467
-    0.001: 0.014970896504153937
-    0.01: 0.10870286572380539
-    0.5: 0.16529633945001213
-    1: 0.16529633945001213
-    1.5: 0.16529633945001213
-    2: 0.16529633945001213
-    3: 0.16529633945001213
-    4: 0.16529633945001213
-    5: 0.16529633945001213
-    10: 0.16529633945001213
-    20: 0.16529633945001213
-    30: 0.16529633945001213
-    40: 0.16529633945001213
-    -3: 5.388825744878945
-    -2: 5.4709451280041455
-    -1: 5.72917572327467
-
-
 
 ```python
 for key, value in sorted(temp_rss.items(), key=lambda item: item[1]):
     print("%s: %s" % (key, value))
 ```
-
-    0.0001: 4.997116684359926
-    1e-05: 5.657442628633018
-    1e-08: 5.980460066132193
-    1e-10: 5.982100954843148
-    1e-15: 5.982118149342944
-    0.001: 7.186030321993893
-    0.01: 52.17737554742654
-    0.5: 79.34224293600582
-    1: 79.34224293600582
-    1.5: 79.34224293600582
-    2: 79.34224293600582
-    3: 79.34224293600582
-    4: 79.34224293600582
-    5: 79.34224293600582
-    10: 79.34224293600582
-    20: 79.34224293600582
-    30: 79.34224293600582
-    40: 79.34224293600582
-    -3: 2586.6363575418927
-    -2: 2626.0536614419884
-    -1: 2750.004347171842
-
 
 # Fitting model (Advanced approach)
 
@@ -4606,30 +5218,6 @@ score = cv_rmse(xgboost)
 print("xgboost: {:.4f} ({:.4f})\n".format(score.mean(), score.std()), datetime.now(), )
 ```
 
-    Ridge: 0.1011 (0.0141)
-     2020-04-17 21:57:13.160139
-    LASSO: 0.0997 (0.0142)
-     2020-04-17 21:57:16.920019
-    elastic net: 0.0998 (0.0143)
-     2020-04-17 21:57:38.961332
-    SVR: 0.1020 (0.0146)
-     2020-04-17 21:57:45.892114
-    lightgbm: 0.1058 (0.0160)
-     2020-04-17 21:57:57.648367
-    [21:57:57] WARNING: /usr/local/miniconda/conda-bld/xgboost_1584539872846/work/src/objective/regression_obj.cu:167: reg:linear is now deprecated in favor of reg:squarederror.
-    [21:58:20] WARNING: /usr/local/miniconda/conda-bld/xgboost_1584539872846/work/src/objective/regression_obj.cu:167: reg:linear is now deprecated in favor of reg:squarederror.
-    [21:58:43] WARNING: /usr/local/miniconda/conda-bld/xgboost_1584539872846/work/src/objective/regression_obj.cu:167: reg:linear is now deprecated in favor of reg:squarederror.
-    [21:59:06] WARNING: /usr/local/miniconda/conda-bld/xgboost_1584539872846/work/src/objective/regression_obj.cu:167: reg:linear is now deprecated in favor of reg:squarederror.
-    [21:59:29] WARNING: /usr/local/miniconda/conda-bld/xgboost_1584539872846/work/src/objective/regression_obj.cu:167: reg:linear is now deprecated in favor of reg:squarederror.
-    [21:59:52] WARNING: /usr/local/miniconda/conda-bld/xgboost_1584539872846/work/src/objective/regression_obj.cu:167: reg:linear is now deprecated in favor of reg:squarederror.
-    [22:00:16] WARNING: /usr/local/miniconda/conda-bld/xgboost_1584539872846/work/src/objective/regression_obj.cu:167: reg:linear is now deprecated in favor of reg:squarederror.
-    [22:00:40] WARNING: /usr/local/miniconda/conda-bld/xgboost_1584539872846/work/src/objective/regression_obj.cu:167: reg:linear is now deprecated in favor of reg:squarederror.
-    [22:01:04] WARNING: /usr/local/miniconda/conda-bld/xgboost_1584539872846/work/src/objective/regression_obj.cu:167: reg:linear is now deprecated in favor of reg:squarederror.
-    [22:01:28] WARNING: /usr/local/miniconda/conda-bld/xgboost_1584539872846/work/src/objective/regression_obj.cu:167: reg:linear is now deprecated in favor of reg:squarederror.
-    xgboost: 0.1059 (0.0148)
-     2020-04-17 22:01:52.629694
-
-
 
 ```python
 print('START Fit')
@@ -4659,38 +5247,12 @@ print('lightgbm')
 lgb_model_full_data = lightgbm.fit(X, y)
 ```
 
-    START Fit
-    stack_gen
-    [22:02:52] WARNING: /usr/local/miniconda/conda-bld/xgboost_1584539872846/work/src/objective/regression_obj.cu:167: reg:linear is now deprecated in favor of reg:squarederror.
-    [22:03:14] WARNING: /usr/local/miniconda/conda-bld/xgboost_1584539872846/work/src/objective/regression_obj.cu:167: reg:linear is now deprecated in favor of reg:squarederror.
-    [22:03:34] WARNING: /usr/local/miniconda/conda-bld/xgboost_1584539872846/work/src/objective/regression_obj.cu:167: reg:linear is now deprecated in favor of reg:squarederror.
-    [22:03:55] WARNING: /usr/local/miniconda/conda-bld/xgboost_1584539872846/work/src/objective/regression_obj.cu:167: reg:linear is now deprecated in favor of reg:squarederror.
-    [22:04:15] WARNING: /usr/local/miniconda/conda-bld/xgboost_1584539872846/work/src/objective/regression_obj.cu:167: reg:linear is now deprecated in favor of reg:squarederror.
-    [22:04:42] WARNING: /usr/local/miniconda/conda-bld/xgboost_1584539872846/work/src/objective/regression_obj.cu:167: reg:linear is now deprecated in favor of reg:squarederror.
-    [22:05:12] WARNING: /usr/local/miniconda/conda-bld/xgboost_1584539872846/work/src/objective/regression_obj.cu:167: reg:linear is now deprecated in favor of reg:squarederror.
-    elasticnet
-    Lasso
-    Ridge
-    Svr
-    xgboost
-    [22:05:45] WARNING: /usr/local/miniconda/conda-bld/xgboost_1584539872846/work/src/objective/regression_obj.cu:167: reg:linear is now deprecated in favor of reg:squarederror.
-    lightgbm
-
-
 # Blending Models
 
 
 ```python
 1.0 * elastic_model_full_data.predict(X)
 ```
-
-
-
-
-    array([12.2253507 , 12.19481394, 12.28746198, ..., 12.45059163,
-           11.84620006, 11.91614323])
-
-
 
 
 ```python
@@ -4711,19 +5273,12 @@ print('RMSLE score on train data:')
 print(rmsle(y, blend_models_predict(X)))
 ```
 
-    RMSLE score on train data:
-    0.06264960621850663
-
-
 
 ```python
 print('Predict submission')
 submission = pd.read_csv("../input/house-prices-advanced-regression-techniques/sample_submission.csv")
 submission.iloc[:,1] = np.floor(np.expm1(blend_models_predict(X_sub)))
 ```
-
-    Predict submission
-
 
 
 ```python
@@ -4737,10 +5292,6 @@ submission.iloc[:,1] = np.floor((0.25 * np.floor(np.expm1(blend_models_predict(X
                                 (0.25 * sub_3.iloc[:,1]))
 ```
 
-    Blend with Top Kernels submissions
-    
-
-
 # Submission
 
 
@@ -4752,29 +5303,60 @@ submission['SalePrice'] = submission['SalePrice'].apply(lambda x: x if x < q2 el
 submission.to_csv("submission.csv", index=False)
 ```
 
-## Resources & Credits. 
-* To GA where I started my data science journey.
-* To Kaggle community for inspiring me over and over again with all the resources I need. 
-* [Types of Standard Deviation](https://statistics.laerd.com/statistical-guides/measures-of-spread-standard-deviation.php)
-* [What is Regression](https://www.youtube.com/watch?v=aq8VU5KLmkY)
+<div class="alert alert-info">
+    <h1>Resources</h1>
+    <ul>
+        <li>Statistics</li>
+        <ul>
+            <li><a href="https://statistics.laerd.com/statistical-guides/measures-of-spread-standard-deviation.php">Types of Standard Deviation</a></li>
+            <li><a href="https://www.youtube.com/watch?v=aq8VU5KLmkY">What is Regression</a></li>
+            <li><a href="https://www.econometrics-with-r.org/5-2-cifrc.html">Introduction to Econometrics with R</a></li>
+        </ul>
+        <li>Writing pythonic ways</li>
+        <ul>
+            <li><a href="https://www.kaggle.com/rtatman/six-steps-to-more-professional-data-science-code">Six steps to more professional data science code</a></li>
+            <li><a href="https://www.kaggle.com/jpmiller/creating-a-good-analytics-report">Creating a Good Analytics Report</a></li>
+            <li><a href="https://en.wikipedia.org/wiki/Code_smell">Code Smell</a></li>
+            <li><a href="https://www.python.org/dev/peps/pep-0008/">Python style guides</a></li>
+            <li><a href="https://gist.github.com/sloria/7001839">The Best of the Best Practices(BOBP) Guide for Python</a></li>
+            <li><a href="https://www.python.org/dev/peps/pep-0020/">PEP 20 -- The Zen of Python</a></li>
+            <li><a href="https://docs.python-guide.org/">The Hitchiker's Guide to Python</a></li>
+            <li><a href="https://realpython.com/tutorials/best-practices/">Python Best Practice Patterns</a></li>
+            <li><a href="http://www.nilunder.com/blog/2013/08/03/pythonic-sensibilities/">Pythonic Sensibilities</a></li>
+        </ul>
+        <li>Why Scikit-Learn?</li>
+        <ul>
+            <li><a href="https://www.oreilly.com/content/intro-to-scikit-learn/">Introduction to Scikit-Learn</a></li>
+            <li><a href="https://www.oreilly.com/content/six-reasons-why-i-recommend-scikit-learn/">Six reasons why I recommend scikit-learn</a></li>
+            <li><a href="https://hub.packtpub.com/learn-scikit-learn/">Why you should learn Scikit-learn</a></li>
+            <li><a href="https://www.kaggle.com/baghern/a-deep-dive-into-sklearn-pipelines">A Deep Dive Into Sklearn Pipelines</a></li>
+            <li><a href="https://www.kaggle.com/sermakarevich/sklearn-pipelines-tutorial">Sklearn pipelines tutorial</a></li>
+            <li><a href="https://www.kdnuggets.com/2017/12/managing-machine-learning-workflows-scikit-learn-pipelines-part-1.html">Managing Machine Learning workflows with Sklearn pipelines</a></li>
+            <li><a href="https://towardsdatascience.com/a-simple-example-of-pipeline-in-machine-learning-with-scikit-learn-e726ffbb6976">A simple example of pipeline in Machine Learning using SKlearn</a></li>
+        </ul>
+    </ul>
+    <h1>Credits</h1>
+    <ul>
+        <li>To GA where I started my data science journey.</li>
+        <li>To Kaggle community for inspiring me over and over again with all the resources I need.</li>
+        <li>To Udemy Course "Deployment of Machine Learning". I have used and modified some of the code from this course to help making the learning process intuitive.</li>
+    </ul>
+</div>
 
-![](http://)***
-If you like to discuss any other projects or just have a chat about data science topics, I'll be more than happy to connect with you on:
+<div class="alert alert-info">
+<h4>If you like to discuss any other projects or just have a chat about data science topics, I'll be more than happy to connect with you on:</h4>
+    <ul>
+        <li><a href="https://www.linkedin.com/in/masumrumi/"><b>LinkedIn</b></a></li>
+        <li><a href="https://github.com/masumrumi"><b>Github</b></a></li>
+        <li><a href="https://www.kaggle.com/masumrumi"><b>Kaggle</b></a></li>
+        <li><a href="http://masumrumi.com/"><b>masumrumi.com</b></a></li>
+    </ul>
 
-**LinkedIn:** https://www.linkedin.com/in/masumrumi/ 
+<p>This kernel will always be a work in progress. I will incorporate new concepts of data science as I comprehend them with each update. If you have any idea/suggestions about this notebook, please let me know. Any feedback about further improvements would be genuinely appreciated.</p>
 
-**My Website:** http://masumrumi.com/ 
+<h1>If you have come this far, Congratulations!!</h1>
 
-*** This kernel will always be a work in progress. I will incorporate new concepts of data science as I comprehend them with each update. If you have any idea/suggestions about this notebook, please let me know. Any feedback about further improvements would be genuinely appreciated.***
-***
-### If you have come this far, Congratulations!!
-
-### If this notebook helped you in any way or you liked it, please upvote and/or leave a comment!! :) 
-
-
-```python
-
-```
+<h1>If this notebook helped you in any way or you liked it, please upvote and/or leave a comment!! :)</h1></div>
 
 
 ```python
