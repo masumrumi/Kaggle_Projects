@@ -1,3 +1,23 @@
+## checkpoints
+# Boston housing
 Boston-housing/.ipynb_checkpoint/**
-Titanic/.ipynb_checkpoints/**
+Boston-housing/notebook/.ipynb_checkpoint/**
+Boston-housing/notebook/.DS_Store
+Boston-housing/input
+Boston-housing/notebook/{*.json , *.csv}
+Boston-housing/.idea/**
 
+
+
+# Titanic
+Titanic/.ipynb_checkpoints/**
+Titanic/notebook/.ipynb_checkpoints/**
+Titanic/notebook/.DS_Store
+Titanic/input
+Titanic/*.csv
+Titanic/notebook/*.json
+
+
+# original file
+input/**
+.DS_Store

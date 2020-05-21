@@ -1,0 +1,25 @@
+{
+  "id": "masumrumi/a-visual-analysis-and-prediction-for-covid-19",
+  "id_no": 8466700,
+  "title": "A Visual Analysis and Prediction for COVID-19",
+  "code_file": "a-visual-analysis-and-prediction-for-covid-19.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": false,
+  "enable_gpu": false,
+  "enable_internet": true,
+  "keywords": [
+    "time series",
+    "beginner",
+    "data visualization",
+    "starter code",
+    "covid19"
+  ],
+  "dataset_sources": [
+    "roche-data-science-coalition/uncover",
+    "sudalairajkumar/novel-corona-virus-2019-dataset",
+    "fireballbyedimyrnmom/us-counties-covid-19-dataset"
+  ],
+  "kernel_sources": [],
+  "competition_sources": []
+}
