@@ -16,6 +16,7 @@ Titanic/notebook/.DS_Store
 Titanic/input
 Titanic/*.csv
 Titanic/notebook/*.json
+Titanic/.DS_Store
 
 
 # original file
