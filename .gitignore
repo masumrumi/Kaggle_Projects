@@ -16,7 +16,7 @@ Titanic/notebook/.DS_Store
 Titanic/input
 Titanic/*.csv
 Titanic/notebook/*.json
-Titanic/notebook/{*.json, *csv}
+Titanic/notebook/*.csv
 Titanic/.DS_Store
 
 
