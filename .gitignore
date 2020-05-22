@@ -18,6 +18,7 @@ Titanic/*.csv
 Titanic/notebook/*.json
 Titanic/notebook/*.csv
 Titanic/.DS_Store
+Titanic/README_files/**
 
 
 # original file
