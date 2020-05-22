@@ -1,10 +1,14 @@
 ## checkpoints
 # Boston housing
 Boston-housing/.ipynb_checkpoint/**
+Boston-housing/.DS_Store
+Boston-housing/input/**
+
 Boston-housing/notebook/.ipynb_checkpoint/**
 Boston-housing/notebook/.DS_Store
-Boston-housing/input
-Boston-housing/notebook/{*.json , *.csv}
+
+Boston-housing/notebook/*.json
+Boston-housing/notebook/*.csv
 Boston-housing/.idea/**
 
 
