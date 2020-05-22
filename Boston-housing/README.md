@@ -68,6 +68,14 @@ warnings.filterwarnings('ignore')
 # Any results you write to the current directory are saved as output.
 ```
 
+    
+    Bad key "text.kerning_factor" on line 4 in
+    /Users/masumrumi/anaconda3/lib/python3.7/site-packages/matplotlib/mpl-data/stylelib/_classic_test_patch.mplstyle.
+    You probably need to get an updated matplotlibrc file from
+    https://github.com/matplotlib/matplotlib/blob/v3.1.3/matplotlibrc.template
+    or from the matplotlib source distribution
+
+
     ['top-house-price-kernel-predictions', 'house-prices-advanced-regression-techniques']
 
 
@@ -308,39 +316,15 @@ test.sample(5)
   </thead>
   <tbody>
     <tr>
-      <th>153</th>
-      <td>1614</td>
-      <td>120</td>
-      <td>RM</td>
-      <td>31.0</td>
-      <td>2394</td>
+      <th>689</th>
+      <td>2150</td>
+      <td>20</td>
+      <td>RL</td>
+      <td>82.0</td>
+      <td>20270</td>
       <td>Pave</td>
       <td>NaN</td>
-      <td>Reg</td>
-      <td>Low</td>
-      <td>AllPub</td>
-      <td>...</td>
-      <td>108</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0</td>
-      <td>5</td>
-      <td>2010</td>
-      <td>WD</td>
-      <td>Normal</td>
-    </tr>
-    <tr>
-      <th>502</th>
-      <td>1963</td>
-      <td>160</td>
-      <td>RM</td>
-      <td>21.0</td>
-      <td>1890</td>
-      <td>Pave</td>
-      <td>NaN</td>
-      <td>Reg</td>
+      <td>IR1</td>
       <td>Lvl</td>
       <td>AllPub</td>
       <td>...</td>
@@ -356,39 +340,15 @@ test.sample(5)
       <td>Normal</td>
     </tr>
     <tr>
-      <th>609</th>
-      <td>2070</td>
-      <td>50</td>
+      <th>682</th>
+      <td>2143</td>
+      <td>85</td>
       <td>RL</td>
-      <td>45.0</td>
-      <td>7506</td>
+      <td>NaN</td>
+      <td>7400</td>
       <td>Pave</td>
       <td>NaN</td>
-      <td>Reg</td>
-      <td>Lvl</td>
-      <td>AllPub</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0</td>
-      <td>5</td>
-      <td>2008</td>
-      <td>WD</td>
-      <td>Normal</td>
-    </tr>
-    <tr>
-      <th>999</th>
-      <td>2460</td>
-      <td>50</td>
-      <td>RM</td>
-      <td>NaN</td>
-      <td>6240</td>
-      <td>Pave</td>
-      <td>NaN</td>
-      <td>Reg</td>
+      <td>IR1</td>
       <td>Lvl</td>
       <td>AllPub</td>
       <td>...</td>
@@ -399,31 +359,79 @@ test.sample(5)
       <td>NaN</td>
       <td>0</td>
       <td>3</td>
-      <td>2007</td>
+      <td>2008</td>
       <td>WD</td>
       <td>Normal</td>
     </tr>
     <tr>
-      <th>331</th>
-      <td>1792</td>
-      <td>20</td>
+      <th>760</th>
+      <td>2221</td>
+      <td>120</td>
+      <td>RM</td>
+      <td>44.0</td>
+      <td>3843</td>
+      <td>Pave</td>
+      <td>NaN</td>
+      <td>IR1</td>
+      <td>HLS</td>
+      <td>AllPub</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>8</td>
+      <td>2008</td>
+      <td>New</td>
+      <td>Partial</td>
+    </tr>
+    <tr>
+      <th>329</th>
+      <td>1790</td>
+      <td>30</td>
       <td>RL</td>
-      <td>83.0</td>
-      <td>10143</td>
+      <td>60.0</td>
+      <td>10800</td>
+      <td>Pave</td>
+      <td>Grvl</td>
+      <td>Reg</td>
+      <td>Lvl</td>
+      <td>AllPub</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>11</td>
+      <td>2009</td>
+      <td>WD</td>
+      <td>Normal</td>
+    </tr>
+    <tr>
+      <th>796</th>
+      <td>2257</td>
+      <td>60</td>
+      <td>RL</td>
+      <td>60.0</td>
+      <td>7500</td>
       <td>Pave</td>
       <td>NaN</td>
       <td>Reg</td>
       <td>Lvl</td>
       <td>AllPub</td>
       <td>...</td>
-      <td>216</td>
+      <td>0</td>
       <td>0</td>
       <td>NaN</td>
-      <td>GdWo</td>
+      <td>NaN</td>
       <td>NaN</td>
       <td>0</td>
-      <td>6</td>
-      <td>2009</td>
+      <td>8</td>
+      <td>2007</td>
       <td>WD</td>
       <td>Normal</td>
     </tr>
@@ -1022,7 +1030,7 @@ msno.matrix(train);
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_14_0.png)
+![png](README_files/README_14_0.png)
 
 
 
@@ -1172,7 +1180,7 @@ msno.matrix(test);
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_17_0.png)
+![png](README_files/README_17_0.png)
 
 
 
@@ -1416,79 +1424,79 @@ for var in features_with_na:
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_20_0.png)
+![png](README_files/README_20_0.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_20_1.png)
+![png](README_files/README_20_1.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_20_2.png)
+![png](README_files/README_20_2.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_20_3.png)
+![png](README_files/README_20_3.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_20_4.png)
+![png](README_files/README_20_4.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_20_5.png)
+![png](README_files/README_20_5.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_20_6.png)
+![png](README_files/README_20_6.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_20_7.png)
+![png](README_files/README_20_7.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_20_8.png)
+![png](README_files/README_20_8.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_20_9.png)
+![png](README_files/README_20_9.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_20_10.png)
+![png](README_files/README_20_10.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_20_11.png)
+![png](README_files/README_20_11.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_20_12.png)
+![png](README_files/README_20_12.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_20_13.png)
+![png](README_files/README_20_13.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_20_14.png)
+![png](README_files/README_20_14.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_20_15.png)
+![png](README_files/README_20_15.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_20_16.png)
+![png](README_files/README_20_16.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_20_17.png)
+![png](README_files/README_20_17.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_20_18.png)
+![png](README_files/README_20_18.png)
 
 
 These plots compare the median SalePrice in the observations where data is missing vs the observations where a value is available. As you can see there is a significant difference in median sale price between where missing value exists and where missing value doesn't exist. <b>We are using median here because mean would not direct us towards a better assumption as there are some outliers present. 
@@ -1758,7 +1766,7 @@ plt.title('Change in House price with the years')
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_29_1.png)
+![png](README_files/README_29_1.png)
 
 
 This plot should raise an eyebrows. As the year increases the price of the houses seems to be decreasing, which in real time is quite unusual. Let's see if there is a relationship between year features and SalePrice
@@ -1787,15 +1795,15 @@ for feature in year_features:
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_31_0.png)
+![png](README_files/README_31_0.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_31_1.png)
+![png](README_files/README_31_1.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_31_2.png)
+![png](README_files/README_31_2.png)
 
 
 These charts seems more like a real life situation case. The longer the time between the house was built/remodeled and sold, the lower the sale price. This is likely, because the houses will have an older look and might need repairing. 
@@ -1838,59 +1846,59 @@ for var in discrete_vars:
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_36_0.png)
+![png](README_files/README_36_0.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_36_1.png)
+![png](README_files/README_36_1.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_36_2.png)
+![png](README_files/README_36_2.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_36_3.png)
+![png](README_files/README_36_3.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_36_4.png)
+![png](README_files/README_36_4.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_36_5.png)
+![png](README_files/README_36_5.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_36_6.png)
+![png](README_files/README_36_6.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_36_7.png)
+![png](README_files/README_36_7.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_36_8.png)
+![png](README_files/README_36_8.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_36_9.png)
+![png](README_files/README_36_9.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_36_10.png)
+![png](README_files/README_36_10.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_36_11.png)
+![png](README_files/README_36_11.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_36_12.png)
+![png](README_files/README_36_12.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_36_13.png)
+![png](README_files/README_36_13.png)
 
 
 There tend to be some relationships between the variables and the SalePrice, for example some are monotonic like OverallQual, some almost monotonic except for a unique values like OverallCond. We need to be particulary careful for these variables to extract maximum values for a linear model. 
@@ -1924,7 +1932,7 @@ plt.title("Heatmap of the Discrete Features", fontsize = 30);
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_38_0.png)
+![png](README_files/README_38_0.png)
 
 
 <h3>Continous Variables</h3>
@@ -2125,79 +2133,79 @@ for var in continous_vars:
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_42_0.png)
+![png](README_files/README_42_0.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_42_1.png)
+![png](README_files/README_42_1.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_42_2.png)
+![png](README_files/README_42_2.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_42_3.png)
+![png](README_files/README_42_3.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_42_4.png)
+![png](README_files/README_42_4.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_42_5.png)
+![png](README_files/README_42_5.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_42_6.png)
+![png](README_files/README_42_6.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_42_7.png)
+![png](README_files/README_42_7.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_42_8.png)
+![png](README_files/README_42_8.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_42_9.png)
+![png](README_files/README_42_9.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_42_10.png)
+![png](README_files/README_42_10.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_42_11.png)
+![png](README_files/README_42_11.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_42_12.png)
+![png](README_files/README_42_12.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_42_13.png)
+![png](README_files/README_42_13.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_42_14.png)
+![png](README_files/README_42_14.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_42_15.png)
+![png](README_files/README_42_15.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_42_16.png)
+![png](README_files/README_42_16.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_42_17.png)
+![png](README_files/README_42_17.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_42_18.png)
+![png](README_files/README_42_18.png)
 
 
 As you can see these variables are not normally distributed including our target variable "SalePrice". In order to maximise performance of linear models, we can use log transformation. We will describe more on this in following parts. We will do the transformation in the feature engineering section. Let's now see how the distribution might look once we do the transformation. 
@@ -2230,23 +2238,23 @@ for var in continous_vars:
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_44_0.png)
+![png](README_files/README_44_0.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_44_1.png)
+![png](README_files/README_44_1.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_44_2.png)
+![png](README_files/README_44_2.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_44_3.png)
+![png](README_files/README_44_3.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_44_4.png)
+![png](README_files/README_44_4.png)
 
 
 As you can see, we get a better spread of data once we use log transformation.
@@ -2295,7 +2303,7 @@ plotting_3_chart(train, 'SalePrice')
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_46_0.png)
+![png](README_files/README_46_0.png)
 
 
 These **three** charts above can tell us a lot about our target variable.
@@ -2425,7 +2433,7 @@ customized_scatterplot(train.SalePrice, train.OverallQual)
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_54_0.png)
+![png](README_files/README_54_0.png)
 
 
 **OverallQual** is a categorical variable, and a scatter plot is not the best way to visualize categorical variables. However, there is an apparent relationship between the two features. The price of the houses increases with the overall quality. Let's check out some more features to determine the outliers. Let's focus on the numerical variables this time.
@@ -2438,7 +2446,7 @@ customized_scatterplot(train.SalePrice, train.GrLivArea)
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_57_0.png)
+![png](README_files/README_57_0.png)
 
 
 As you can see, there are two outliers in the plot above. We will get rid off them later. Let's look at another scatter plot with a different feature.
@@ -2451,7 +2459,7 @@ customized_scatterplot(train.SalePrice, train.GarageArea);
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_59_0.png)
+![png](README_files/README_59_0.png)
 
 
 And the next one..?
@@ -2463,7 +2471,7 @@ customized_scatterplot(train.SalePrice, train.TotalBsmtSF)
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_61_0.png)
+![png](README_files/README_61_0.png)
 
 
 and the next ?
@@ -2475,7 +2483,7 @@ customized_scatterplot(train.SalePrice, train['1stFlrSF']);
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_63_0.png)
+![png](README_files/README_63_0.png)
 
 
 How about one more...
@@ -2488,7 +2496,7 @@ customized_scatterplot(train.SalePrice, train.MasVnrArea);
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_65_0.png)
+![png](README_files/README_65_0.png)
 
 
 Okay, I think we have seen enough. Let's discuss what we have found so far. 
@@ -2545,7 +2553,7 @@ sns.regplot(x=train.MasVnrArea, y=train.SalePrice, ax=ax2);
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_69_0.png)
+![png](README_files/README_69_0.png)
 
 
 Here we are plotting our target variable with two independent variables **GrLivArea** and **MasVnrArea**. It's pretty apparent from the chart that there is a better linear relationship between **SalePrice** and **GrLivArea** than **SalePrice** and **MasVnrArea**. One thing to take note here, there are some outliers in the dataset. It is imperative to check for outliers since linear regression is sensitive to outlier effects. Sometimes we may be trying to fit a linear regression model when the data might not be so linear, or the function may need another degree of freedom to fit the data. In that case, we may need to change our function depending on the data to get the best possible fit. In addition to that, we can also check the residual plot, which tells us how is the error variance across the true line. Let's look at the residual plot for independent variable **GrLivArea** and our target variable **SalePrice **. 
@@ -2557,7 +2565,7 @@ sns.residplot(train.GrLivArea, train.SalePrice);
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_71_0.png)
+![png](README_files/README_71_0.png)
 
 
 Ideally, if the assumptions are met, the residuals will be randomly scattered around the centerline of zero with no apparent pattern. The residual will look like an unstructured cloud of points centered around zero. However, our residual plot is anything but an unstructured cloud of points. Even though it seems like there is a linear relationship between the response variable and predictor variable, the residual plot looks more like a funnel. The error plot shows that as **GrLivArea** value increases, the variance also increases, which is the characteristics known as **Heteroscedasticity**. Let's break this down. 
@@ -2578,7 +2586,7 @@ plotting_3_chart(train, 'SalePrice')
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_73_0.png)
+![png](README_files/README_73_0.png)
 
 
 Now, let's make sure that the target variable follows a normal distribution. If you want to learn more about the probability plot(Q-Q plot), try [this](https://www.youtube.com/watch?v=smJBsZ4YQZw) video. You can also check out [this](https://www.youtube.com/watch?v=9IcaQwQkE9I) one if you have some extra time.
@@ -2593,7 +2601,7 @@ plotting_3_chart(train, 'transformed_SalePrice')
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_75_0.png)
+![png](README_files/README_75_0.png)
 
 
 <div class="alert alert-success"><strong>Success!!</strong> As you can see, the log transformation removes the normality of errors, which solves most of the other errors we talked about above. Let's make a comparison of the pre-transformed and post-transformed state of residual plots.</div> 
@@ -2613,7 +2621,7 @@ sns.residplot(x = train.GrLivArea, y = train.transformed_SalePrice, ax = ax2);
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_77_0.png)
+![png](README_files/README_77_0.png)
 
 
 Here, we see that the pre-transformed chart on the left has heteroscedasticity, and the post-transformed chart on the right has Homoscedasticity(almost an equal amount of variance across the zero lines). It looks like a blob of data points and doesn't seem to give away any relationships. That's the sort of relationship we would like to see to avoid some of these assumptions. 
@@ -2658,7 +2666,7 @@ plt.title("Heatmap of the Continous Features", fontsize = 30);
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_80_0.png)
+![png](README_files/README_80_0.png)
 
 
 <h4>Observation.</h4>
@@ -2708,23 +2716,23 @@ for var in continous_vars:
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_83_0.png)
+![png](README_files/README_83_0.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_83_1.png)
+![png](README_files/README_83_1.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_83_2.png)
+![png](README_files/README_83_2.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_83_3.png)
+![png](README_files/README_83_3.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_83_4.png)
+![png](README_files/README_83_4.png)
 
 
 As you can see most of the continous variables seem to contaion outliers. We will get rid of some of these outliers in the feature engineering section. 
@@ -3213,175 +3221,175 @@ for var in categorical_vars:
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_0.png)
+![png](README_files/README_93_0.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_1.png)
+![png](README_files/README_93_1.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_2.png)
+![png](README_files/README_93_2.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_3.png)
+![png](README_files/README_93_3.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_4.png)
+![png](README_files/README_93_4.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_5.png)
+![png](README_files/README_93_5.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_6.png)
+![png](README_files/README_93_6.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_7.png)
+![png](README_files/README_93_7.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_8.png)
+![png](README_files/README_93_8.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_9.png)
+![png](README_files/README_93_9.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_10.png)
+![png](README_files/README_93_10.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_11.png)
+![png](README_files/README_93_11.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_12.png)
+![png](README_files/README_93_12.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_13.png)
+![png](README_files/README_93_13.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_14.png)
+![png](README_files/README_93_14.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_15.png)
+![png](README_files/README_93_15.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_16.png)
+![png](README_files/README_93_16.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_17.png)
+![png](README_files/README_93_17.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_18.png)
+![png](README_files/README_93_18.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_19.png)
+![png](README_files/README_93_19.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_20.png)
+![png](README_files/README_93_20.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_21.png)
+![png](README_files/README_93_21.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_22.png)
+![png](README_files/README_93_22.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_23.png)
+![png](README_files/README_93_23.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_24.png)
+![png](README_files/README_93_24.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_25.png)
+![png](README_files/README_93_25.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_26.png)
+![png](README_files/README_93_26.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_27.png)
+![png](README_files/README_93_27.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_28.png)
+![png](README_files/README_93_28.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_29.png)
+![png](README_files/README_93_29.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_30.png)
+![png](README_files/README_93_30.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_31.png)
+![png](README_files/README_93_31.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_32.png)
+![png](README_files/README_93_32.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_33.png)
+![png](README_files/README_93_33.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_34.png)
+![png](README_files/README_93_34.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_35.png)
+![png](README_files/README_93_35.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_36.png)
+![png](README_files/README_93_36.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_37.png)
+![png](README_files/README_93_37.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_38.png)
+![png](README_files/README_93_38.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_39.png)
+![png](README_files/README_93_39.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_40.png)
+![png](README_files/README_93_40.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_41.png)
+![png](README_files/README_93_41.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_93_42.png)
+![png](README_files/README_93_42.png)
 
 
 Clearly these categorical variables shows promising information. We will transform these variable in the feature engineering section to extract necessary information. 
@@ -3657,7 +3665,7 @@ plt.ylabel("Number of houses(log scale)");
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_113_0.png)
+![png](README_files/README_113_0.png)
 
 
 
@@ -3668,7 +3676,7 @@ plt.ylabel("Number of houses(log scale)");
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_114_0.png)
+![png](README_files/README_114_0.png)
 
 
 <div class="alert alert-success"><strong>Success!!</strong> It looks like the transformation was successful. We can see variables are normally distributed(Gaussian distribution).</div>
@@ -3746,23 +3754,23 @@ for var in categorical_vars[:5]:
 ```
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_122_0.png)
+![png](README_files/README_122_0.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_122_1.png)
+![png](README_files/README_122_1.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_122_2.png)
+![png](README_files/README_122_2.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_122_3.png)
+![png](README_files/README_122_3.png)
 
 
 
-![png](a-detailed-regression-guide-with-house-pricing_files/a-detailed-regression-guide-with-house-pricing_122_4.png)
+![png](README_files/README_122_4.png)
 
 
 <div class="alert alert-success"><strong>Success!!</strong> It looks like we have successfully converted all the categorical variables and the monotonic relationship is pretty apperant.</div>
@@ -3987,218 +3995,6 @@ X_test[train_vars] = scaler.transform(X_test[train_vars])
 
 
 ```python
-train.head()
-```
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Id</th>
-      <th>MSSubClass</th>
-      <th>MSZoning</th>
-      <th>LotFrontage</th>
-      <th>LotArea</th>
-      <th>Street</th>
-      <th>Alley</th>
-      <th>LotShape</th>
-      <th>LandContour</th>
-      <th>Utilities</th>
-      <th>...</th>
-      <th>PoolArea</th>
-      <th>PoolQC</th>
-      <th>Fence</th>
-      <th>MiscFeature</th>
-      <th>MiscVal</th>
-      <th>MoSold</th>
-      <th>YrSold</th>
-      <th>SaleType</th>
-      <th>SaleCondition</th>
-      <th>SalePrice</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>60</td>
-      <td>RL</td>
-      <td>65.0</td>
-      <td>8450</td>
-      <td>Pave</td>
-      <td>NaN</td>
-      <td>Reg</td>
-      <td>Lvl</td>
-      <td>AllPub</td>
-      <td>...</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0</td>
-      <td>2</td>
-      <td>2008</td>
-      <td>WD</td>
-      <td>Normal</td>
-      <td>208500</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2</td>
-      <td>20</td>
-      <td>RL</td>
-      <td>80.0</td>
-      <td>9600</td>
-      <td>Pave</td>
-      <td>NaN</td>
-      <td>Reg</td>
-      <td>Lvl</td>
-      <td>AllPub</td>
-      <td>...</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0</td>
-      <td>5</td>
-      <td>2007</td>
-      <td>WD</td>
-      <td>Normal</td>
-      <td>181500</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>3</td>
-      <td>60</td>
-      <td>RL</td>
-      <td>68.0</td>
-      <td>11250</td>
-      <td>Pave</td>
-      <td>NaN</td>
-      <td>IR1</td>
-      <td>Lvl</td>
-      <td>AllPub</td>
-      <td>...</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0</td>
-      <td>9</td>
-      <td>2008</td>
-      <td>WD</td>
-      <td>Normal</td>
-      <td>223500</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>4</td>
-      <td>70</td>
-      <td>RL</td>
-      <td>60.0</td>
-      <td>9550</td>
-      <td>Pave</td>
-      <td>NaN</td>
-      <td>IR1</td>
-      <td>Lvl</td>
-      <td>AllPub</td>
-      <td>...</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0</td>
-      <td>2</td>
-      <td>2006</td>
-      <td>WD</td>
-      <td>Abnorml</td>
-      <td>140000</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>60</td>
-      <td>RL</td>
-      <td>84.0</td>
-      <td>14260</td>
-      <td>Pave</td>
-      <td>NaN</td>
-      <td>IR1</td>
-      <td>Lvl</td>
-      <td>AllPub</td>
-      <td>...</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0</td>
-      <td>12</td>
-      <td>2008</td>
-      <td>WD</td>
-      <td>Normal</td>
-      <td>250000</td>
-    </tr>
-  </tbody>
-</table>
-<p>5 rows × 81 columns</p>
-</div>
-
-
-
-
-```python
-
-```
-
-
-```python
-
-```
-
-
-```python
-
-```
-
-
-```python
-
-```
-
-
-```python
-
-```
-
-
-```python
-
-```
-
-
-```python
-
-```
-
-
-```python
 ## Dropping the "Id" from train and test set. 
 train.drop(columns=['Id'],axis=1, inplace=True)
 test.drop(columns=['Id'],axis=1, inplace=True)
@@ -4212,11 +4008,6 @@ previous_train = train.copy()
 
 
 ```python
-
-```
-
-
-```python
 ## Combining train and test datasets together so that we can do all the work at once. 
 all_data = pd.concat((train, test)).reset_index(drop = True)
 ## Dropping the target variable. 
@@ -4226,85 +4017,6 @@ all_data.drop(['SalePrice'], axis = 1, inplace = True)
 <h2>Dealing with Missing Values</h2>
 
 * Missing data in train and test data(all_data)
-
-
-```python
-del all_data['transformed_SalePrice']
-```
-
-
-    ---------------------------------------------------------------------------
-
-    KeyError                                  Traceback (most recent call last)
-
-    ~/anaconda3/lib/python3.7/site-packages/pandas/core/indexes/base.py in get_loc(self, key, method, tolerance)
-       2645             try:
-    -> 2646                 return self._engine.get_loc(key)
-       2647             except KeyError:
-
-
-    pandas/_libs/index.pyx in pandas._libs.index.IndexEngine.get_loc()
-
-
-    pandas/_libs/index.pyx in pandas._libs.index.IndexEngine.get_loc()
-
-
-    pandas/_libs/hashtable_class_helper.pxi in pandas._libs.hashtable.PyObjectHashTable.get_item()
-
-
-    pandas/_libs/hashtable_class_helper.pxi in pandas._libs.hashtable.PyObjectHashTable.get_item()
-
-
-    KeyError: 'transformed_SalePrice'
-
-    
-    During handling of the above exception, another exception occurred:
-
-
-    KeyError                                  Traceback (most recent call last)
-
-    <ipython-input-75-194de315918e> in <module>
-    ----> 1 del all_data['transformed_SalePrice']
-    
-
-    ~/anaconda3/lib/python3.7/site-packages/pandas/core/generic.py in __delitem__(self, key)
-       3757             # there was no match, this call should raise the appropriate
-       3758             # exception:
-    -> 3759             self._data.delete(key)
-       3760 
-       3761         # delete from the caches
-
-
-    ~/anaconda3/lib/python3.7/site-packages/pandas/core/internals/managers.py in delete(self, item)
-       1000         Delete selected item (items if non-unique) in-place.
-       1001         """
-    -> 1002         indexer = self.items.get_loc(item)
-       1003 
-       1004         is_deleted = np.zeros(self.shape[0], dtype=np.bool_)
-
-
-    ~/anaconda3/lib/python3.7/site-packages/pandas/core/indexes/base.py in get_loc(self, key, method, tolerance)
-       2646                 return self._engine.get_loc(key)
-       2647             except KeyError:
-    -> 2648                 return self._engine.get_loc(self._maybe_cast_indexer(key))
-       2649         indexer = self.get_indexer([key], method=method, tolerance=tolerance)
-       2650         if indexer.ndim > 1 or indexer.size > 1:
-
-
-    pandas/_libs/index.pyx in pandas._libs.index.IndexEngine.get_loc()
-
-
-    pandas/_libs/index.pyx in pandas._libs.index.IndexEngine.get_loc()
-
-
-    pandas/_libs/hashtable_class_helper.pxi in pandas._libs.hashtable.PyObjectHashTable.get_item()
-
-
-    pandas/_libs/hashtable_class_helper.pxi in pandas._libs.hashtable.PyObjectHashTable.get_item()
-
-
-    KeyError: 'transformed_SalePrice'
-
 
 
 ```python
@@ -4362,6 +4074,13 @@ all_data.groupby('MSSubClass')['MSZoning']
 ```
 
 
+
+
+    <pandas.core.groupby.generic.SeriesGroupBy object at 0x7fb429560890>
+
+
+
+
 ```python
 
 ```
@@ -4370,6 +4089,19 @@ all_data.groupby('MSSubClass')['MSZoning']
 ```python
 all_data['MSZoning'].value_counts(dropna = False)
 ```
+
+
+
+
+    RL         2265
+    RM          460
+    FV          139
+    RH           26
+    C (all)      25
+    NaN           4
+    Name: MSZoning, dtype: int64
+
+
 
 
 ```python
@@ -4406,6 +4138,38 @@ all_data['Electrical'] = all_data['Electrical'].fillna("SBrkr")
 missing_percentage(all_data)
 ```
 
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Total_missing</th>
+      <th>Percent_wise</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+</div>
+
+
+
 So, there are no missing value left. 
 
 ## Fixing Skewness
@@ -4418,6 +4182,46 @@ skewed_feats = all_data[numeric_feats].apply(lambda x: skew(x)).sort_values(asce
 
 skewed_feats
 ```
+
+
+
+
+    MiscVal          21.947195
+    PoolArea         16.898328
+    LotArea          12.822431
+    LowQualFinSF     12.088761
+    3SsnPorch        11.376065
+    KitchenAbvGr      4.302254
+    BsmtFinSF2        4.146143
+    EnclosedPorch     4.003891
+    ScreenPorch       3.946694
+    BsmtHalfBath      3.931594
+    MasVnrArea        2.613592
+    OpenPorchSF       2.535114
+    WoodDeckSF        1.842433
+    1stFlrSF          1.469604
+    LotFrontage       1.460429
+    BsmtFinSF1        1.425230
+    GrLivArea         1.269358
+    TotalBsmtSF       1.156894
+    BsmtUnfSF         0.919339
+    2ndFlrSF          0.861675
+    TotRmsAbvGrd      0.758367
+    Fireplaces        0.733495
+    HalfBath          0.694566
+    BsmtFullBath      0.624832
+    OverallCond       0.570312
+    BedroomAbvGr      0.326324
+    GarageArea        0.239257
+    OverallQual       0.197110
+    FullBath          0.167606
+    GarageCars       -0.219581
+    YearRemodAdd     -0.451020
+    YearBuilt        -0.599806
+    GarageYrBlt      -3.906205
+    dtype: float64
+
+
 
 
 ```python
@@ -4451,6 +4255,10 @@ fixing_skewness(all_data)
 ```python
 sns.distplot(all_data['1stFlrSF']);
 ```
+
+
+![png](README_files/README_146_0.png)
+
 
 ## Creating New Features
 
@@ -4502,6 +4310,13 @@ all_data['hasfireplace'] = all_data['Fireplaces'].apply(lambda x: 1 if x > 0 els
 all_data.shape
 ```
 
+
+
+
+    (2919, 89)
+
+
+
 ## Deleting features
 
 
@@ -4518,6 +4333,13 @@ all_data = all_data.drop(['Utilities', 'Street', 'PoolQC',], axis=1)
 final_features = pd.get_dummies(all_data).reset_index(drop=True)
 final_features.shape
 ```
+
+
+
+
+    (2919, 334)
+
+
 
 
 ```python
@@ -4560,6 +4382,13 @@ X_sub = X_sub.drop(overfitted_features, axis=1)
 X.shape,y.shape, X_sub.shape
 ```
 
+
+
+
+    ((1455, 333), (1455,), (1459, 333))
+
+
+
 # Fitting model(simple approach)
 
 ## Train_test split
@@ -4584,6 +4413,13 @@ X_train, X_test, y_train, y_test = train_test_split(X, y,test_size = .33, random
 X_train.shape, y_train.shape, X_test.shape, y_test.shape
 ```
 
+
+
+
+    ((974, 333), (974,), (481, 333), (481,))
+
+
+
 # Modeling the Data
  
 Before modeling each algorithm, I would like to discuss them for a better understanding. This way I would review what I know and at the same time help out the community. If you already know enough about Linear Regression, you may skip this part and go straight to the part where I fit the model. However, if you take your time to read this and other model description sections and let me know how I am doing, I would genuinely appreciate it. Let's get started. 
@@ -4604,6 +4440,10 @@ plt.title("Chart with Data Points");
 #ax.plot((sample_train.GrLivArea.values.min(),sample_train.GrLivArea.values.max()), (sample_train.SalePrice.values.mean(),sample_train.SalePrice.values.mean()), color = 'r');
 ```
 
+
+![png](README_files/README_163_0.png)
+
+
 As we discussed before, there is a linear relationship between SalePrice and GrLivArea. We want to know/estimate/predict the sale price of a house based on the given area, How do we do that? One naive way is to find the average of all the house prices. Let's find a line with the average of all houses and place it in the scatter plot. Simple enough.
 
 
@@ -4616,6 +4456,10 @@ ax.plot((sample_train.GrLivArea.values.min(),sample_train.GrLivArea.values.max()
 plt.title("Chart with Average Line");
 ```
 
+
+![png](README_files/README_165_0.png)
+
+
 You can tell this is not the most efficient way to estimate the price of houses. The average line clearly does not represent all the datapoint and fails to grasp the linear relationship between <b>GrLivArea & SalePrice. </b> Let use one of the evaluation regression metrics and find out the Mean Squared Error(more on this later) of this line.
 
 
@@ -4627,6 +4471,9 @@ sample_train.mse.mean()
 ## getting mse
 print("Mean Squared Error(MSE) for average line is : {}".format(sample_train.mse.mean()))
 ```
+
+    Mean Squared Error(MSE) for average line is : 5203352754.517814
+
 
 > If you are reading this in my github page, you may find it difficult to follow through as the following section includes mathematical equation. Please checkout [this](https://www.kaggle.com/masumrumi/a-stats-analysis-and-ml-workflow-of-house-pricing) kernel at Kaggle. 
 
@@ -4741,6 +4588,10 @@ ax.scatter(sample_train.GrLivArea, sample_train.SalePrice, c='b')
 ax.plot(sample_train['GrLivArea'], sample_train['Linear_Yhat'], color='r');
 ```
 
+
+![png](README_files/README_173_0.png)
+
+
 Phew!! This looks like something we can work with!! Let's find out the MSE for the regression line as well.
 
 
@@ -4749,11 +4600,21 @@ Phew!! This looks like something we can work with!! Let's find out the MSE for t
 print("Mean Squared Error(MSE) for regression line is : {}".format(np.square(sample_train['SalePrice'] - sample_train['Linear_Yhat']).mean()))
 ```
 
+    Mean Squared Error(MSE) for regression line is : 3267711487.391867
+
+
 
 ```python
 from sklearn.metrics import mean_squared_error
 mean_squared_error(sample_train['SalePrice'], sample_train.Linear_Yhat)
 ```
+
+
+
+
+    3267711487.3918676
+
+
 
 A much-anticipated decrease in mean squared error(mse), therefore better-predicted model. The way we compare between the two predicted lines is by considering their errors. Let's put both of the model's side by side and compare the errors.
 
@@ -4787,6 +4648,10 @@ ax2.plot(sample_train['GrLivArea'], sample_train['Linear_Yhat'], color='k');
 for _, row in sample_train.iterrows():
     plt.plot((row['GrLivArea'], row['GrLivArea']), (row['SalePrice'], row['Linear_Yhat']), 'r-')
 ```
+
+
+![png](README_files/README_178_0.png)
+
 
 On the two charts above, the left one is the average line, and the right one is the regression line. <font color="blue"><b>Blue</b></font> dots are observed data points and <font color="red"><b>red</b></font> lines are error distance from each observed data points to model-predicted line. As you can see, the regression line reduces much of the errors; therefore, performs much better than average line. 
 
@@ -4938,6 +4803,9 @@ y_pred = lin_reg.predict(X_test)
 print ('%.2f'%mean_squared_error(y_test, y_pred))
 ```
 
+    4512922236062199650169095454720.00
+
+
 ## Using cross validation.
 
 
@@ -4953,6 +4821,9 @@ scores = cross_val_score(lin_reg, X,y,cv = cv, scoring = 'neg_mean_absolute_erro
 ```python
 print ('%.8f'%scores.mean())
 ```
+
+    -46329.93310384
+
 
  This way of model fitting above is probably the simplest way to construct a machine learning model. However, Let's dive deep into some more complex regression. 
 
@@ -5032,11 +4903,57 @@ for key, value in sorted(temp_mse.items(), key=lambda item: item[1]):
     print("%s: %s" % (key, value))
 ```
 
+    0.5: 1033769519.4793838
+    0.01: 1064160289.4561521
+    0.001: 1096810745.6921458
+    1: 1118445882.5269456
+    0.0001: 1140089175.5238469
+    1.5: 1204612986.7499564
+    1e-05: 1221711588.2250483
+    1e-08: 1251991185.1413984
+    1e-10: 1252022068.7589216
+    1e-15: 1252393031.1772377
+    2: 1287941102.9505153
+    3: 1445146524.5562673
+    4: 1591416779.5789666
+    5: 1728666466.3435702
+    10: 2316109466.2471356
+    20: 3171380017.4197617
+    30: 3766439348.288767
+    40: 4202471948.0911818
+    -2: 62063221888.41899
+    -3: 418404479487.1511
+    -1: 4998076982726.335
+
+
 
 ```python
 for key, value in sorted(temp_rss.items(), key=lambda item: item[1]):
     print("%s: %s" % (key, value))
 ```
+
+    0.5: 497243138869.5833
+    0.01: 511861099228.40894
+    0.001: 527565968677.9221
+    1: 537972469495.4609
+    0.0001: 548382893426.96985
+    1.5: 579418846626.7289
+    1e-05: 587643273936.2485
+    1e-08: 602207760053.013
+    1e-10: 602222615073.041
+    1e-15: 602401047996.2511
+    2: 619499670519.1985
+    3: 695115478311.565
+    4: 765471470977.4828
+    5: 831488570311.2577
+    10: 1114048653264.8723
+    20: 1525433788378.907
+    30: 1811657326526.8982
+    40: 2021389007031.8572
+    -2: 29852409728329.547
+    -3: 201252554633319.7
+    -1: 2404075028691366.0
+
 
 ### Lasso:
 Lasso adds penalty equivalent to the absolute value of the sum of coefficients. This penalty is added to the least square loss function and replaces the squared sum of coefficients from Ridge. 
@@ -5072,11 +4989,57 @@ for key, value in sorted(temp_mse.items(), key=lambda item: item[1]):
     print("%s: %s" % (key, value))
 ```
 
+    30: 975443837.218586
+    20: 976823831.7113305
+    10: 990161013.1324797
+    40: 995851243.462408
+    5: 1015588647.2294941
+    4: 1023721629.2659931
+    3: 1033929531.982831
+    2: 1046350589.3371665
+    1.5: 1053074550.2663019
+    1: 1061010718.1763077
+    0.5: 1072874636.8870983
+    0.01: 1105340716.875891
+    0.001: 1107060922.6613677
+    0.0001: 1107339791.8469224
+    1e-05: 1107367001.52484
+    1e-08: 1107370022.4926338
+    1e-10: 1107370025.4864352
+    1e-15: 1107370025.516675
+    -1: 8883357044.840988
+    -2: 31215297538.582256
+    -3: 74943976593.05492
+
+
 
 ```python
 for key, value in sorted(temp_rss.items(), key=lambda item: item[1]):
     print("%s: %s" % (key, value))
 ```
+
+    30: 469188485702.13934
+    20: 469852263053.1501
+    10: 476267447316.72314
+    40: 479004448105.4184
+    5: 488498139317.3864
+    4: 492410103676.9427
+    3: 497320104883.74164
+    2: 503294633471.1774
+    1.5: 506528858678.0914
+    1: 510346155442.80457
+    0.5: 516052700342.69495
+    0.01: 531668884817.3034
+    0.001: 532496303800.11743
+    0.0001: 532630439878.3699
+    1e-05: 532643527733.44836
+    1e-08: 532644980818.957
+    1e-10: 532644982258.9754
+    1e-15: 532644982273.521
+    -1: 4272894738568.5176
+    -2: 15014558116058.057
+    -3: 36048052741259.45
+
 
 ### Elastic Net: 
 Elastic Net is the combination of both Ridge and Lasso. It adds both the sum of squared coefficients and the absolute sum of the coefficients with the ordinary least square function. Let's look at the function. 
@@ -5110,11 +5073,57 @@ for key, value in sorted(temp_mse.items(), key=lambda item: item[1]):
     print("%s: %s" % (key, value))
 ```
 
+    0.0001: 1021006288.8397665
+    0.001: 1031749420.4319353
+    1e-05: 1078102898.2011259
+    1e-08: 1107252732.860571
+    1e-10: 1107368846.7903428
+    1e-15: 1107370025.5048873
+    0.01: 1711292034.0369115
+    0.5: 6227501775.662544
+    1: 6562918039.321088
+    1.5: 6683789826.531347
+    2: 6746072765.39308
+    3: 6809634474.844318
+    4: 6841906531.580285
+    5: 6861429688.964495
+    10: 6900840822.7676
+    20: 6920730771.7868595
+    30: 6927388252.284948
+    40: 6930722140.924023
+    -3: 7077438312.631044
+    -2: 7147982895.3855505
+    -1: 7368957396.421226
+
+
 
 ```python
 for key, value in sorted(temp_rss.items(), key=lambda item: item[1]):
     print("%s: %s" % (key, value))
 ```
+
+    0.0001: 491104024931.9275
+    0.001: 496271471227.7608
+    1e-05: 518567494034.7413
+    1e-08: 532588564505.93475
+    1e-10: 532644415306.15466
+    1e-15: 532644982267.85114
+    0.01: 823131468371.7544
+    0.5: 2995428354093.682
+    1: 3156763576913.4463
+    1.5: 3214902906561.5806
+    2: 3244861000154.0693
+    3: 3275434182400.1157
+    4: 3290957041690.116
+    5: 3300347680391.9224
+    10: 3319304435751.2197
+    20: 3328871501229.4775
+    30: 3332073749349.0605
+    40: 3333677349784.4546
+    -3: 3404247828375.5327
+    -2: 3438179772680.45
+    -1: 3544468507678.6084
+
 
 # Fitting model (Advanced approach)
 
@@ -5144,7 +5153,8 @@ ridge = make_pipeline(RobustScaler(), RidgeCV(alphas=alphas_alt, cv=kfolds))
 lasso = make_pipeline(RobustScaler(), LassoCV(max_iter=1e7, 
                                               alphas=alphas2, 
                                               random_state=42, 
-                                              cv=kfolds))
+                                              cv=kfolds, 
+                                             ))
 elasticnet = make_pipeline(RobustScaler(), ElasticNetCV(max_iter=1e7, alphas=e_alphas, cv=kfolds, l1_ratio=e_l1ratio))                                
 svr = make_pipeline(RobustScaler(), SVR(C= 20, epsilon= 0.008, gamma=0.0003,))
 ```
@@ -5190,8 +5200,300 @@ stack_gen = StackingCVRegressor(regressors=(ridge, lasso, elasticnet, xgboost, l
 
 
 ```python
-# score = cv_rmse(stack_gen)
-# print("Stack: {:.4f} ({:.4f})\n".format(score.mean(), score.std()), datetime.now(), )
+score = cv_rmse(stack_gen)
+print("Stack: {:.4f} ({:.4f})\n".format(score.mean(), score.std()), datetime.now(), )
+```
+
+
+    ---------------------------------------------------------------------------
+
+    KeyboardInterrupt                         Traceback (most recent call last)
+
+    <ipython-input-129-b7f8c67ddf18> in <module>
+    ----> 1 score = cv_rmse(stack_gen)
+          2 print("Stack: {:.4f} ({:.4f})\n".format(score.mean(), score.std()), datetime.now(), )
+
+
+    <ipython-input-118-b82886df75a8> in cv_rmse(model, X)
+          5 
+          6 def cv_rmse(model, X=X):
+    ----> 7     rmse = np.sqrt(-cross_val_score(model, X, y, scoring="neg_mean_squared_error", cv=kfolds))
+          8     return (rmse)
+
+
+    ~/anaconda3/lib/python3.7/site-packages/sklearn/model_selection/_validation.py in cross_val_score(estimator, X, y, groups, scoring, cv, n_jobs, verbose, fit_params, pre_dispatch, error_score)
+        388                                 fit_params=fit_params,
+        389                                 pre_dispatch=pre_dispatch,
+    --> 390                                 error_score=error_score)
+        391     return cv_results['test_score']
+        392 
+
+
+    ~/anaconda3/lib/python3.7/site-packages/sklearn/model_selection/_validation.py in cross_validate(estimator, X, y, groups, scoring, cv, n_jobs, verbose, fit_params, pre_dispatch, return_train_score, return_estimator, error_score)
+        234             return_times=True, return_estimator=return_estimator,
+        235             error_score=error_score)
+    --> 236         for train, test in cv.split(X, y, groups))
+        237 
+        238     zipped_scores = list(zip(*scores))
+
+
+    ~/anaconda3/lib/python3.7/site-packages/joblib/parallel.py in __call__(self, iterable)
+       1002             # remaining jobs.
+       1003             self._iterating = False
+    -> 1004             if self.dispatch_one_batch(iterator):
+       1005                 self._iterating = self._original_iterator is not None
+       1006 
+
+
+    ~/anaconda3/lib/python3.7/site-packages/joblib/parallel.py in dispatch_one_batch(self, iterator)
+        833                 return False
+        834             else:
+    --> 835                 self._dispatch(tasks)
+        836                 return True
+        837 
+
+
+    ~/anaconda3/lib/python3.7/site-packages/joblib/parallel.py in _dispatch(self, batch)
+        752         with self._lock:
+        753             job_idx = len(self._jobs)
+    --> 754             job = self._backend.apply_async(batch, callback=cb)
+        755             # A job can complete so quickly than its callback is
+        756             # called before we get here, causing self._jobs to
+
+
+    ~/anaconda3/lib/python3.7/site-packages/joblib/_parallel_backends.py in apply_async(self, func, callback)
+        207     def apply_async(self, func, callback=None):
+        208         """Schedule a func to be run"""
+    --> 209         result = ImmediateResult(func)
+        210         if callback:
+        211             callback(result)
+
+
+    ~/anaconda3/lib/python3.7/site-packages/joblib/_parallel_backends.py in __init__(self, batch)
+        588         # Don't delay the application, to avoid keeping the input
+        589         # arguments in memory
+    --> 590         self.results = batch()
+        591 
+        592     def get(self):
+
+
+    ~/anaconda3/lib/python3.7/site-packages/joblib/parallel.py in __call__(self)
+        254         with parallel_backend(self._backend, n_jobs=self._n_jobs):
+        255             return [func(*args, **kwargs)
+    --> 256                     for func, args, kwargs in self.items]
+        257 
+        258     def __len__(self):
+
+
+    ~/anaconda3/lib/python3.7/site-packages/joblib/parallel.py in <listcomp>(.0)
+        254         with parallel_backend(self._backend, n_jobs=self._n_jobs):
+        255             return [func(*args, **kwargs)
+    --> 256                     for func, args, kwargs in self.items]
+        257 
+        258     def __len__(self):
+
+
+    ~/anaconda3/lib/python3.7/site-packages/sklearn/model_selection/_validation.py in _fit_and_score(estimator, X, y, scorer, train, test, verbose, parameters, fit_params, return_train_score, return_parameters, return_n_test_samples, return_times, return_estimator, error_score)
+        513             estimator.fit(X_train, **fit_params)
+        514         else:
+    --> 515             estimator.fit(X_train, y_train, **fit_params)
+        516 
+        517     except Exception as e:
+
+
+    ~/anaconda3/lib/python3.7/site-packages/mlxtend/regressor/stacking_cv_regression.py in fit(self, X, y, groups, sample_weight)
+        189                 verbose=self.verbose, n_jobs=self.n_jobs,
+        190                 fit_params=fit_params, pre_dispatch=self.pre_dispatch)
+    --> 191                     for regr in self.regr_])
+        192 
+        193         # save meta-features for training data
+
+
+    ~/anaconda3/lib/python3.7/site-packages/mlxtend/regressor/stacking_cv_regression.py in <listcomp>(.0)
+        189                 verbose=self.verbose, n_jobs=self.n_jobs,
+        190                 fit_params=fit_params, pre_dispatch=self.pre_dispatch)
+    --> 191                     for regr in self.regr_])
+        192 
+        193         # save meta-features for training data
+
+
+    ~/anaconda3/lib/python3.7/site-packages/sklearn/model_selection/_validation.py in cross_val_predict(estimator, X, y, groups, cv, n_jobs, verbose, fit_params, pre_dispatch, method)
+        753     prediction_blocks = parallel(delayed(_fit_and_predict)(
+        754         clone(estimator), X, y, train, test, verbose, fit_params, method)
+    --> 755         for train, test in cv.split(X, y, groups))
+        756 
+        757     # Concatenate the predictions
+
+
+    ~/anaconda3/lib/python3.7/site-packages/joblib/parallel.py in __call__(self, iterable)
+       1002             # remaining jobs.
+       1003             self._iterating = False
+    -> 1004             if self.dispatch_one_batch(iterator):
+       1005                 self._iterating = self._original_iterator is not None
+       1006 
+
+
+    ~/anaconda3/lib/python3.7/site-packages/joblib/parallel.py in dispatch_one_batch(self, iterator)
+        833                 return False
+        834             else:
+    --> 835                 self._dispatch(tasks)
+        836                 return True
+        837 
+
+
+    ~/anaconda3/lib/python3.7/site-packages/joblib/parallel.py in _dispatch(self, batch)
+        752         with self._lock:
+        753             job_idx = len(self._jobs)
+    --> 754             job = self._backend.apply_async(batch, callback=cb)
+        755             # A job can complete so quickly than its callback is
+        756             # called before we get here, causing self._jobs to
+
+
+    ~/anaconda3/lib/python3.7/site-packages/joblib/_parallel_backends.py in apply_async(self, func, callback)
+        207     def apply_async(self, func, callback=None):
+        208         """Schedule a func to be run"""
+    --> 209         result = ImmediateResult(func)
+        210         if callback:
+        211             callback(result)
+
+
+    ~/anaconda3/lib/python3.7/site-packages/joblib/_parallel_backends.py in __init__(self, batch)
+        588         # Don't delay the application, to avoid keeping the input
+        589         # arguments in memory
+    --> 590         self.results = batch()
+        591 
+        592     def get(self):
+
+
+    ~/anaconda3/lib/python3.7/site-packages/joblib/parallel.py in __call__(self)
+        254         with parallel_backend(self._backend, n_jobs=self._n_jobs):
+        255             return [func(*args, **kwargs)
+    --> 256                     for func, args, kwargs in self.items]
+        257 
+        258     def __len__(self):
+
+
+    ~/anaconda3/lib/python3.7/site-packages/joblib/parallel.py in <listcomp>(.0)
+        254         with parallel_backend(self._backend, n_jobs=self._n_jobs):
+        255             return [func(*args, **kwargs)
+    --> 256                     for func, args, kwargs in self.items]
+        257 
+        258     def __len__(self):
+
+
+    ~/anaconda3/lib/python3.7/site-packages/sklearn/model_selection/_validation.py in _fit_and_predict(estimator, X, y, train, test, verbose, fit_params, method)
+        839         estimator.fit(X_train, **fit_params)
+        840     else:
+    --> 841         estimator.fit(X_train, y_train, **fit_params)
+        842     func = getattr(estimator, method)
+        843     predictions = func(X_test)
+
+
+    ~/anaconda3/lib/python3.7/site-packages/sklearn/pipeline.py in fit(self, X, y, **fit_params)
+        352                                  self._log_message(len(self.steps) - 1)):
+        353             if self._final_estimator != 'passthrough':
+    --> 354                 self._final_estimator.fit(Xt, y, **fit_params)
+        355         return self
+        356 
+
+
+    ~/anaconda3/lib/python3.7/site-packages/sklearn/linear_model/_coordinate_descent.py in fit(self, X, y)
+       1182                 for train, test in folds)
+       1183         mse_paths = Parallel(n_jobs=self.n_jobs, verbose=self.verbose,
+    -> 1184                              **_joblib_parallel_args(prefer="threads"))(jobs)
+       1185         mse_paths = np.reshape(mse_paths, (n_l1_ratio, len(folds), -1))
+       1186         mean_mse = np.mean(mse_paths, axis=1)
+
+
+    ~/anaconda3/lib/python3.7/site-packages/joblib/parallel.py in __call__(self, iterable)
+       1002             # remaining jobs.
+       1003             self._iterating = False
+    -> 1004             if self.dispatch_one_batch(iterator):
+       1005                 self._iterating = self._original_iterator is not None
+       1006 
+
+
+    ~/anaconda3/lib/python3.7/site-packages/joblib/parallel.py in dispatch_one_batch(self, iterator)
+        833                 return False
+        834             else:
+    --> 835                 self._dispatch(tasks)
+        836                 return True
+        837 
+
+
+    ~/anaconda3/lib/python3.7/site-packages/joblib/parallel.py in _dispatch(self, batch)
+        752         with self._lock:
+        753             job_idx = len(self._jobs)
+    --> 754             job = self._backend.apply_async(batch, callback=cb)
+        755             # A job can complete so quickly than its callback is
+        756             # called before we get here, causing self._jobs to
+
+
+    ~/anaconda3/lib/python3.7/site-packages/joblib/_parallel_backends.py in apply_async(self, func, callback)
+        207     def apply_async(self, func, callback=None):
+        208         """Schedule a func to be run"""
+    --> 209         result = ImmediateResult(func)
+        210         if callback:
+        211             callback(result)
+
+
+    ~/anaconda3/lib/python3.7/site-packages/joblib/_parallel_backends.py in __init__(self, batch)
+        588         # Don't delay the application, to avoid keeping the input
+        589         # arguments in memory
+    --> 590         self.results = batch()
+        591 
+        592     def get(self):
+
+
+    ~/anaconda3/lib/python3.7/site-packages/joblib/parallel.py in __call__(self)
+        254         with parallel_backend(self._backend, n_jobs=self._n_jobs):
+        255             return [func(*args, **kwargs)
+    --> 256                     for func, args, kwargs in self.items]
+        257 
+        258     def __len__(self):
+
+
+    ~/anaconda3/lib/python3.7/site-packages/joblib/parallel.py in <listcomp>(.0)
+        254         with parallel_backend(self._backend, n_jobs=self._n_jobs):
+        255             return [func(*args, **kwargs)
+    --> 256                     for func, args, kwargs in self.items]
+        257 
+        258     def __len__(self):
+
+
+    ~/anaconda3/lib/python3.7/site-packages/sklearn/linear_model/_coordinate_descent.py in _path_residuals(X, y, train, test, path, path_params, alphas, l1_ratio, X_order, dtype)
+       1007     # X is copied and a reference is kept here
+       1008     X_train = check_array(X_train, 'csc', dtype=dtype, order=X_order)
+    -> 1009     alphas, coefs, _ = path(X_train, y_train, **path_params)
+       1010     del X_train, y_train
+       1011 
+
+
+    ~/anaconda3/lib/python3.7/site-packages/sklearn/linear_model/_coordinate_descent.py in lasso_path(X, y, eps, n_alphas, alphas, precompute, Xy, copy_X, coef_init, verbose, return_n_iter, positive, **params)
+        261                      alphas=alphas, precompute=precompute, Xy=Xy,
+        262                      copy_X=copy_X, coef_init=coef_init, verbose=verbose,
+    --> 263                      positive=positive, return_n_iter=return_n_iter, **params)
+        264 
+        265 
+
+
+    ~/anaconda3/lib/python3.7/site-packages/sklearn/linear_model/_coordinate_descent.py in enet_path(X, y, l1_ratio, eps, n_alphas, alphas, precompute, Xy, copy_X, coef_init, verbose, return_n_iter, positive, check_input, **params)
+        470             model = cd_fast.enet_coordinate_descent_gram(
+        471                 coef_, l1_reg, l2_reg, precompute, Xy, y, max_iter,
+    --> 472                 tol, rng, random, positive)
+        473         elif precompute is False:
+        474             model = cd_fast.enet_coordinate_descent(
+
+
+    sklearn/linear_model/_cd_fast.pyx in sklearn.linear_model._cd_fast.enet_coordinate_descent_gram()
+
+
+    KeyboardInterrupt: 
+
+
+
+```python
+
 ```
 
 
@@ -5217,6 +5519,10 @@ print("lightgbm: {:.4f} ({:.4f})\n".format(score.mean(), score.std()), datetime.
 score = cv_rmse(xgboost)
 print("xgboost: {:.4f} ({:.4f})\n".format(score.mean(), score.std()), datetime.now(), )
 ```
+
+    Ridge: 30304.2524 (12449.3134)
+     2020-05-22 04:30:13.781101
+
 
 
 ```python
