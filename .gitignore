@@ -4,7 +4,8 @@ Boston-housing/.ipynb_checkpoint/**
 Boston-housing/.DS_Store
 Boston-housing/input/**
 
-Boston-housing/notebook/.ipynb_checkpoint/**
+
+Boston-housing/notebook/.ipynb_checkpoints/**
 Boston-housing/notebook/.DS_Store
 
 Boston-housing/notebook/*.json
