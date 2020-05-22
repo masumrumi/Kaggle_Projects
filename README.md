@@ -1,2 +1,1 @@
-# Kaggle Projects
-This is a repository of all the kaggle projects
+This repository consists of some of my work from Kaggle.
