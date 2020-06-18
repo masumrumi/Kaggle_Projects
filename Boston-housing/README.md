@@ -5055,11 +5055,11 @@ temp_rss = {}
 temp_mse = {}
 for i in alpha_ridge:
     ## Assigin each model. 
-    lasso_reg = ElasticNet(alpha= i, normalize=True)
+    elastic_reg = ElasticNet(alpha= i, normalize=True)
     ## fit the model. 
-    lasso_reg.fit(X_train, y_train)
+    elastic_reg.fit(X_train, y_train)
     ## Predicting the target value based on "Test_x"
-    y_pred = lasso_reg.predict(X_test)
+    y_pred = elastic_reg.predict(X_test)
 
     mse = mean_squared_error(y_test, y_pred)
     rss = sum((y_pred-y_test)**2)
