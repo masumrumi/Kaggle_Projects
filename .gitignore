@@ -25,6 +25,14 @@ Titanic/notebook/*.csv
 Titanic/.DS_Store
 
 
+#pyspark_titanic
+pyspark_titanic/input
+pyspark_titanic/notebook/.ipynb_checkpoints/**
+pyspark_titanic/notebook/*.json
+
+
+
+
 # original file
 input/**
 .DS_Store
