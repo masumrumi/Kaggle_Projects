@@ -16,12 +16,12 @@ Boston-housing/.idea/**
 
 # Titanic
 Titanic/.ipynb_checkpoints/**
-Titanic/notebook/.ipynb_checkpoints/**
-Titanic/notebook/.DS_Store
+Titanic/working/.ipynb_checkpoints/**
+Titanic/input/.DS_Store
 Titanic/input
 Titanic/*.csv
-Titanic/notebook/*.json
-Titanic/notebook/*.csv
+Titanic/working/*.json
+Titanic/working/*.csv
 Titanic/.DS_Store
 
 
