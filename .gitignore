@@ -29,7 +29,7 @@ pyspark_titanic/working/*.json
 
 Covid-19/working/*.json
 Covid-19/working/.ipynb_checkpoints
-
+Covid-19/input/novel-corona-virus-2019-dataset/*
 
 # original file
 input/**
