@@ -1,13 +1,7 @@
 ## checkpoints
 # Boston housing
-Boston-housing/.ipynb_checkpoint/**
 Boston-housing/.DS_Store
 Boston-housing/input/**
-
-
-Boston-housing/notebook/.ipynb_checkpoints/**
-Boston-housing/notebook/.DS_Store
-
 Boston-housing/working/*.json
 Boston-housing/working/*.csv
 Boston-housing/.idea/**
@@ -32,6 +26,9 @@ pyspark_titanic/working/.ipynb_checkpoints
 pyspark_titanic/working/*.json
 
 
+
+Covid-19/working/*.json
+Covid-19/working/.ipynb_checkpoints
 
 
 # original file
