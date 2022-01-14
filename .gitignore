@@ -8,8 +8,8 @@ Boston-housing/input/**
 Boston-housing/notebook/.ipynb_checkpoints/**
 Boston-housing/notebook/.DS_Store
 
-Boston-housing/notebook/*.json
-Boston-housing/notebook/*.csv
+Boston-housing/working/*.json
+Boston-housing/working/*.csv
 Boston-housing/.idea/**
 
 
@@ -27,8 +27,8 @@ Titanic/.DS_Store
 
 #pyspark_titanic
 pyspark_titanic/input
-pyspark_titanic/notebook/.ipynb_checkpoints/**
-pyspark_titanic/notebook/*.json
+pyspark_titanic/working/.ipynb_checkpoints/**
+pyspark_titanic/working/*.json
 
 
 
