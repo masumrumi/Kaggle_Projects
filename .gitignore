@@ -28,6 +28,7 @@ Titanic/.DS_Store
 #pyspark_titanic
 pyspark_titanic/input
 pyspark_titanic/working/.ipynb_checkpoints/**
+pyspark_titanic/working/.ipynb_checkpoints
 pyspark_titanic/working/*.json
 
 
