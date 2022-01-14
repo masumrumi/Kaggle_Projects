@@ -25,6 +25,11 @@ pyspark_titanic/working/.ipynb_checkpoints/**
 pyspark_titanic/working/.ipynb_checkpoints
 pyspark_titanic/working/*.json
 
+# pyspark_boston_housing
+pyspark_Boston-housing/input/*
+pyspark_Boston-housing/working/*.json
+pyspark_Boston-housing/working/.ipynb_checkpoints/**
+
 
 # Covid-19
 Covid-19/working/*.json
