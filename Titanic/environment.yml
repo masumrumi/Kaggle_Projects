@@ -1,0 +1,8 @@
+name: titanic
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python
+  - ipykernel
+prefix: /Users/masumrumi/opt/anaconda3/envs/titanic
