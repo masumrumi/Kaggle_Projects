@@ -6,7 +6,7 @@ debugpy==1.4.1
 decorator==5.1.0
 entrypoints==0.3
 ipykernel==6.4.1
-ipython==7.29.0
+ipython==7.31.1
 ipython-genutils==0.2.0
 jedi==0.18.0
 jupyter-client==7.0.1
