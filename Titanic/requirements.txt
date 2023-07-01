@@ -33,7 +33,7 @@ scipy==1.7.2
 seaborn==0.11.2
 setuptools==65.5.1
 six==1.16.0
-tornado==6.1
+tornado==6.3.2
 traitlets==5.1.1
 wcwidth==0.2.5
 wheel==0.37.0
